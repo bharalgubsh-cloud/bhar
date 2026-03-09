@@ -3,76 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="مَوْقِعُ بَحْرِ الْغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ - الدُّكْتُور عَبْدَالصَّمَد - مَتْجَرٌ عَالَمِيٌّ وَبَثٌّ مُبَاشِرٌ">
+    <meta name="description" content="مَوْقِعُ بَحْرِ الْغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ - الدُّكْتُور عَبْدَالصَّمَد - مَتْجَرٌ وَإِدَارَةٌ وَبَحْثٌ عِلَاجِيٌّ">
     <link rel="canonical" href="https://bahar-al-gubsh.com/">
     
-    <title>بَحْرُ الْغُبُشِ | الْمَنْظُومَةُ الْعَالَمِيَّةُ الشَّامِلَةُ</title>
+    <title>بَحْرُ الْغُبُشِ | النِّظَامُ الْعِلَاجِيُّ الشَّامِلُ</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
         body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; user-select: none; overflow-x: hidden; }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
         .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; transition: 0.4s; }
-        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; cursor: pointer; }
-        #liveAlert { display: none; background: linear-gradient(90deg, #ff0000, #990000); color: white; padding: 10px; text-align: center; font-weight: bold; position: sticky; top: 0; z-index: 2000; }
+        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; cursor: pointer; border: none; }
+        input, textarea { background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 10px; width: 100%; outline: none; margin-bottom: 10px; font-size: 13px; }
+        .admin-panel { display: none; position: fixed; inset: 0; background: black; z-index: 5000; overflow-y: auto; padding: 20px; }
         .cart-badge { position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
+        #invoiceTemplate { background: white; color: black; padding: 40px; border: 10px double #bf953f; width: 500px; position: fixed; left: -9999px; }
+        .stamp { border: 3px solid red; color: red; padding: 5px; border-radius: 50%; display: inline-block; transform: rotate(-15deg); font-weight: bold; opacity: 0.7; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 15px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .search-glow { box-shadow: 0 0 15px rgba(191, 149, 63, 0.3); border: 1px solid #bf953f !important; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <div id="liveAlert"><i class="fas fa-broadcast-tower ml-2"></i> بَثٌّ مُبَاشِرٌ مَعَ الدُّكْتُور عَبْدَالصَّمَد! <a id="liveLink" href="#" target="_blank" class="underline mr-4">اِنْضَمَّ الآنَ</a></div>
-
     <div id="loginPage" class="max-w-md mx-auto mt-20 text-center px-4">
         <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter uppercase">بَحْرُ الْغُبُشِ</h1>
         <div class="glass-card p-10 border-yellow-600/30">
-            <h2 class="text-xl mb-6 font-bold text-white uppercase tracking-widest">دُخُولُ النِّظَامِ السَّامِي</h2>
-            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّسْجِيلِ..." class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
-            <button onclick="entry()" class="w-full btn-gold py-4 text-lg uppercase">فَتْحُ الْمَوْسُوعَةِ</button>
+            <h2 class="text-xl mb-6 font-bold text-white uppercase tracking-widest">دُخُولُ الزُّوَّارِ</h2>
+            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلدُّخُولِ...">
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg font-bold">فَتْحُ الْمَوْسُوعَةِ</button>
         </div>
+        <button onclick="openAdmin()" class="mt-10 text-yellow-600 text-[12px] font-bold border-b border-yellow-900 pb-1 uppercase">نِظَامُ الْإِدَارَةِ (لِلْمُدِيرِ فَقَطْ)</button>
     </div>
 
     <div id="mainApp" class="hidden max-w-7xl mx-auto px-4 pb-40">
         <header class="flex justify-between items-center mb-8 p-6 glass-card mt-6">
             <div>
                 <h2 class="text-2xl gold-text font-bold tracking-widest">بَحْرُ الْغُبُشِ ⚓</h2>
-                <p class="text-[10px] text-zinc-500 uppercase">الْمُدِيرُ: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
+                <p class="text-[10px] text-zinc-500">الْمُدِيرُ: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
             </div>
             <div class="flex gap-2">
-                <button id="backBtn" onclick="goBack()" class="btn-gold px-4 py-2 text-[10px] hidden">رُجُوعٌ</button>
-                <a href="https://www.facebook.com/share/1CujuhCQ5E/" target="_blank" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-[10px] font-bold flex items-center">
-                    <i class="fab fa-facebook ml-1"></i> فِيسْبُوك
-                </a>
-                <button onclick="openCart()" class="bg-zinc-800 text-white px-4 py-2 rounded-xl text-[10px] font-bold relative">
-                    <i class="fas fa-shopping-basket"></i> السَّلَّةُ <span id="cartCount" class="cart-badge">0</span>
-                </button>
+                <a href="https://www.facebook.com/share/1CujuhCQ5E/" target="_blank" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-[10px] font-bold flex items-center"><i class="fab fa-facebook ml-1"></i> فِيسْبُوك</a>
+                <button onclick="openCart()" class="bg-zinc-800 text-white px-4 py-2 rounded-xl text-[10px] font-bold relative"><i class="fas fa-shopping-basket"></i> السَّلَّةُ <span id="cartCount" class="cart-badge">0</span></button>
             </div>
         </header>
 
-        <div id="navigationTabs" class="flex overflow-x-auto gap-4 mb-10 pb-4 no-scrollbar">
-            <button onclick="showTab('roqya')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-purple-900"><i class="fas fa-scroll text-purple-500 mb-2 text-xl"></i><br>الرُّقْيَةُ (18)</button>
-            <button onclick="showTab('herbs')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-green-900"><i class="fas fa-leaf text-green-500 mb-2 text-xl"></i><br>الْأَعْشَابُ</button>
-            <button onclick="showTab('oils')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-yellow-900"><i class="fas fa-oil-can text-yellow-500 mb-2 text-xl"></i><br>الزُّيُوتُ</button>
+        <div class="max-w-2xl mx-auto mb-12">
+            <div class="relative">
+                <input type="text" id="smartSearch" oninput="doSmartSearch()" placeholder="اُكْتُبْ هُنَا مَا تُعَانِي مِنْهُ (مِثَال: سِحْر، حَسَد، مَسّ)..." class="search-glow text-center text-lg py-5 rounded-2xl">
+                <i class="fas fa-magic absolute left-5 top-5 gold-text animate-pulse"></i>
+            </div>
+            <div id="searchResults" class="hidden mt-4 glass-card p-6 border-yellow-500 shadow-2xl">
+                <h3 class="gold-text text-sm mb-4 border-b border-zinc-800 pb-2"><i class="fas fa-stethoscope ml-2"></i> الْوَصْفَةُ الْعِلْمِيَّةُ الْمُقْتَرَحَةُ:</h3>
+                <div id="searchContent" class="space-y-4"></div>
+            </div>
         </div>
 
+        <div id="navigationTabs" class="flex overflow-x-auto gap-4 mb-10 pb-4 no-scrollbar">
+            <button onclick="showTab('roqya')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-purple-900"><i class="fas fa-scroll text-purple-500 mb-2"></i><br>الرُّقْيَةُ (18)</button>
+            <button onclick="showTab('herbs')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-green-900"><i class="fas fa-leaf text-green-500 mb-2"></i><br>الْأَعْشَابُ</button>
+            <button onclick="showTab('oils')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-yellow-900"><i class="fas fa-oil-can text-yellow-500 mb-2"></i><br>الزُّيُوتُ</button>
+            <button onclick="showTab('archive')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-red-900"><i class="fas fa-video text-red-500 mb-2"></i><br>أَرْشِيفُ الْبَثِّ</button>
+        </div>
         <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
     </div>
 
-    <div id="cartModal" class="fixed inset-0 bg-black/95 hidden z-[3000] flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-lg p-8">
-            <h3 class="gold-text text-xl mb-6 text-center">سَلَّةُ طَلَبَاتِ بَحْرِ الْغُبُشِ</h3>
-            <div id="cartItems" class="max-h-40 overflow-y-auto mb-4 text-sm"></div>
-            
-            <div class="mb-4">
-                <label class="block text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">تَوْثِيقُ الدَّفْعِ (إِيصَالُ التَّحْوِيلِ):</label>
-                <input type="file" id="receiptImg" accept="image/*" class="w-full bg-zinc-900 border border-zinc-700 p-2 rounded-lg text-white text-[10px]">
+    <div id="adminPanel" class="admin-panel text-right">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex justify-between items-center mb-8 border-b border-zinc-800 pb-4">
+                <h2 class="gold-text text-2xl font-bold uppercase">لَوْحَةُ تَحَكُّمِ بَحْرِ الْغُبُشِ</h2>
+                <button onclick="closeAdmin()" class="text-red-500 font-bold">X إِغْلَاقُ</button>
             </div>
 
-            <div class="border-t border-zinc-700 pt-4 mb-6 flex justify-between font-bold">
-                <span>الْإِجْمَالِيُّ:</span> <span id="cartTotal" class="text-yellow-500">0 SDG</span>
+            <div id="adminAuth">
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <button onclick="switchAuth('login')" class="btn-gold py-3">تَسْجِيلُ الدُّخُولِ</button>
+                    <button onclick="switchAuth('register')" class="bg-zinc-800 text-white py-3 rounded-xl font-bold uppercase">عُضْوٌ جَدِيدٌ (FACEBOOK STYLE)</button>
+                </div>
+                <div id="loginForm" class="glass-card p-6">
+                    <h3 class="mb-4 text-white font-bold uppercase">دُخُولُ الْمُدِيرِ</h3>
+                    <input type="email" id="loginEmail" placeholder="الْبَرِيدُ الْإِلِكْتُرُونِيُّ">
+                    <input type="password" id="loginPass" placeholder="كَلِمَةُ الْمُرُورِ">
+                    <button onclick="doLogin()" class="w-full btn-gold py-4 mt-4 uppercase">دُخُولُ لَوْحَةِ التَّحَكُّمِ</button>
+                </div>
+                <div id="registerForm" class="glass-card p-6 hidden">
+                    <h3 class="mb-4 text-white font-bold text-center">تَسْجِيلُ عُضْوِ إِدَارَةٍ جَدِيدٍ</h3>
+                    <input type="text" id="regName" placeholder="الِاسْمُ الْكَامِلُ">
+                    <input type="email" id="regEmail" placeholder="الْبَرِيدُ الْإِلِكْتُرُونِيُّ">
+                    <textarea id="regBio" rows="2" placeholder="السِّيرَةُ الذَّاتِيَّةُ..."></textarea>
+                    <div class="grid grid-cols-2 gap-4 text-[10px] text-zinc-500">
+                        <div>الصُّورَةُ الشَّخْصِيَّةُ: <input type="file" id="regPic"></div>
+                        <div>التَّوْقِيعُ الرَّسْمِيُّ: <input type="file" id="regSign"></div>
+                    </div>
+                    <button onclick="sendAdminRequest()" class="w-full btn-gold py-4 mt-6">إِرْسَالُ طَلَبِ التَّسْجِيلِ</button>
+                </div>
             </div>
-            <button onclick="sendCartToWhatsapp()" class="w-full btn-gold py-4 mb-3 uppercase">إِرْسَالُ الطَّلَبِ وَالْإِيصَالِ</button>
-            <button onclick="closeCart()" class="w-full text-zinc-500 text-[10px]">إِغْلَاقُ السَّلَّةِ</button>
+
+            <div id="adminDashboard" class="hidden space-y-6">
+                <div class="glass-card p-6 border-blue-900">
+                    <h3 class="gold-text mb-4 text-lg">إِصْدَارُ فَاتُورَةٍ رَسْمِيَّةٍ لِعَمِيلٍ</h3>
+                    <input type="text" id="invCust" placeholder="اسْمُ الْعَمِيلِ">
+                    <textarea id="invItems" placeholder="الْمُنْتَجَاتُ..."></textarea>
+                    <input type="number" id="invTotal" placeholder="الْمَبْلَغُ الْإِجْمَالِيُّ (SDG)">
+                    <button onclick="generateInvoice()" class="w-full btn-gold py-4 uppercase font-bold">تَوْلِيدُ الْفَاتُورَةِ الْمَخْتُومَةِ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="invoiceTemplate">
+        <div style="text-align: center; border-bottom: 2px solid #bf953f; padding-bottom: 10px;">
+            <h1 style="font-size: 24px; color: #b38728; margin: 0;">بَحْرُ الْغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ</h1>
+            <p style="font-size: 10px;">تَحْتَ إِشْرَافِ: الدُّكْتُور عَبْدَالصَّمَد</p>
+        </div>
+        <div style="margin-top: 20px;">
+            <p><strong>الْعَمِيلُ:</strong> <span id="outCust"></span></p>
+            <p><strong>التَّارِيخُ:</strong> <span id="outDate"></span></p>
+            <hr style="border: 0.5px solid #eee;">
+            <p><strong>الْبَيَانُ:</strong></p>
+            <div id="outItems" style="min-height: 80px; padding: 10px; background: #f9f9f9;"></div>
+            <p style="text-align: left; font-size: 20px; font-weight: bold; border-top: 2px solid black; padding-top: 10px;">الْإِجْمَالِيُّ: <span id="outTotal"></span> SDG</p>
+        </div>
+        <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <div class="stamp">بَحْرُ الْغُبُشِ<br>مُعْتَمَدٌ</div>
+            <div style="text-align: center;"><p style="font-size: 10px;">تَوْقِيعُ الْمُدِيرِ</p><div style="width: 100px; height: 40px; border-bottom: 1px solid black;"></div></div>
         </div>
     </div>
 
@@ -80,10 +136,18 @@
         let userName = ""; let lastTab = ""; let cart = [];
         const drWhatsapp = "249121494942";
 
-        const database = {
+        // قَاعِدَةُ الْبَيَانَاتِ كَامِلَةً (لَا حَذْفَ لِلرُّقْيَةِ الـ 18)
+        let database = {
             roqya: ["العين", "الحسد", "السحر المرشوش", "السحر المأكول", "السحر السفلي", "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"],
-            herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "عشبة المدينة", p: 10000}, {n: "حرمل", p: 3500}, {n: "سدر مطحون", p: 5000}, {n: "مر حجازي", p: 12000}, {n: "قرض", p: 3000}, {n: "محلب", p: 6000}],
-            oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5500}, {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, {n: "زيت إكليل الجبل", p: 12000}, {n: "زيت الكافور", p: 8500}, {n: "زيت النعناع", p: 4000}, {n: "زيت السذاب", p: 15000}]
+            herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "عشبة المدينة", p: 10000}, {n: "حرمل", p: 3500}],
+            oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5500}, {n: "زيت الحبة السوداء", p: 10000}],
+            archive: [{title: "بَثُّ عِلَاجِ الْمَسِّ", url: "https://www.youtube.com/embed/dQw4w9WgXcQ"}],
+            mapping: {
+                "سحر": {r: "سحر الأرحام/السفلي", h: "القسط الهندي", o: "زيت الزيتون المرقي"},
+                "حسد": {r: "الحسد/العين", h: "حرمل", o: "زيت الحبة السوداء"},
+                "عين": {r: "العين", h: "سدر مطحون", o: "زيت السمسم"},
+                "مس": {r: "المس الشيطاني", h: "لبان ذكر", o: "زيت السذاب"}
+            }
         };
 
         function entry() {
@@ -95,46 +159,76 @@
             showTab('roqya');
         }
 
+        function doSmartSearch() {
+            const query = document.getElementById('smartSearch').value.toLowerCase();
+            const results = document.getElementById('searchResults');
+            const content = document.getElementById('searchContent');
+            if(query.length < 2) { results.classList.add('hidden'); return; }
+            
+            let found = false; content.innerHTML = "";
+            for(let key in database.mapping) {
+                if(query.includes(key)) {
+                    let res = database.mapping[key];
+                    content.innerHTML = `<div class="text-xs space-y-2">
+                        <p>✅ <span class="text-purple-400">الرُّقْيَةُ:</span> ${res.r}</p>
+                        <p>🌿 <span class="text-green-400">الْعُشْبَةُ:</span> ${res.h}</p>
+                        <p>🛢️ <span class="text-yellow-400">الزَّيْتُ:</span> ${res.o}</p>
+                    </div>`;
+                    found = true; break;
+                }
+            }
+            if(found) results.classList.remove('hidden'); else results.classList.add('hidden');
+        }
+
         function showTab(type) {
-            lastTab = type;
-            const container = document.getElementById('container');
-            container.innerHTML = "";
-            let items = (type === 'roqya') ? database.roqya.map(i => ({n: i, p: 75000})) : database[type];
-            items.forEach(item => {
-                container.innerHTML += `
-                <div class="glass-card p-8 text-center border-yellow-600/10 hover:border-yellow-600 transform hover:-translate-y-2 duration-500">
-                    <h4 class="font-bold text-[13px] mb-4 text-white uppercase">${item.n}</h4>
-                    <p class="gold-text mb-6 text-2xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
-                    <button onclick="addToCart('${item.n}', ${item.p})" class="btn-gold w-full py-4 text-[10px]">أَضِفْ لِلسَّلَّةِ</button>
-                </div>`;
+            lastTab = type; const container = document.getElementById('container'); container.innerHTML = "";
+            if(type === 'archive') {
+                database.archive.forEach(vid => {
+                    container.innerHTML += `<div class="glass-card p-4"><div class="video-container mb-4"><iframe src="${vid.url}" allowfullscreen></iframe></div><h4 class="text-xs gold-text text-center">${vid.title}</h4></div>`;
+                });
+            } else {
+                let items = (type === 'roqya') ? database.roqya.map(i => ({n: i, p: 75000})) : database[type];
+                items.forEach(item => {
+                    container.innerHTML += `<div class="glass-card p-8 text-center border-yellow-600/10 hover:border-yellow-600 transform hover:-translate-y-2 duration-500"><h4 class="font-bold text-[13px] mb-4 text-white uppercase">${item.n}</h4><p class="gold-text mb-6 text-2xl font-bold font-mono">${item.p.toLocaleString()} SDG</p><button onclick="addToCart('${item.n}', ${item.p})" class="btn-gold w-full py-3 text-[10px]">أَضِفْ لِلطَّلَبَاتِ</button></div>`;
+                });
+            }
+        }
+
+        function generateInvoice() {
+            const cust = document.getElementById('invCust').value;
+            document.getElementById('outCust').innerText = cust;
+            document.getElementById('outItems').innerText = document.getElementById('invItems').value;
+            document.getElementById('outTotal').innerText = document.getElementById('invTotal').value;
+            document.getElementById('outDate').innerText = new Date().toLocaleDateString('ar-EG');
+            html2canvas(document.getElementById('invoiceTemplate')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `فاتورة-بحر-الغبش-${cust}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                alert("تَمَّ تَوْلِيدُ الْفَاتُورَةِ الرَّسْمِيَّةِ!");
             });
         }
 
-        function addToCart(name, price) {
-            cart.push({name, price});
-            document.getElementById('cartCount').innerText = cart.length;
-            alert(`تَمَّتْ إِضَافَةُ ${name}`);
+        function openAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
+        function closeAdmin() { document.getElementById('adminPanel').style.display = 'none'; }
+        function switchAuth(type) {
+            document.getElementById('loginForm').style.display = (type === 'login') ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = (type === 'register') ? 'block' : 'none';
         }
 
-        function openCart() {
-            const list = document.getElementById('cartItems');
-            list.innerHTML = ""; let total = 0;
-            cart.forEach(item => { total += item.price; list.innerHTML += `<div class="flex justify-between mb-2"><span>${item.name}</span><span>${item.price} SDG</span></div>`; });
-            document.getElementById('cartTotal').innerText = total.toLocaleString() + " SDG";
-            document.getElementById('cartModal').classList.remove('hidden');
+        function sendAdminRequest() {
+            const name = document.getElementById('regName').value;
+            window.open(`https://wa.me/${drWhatsapp}?text=طَلَبُ انْضِمَامِ: ${name}`, '_blank');
+            alert("طَلَبُكَ قَيْدُ الْإِجْرَاءِ..");
         }
 
-        function closeCart() { document.getElementById('cartModal').classList.add('hidden'); }
-
-        function sendCartToWhatsapp() {
-            if(cart.length === 0) return alert("السَّلَّةُ فَارِغَةٌ!");
-            let msg = `طَلَبُ شِرَاءٍ (بَحْرُ الْغُبُشِ)%0Aالِاسْمُ: ${userName}%0Aالْمُشْتَرَيَاتُ:%0A`;
-            cart.forEach(i => msg += `- ${i.name}%0A`);
-            msg += `%0Aالْإِجْمَالِيُّ: ${document.getElementById('cartTotal').innerText}%0A(سَأُرْسِلُ صُورَةَ الْإِيصَالِ الآنَ)`;
-            window.open(`https://wa.me/${drWhatsapp}?text=${msg}`, '_blank');
+        function doLogin() {
+            const email = document.getElementById('loginEmail').value;
+            if(email === "admin@bahar.com") {
+                document.getElementById('adminAuth').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+            } else { alert("طَلَبُكَ قَيْدُ الْإِجْرَاءِ.. لَمْ يَتِمَّ قَبُولُ حِسَابِكَ بَعْدُ."); }
         }
-
-        function goBack() { showTab(lastTab || 'roqya'); }
     </script>
 </body>
 </html>
