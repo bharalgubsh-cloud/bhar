@@ -3,113 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع بحر الغُبُش | للأعشاب الطبية والزيوت</title>
-    <meta name="description" content="بحر الغبش لزيوت الأعشاب الطبيعية والمنتجات التقليدية - جودة وأصالة">
+    <title>موقع بحر الغُبُش | للأعشاب والزيوت والرقية</title>
+    <meta name="description" content="موقع بحر الغبش المتخصص في الأعشاب الطبية، الزيوت الطبيعية، وبرامج الرقية الشرعية المعتمدة.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
-        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; transition: 0.3s; }
-        .online-dot { width: 12px; height: 12px; background: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #2ecc71; }
-        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; }
+        body { font-family: 'Changa', sans-serif; background-color: #0a0510; color: #f3f0ff; overflow-x: hidden; }
+        .purple-gradient { background: linear-gradient(to right, #a855f7, #d8b4fe, #7e22ce); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+        .glass-card { background: rgba(30, 10, 50, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 25px; transition: 0.4s; }
+        .glass-card:hover { transform: translateY(-5px); border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2); }
+        .btn-purple { background: linear-gradient(135deg, #7e22ce, #a855f7); color: white; font-weight: bold; }
+        .online-status { width: 12px; height: 12px; background: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
 </head>
-<body class="p-4">
+<body class="p-4 md:p-10">
 
-    <div id="authSection" class="max-w-md mx-auto mt-20 text-center">
-        <h1 class="text-5xl gold-text mb-8 tracking-widest">بَحْرُ الغُبُشِ</h1>
-        <div class="glass-card p-10 shadow-2xl border-yellow-600/20">
-            <h2 class="text-2xl mb-6 text-white font-bold">تَسْجِيلُ عُضْوِيَّةٍ فَوْرِيَّةٍ</h2>
-            <p class="text-zinc-400 text-sm mb-6">أَهْلاً بِكَ فِي مَنْظُومَتِنَا؛ سَجِّلْ اسْمَكَ لِتَصَفُّحِ المُنْتَجَاتِ.</p>
-            <input id="userName" type="text" placeholder="اُكْتُبْ اسْمَكَ الكَامِلَ هُنَا" 
-                   class="w-full bg-zinc-900 border border-yellow-600/40 p-4 rounded-xl text-white mb-6 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-center text-lg">
-            <button onclick="activateSystem()" class="w-full btn-gold py-4 rounded-xl hover:scale-105 transition shadow-lg">إِرْسَالُ وَدُخُولٌ فَوْرِيٌّ</button>
+    <div id="loginSection" class="max-w-md mx-auto mt-24 text-center">
+        <h1 class="text-6xl purple-gradient mb-10">بَحْرُ الغُبُشِ</h1>
+        <div class="glass-card p-10">
+            <h2 class="text-xl mb-6 text-purple-200">تَسْجِيلُ دُخُولِ الزَّائِرِ</h2>
+            <input id="guestName" type="text" placeholder="اُكْتُبْ اسْمَكَ هُنَا لِلتَّفْعِيلِ" 
+                   class="w-full bg-zinc-900 border border-purple-500/30 p-4 rounded-2xl text-white mb-6 text-center focus:ring-2 focus:ring-purple-500 outline-none">
+            <button onclick="activateApp()" class="w-full btn-purple py-4 rounded-2xl shadow-lg">دُخُولٌ مُبَاشِرٌ لِلْمَوْقِعِ</button>
         </div>
     </div>
 
-    <div id="mainSystem" class="hidden max-w-6xl mx-auto mt-6 animate-fadeIn">
-        <header class="flex justify-between items-center mb-8 p-4 glass-card">
+    <div id="appContainer" class="hidden max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-10 p-6 glass-card">
             <div>
-                <h2 class="text-xl gold-text">مَنْظُومَة بَحْر الغُبُش</h2>
-                <p class="text-xs text-zinc-500">مَرْحَبًا بِكَ: <span id="displayUser" class="text-yellow-500"></span></p>
+                <h2 class="text-2xl purple-gradient">مَوْقِع بَحْر الغُبُش</h2>
+                <p class="text-xs text-purple-300">أَهْلاً بِكَ: <span id="userNameShow" class="font-bold"></span></p>
             </div>
-            <div class="text-center">
-                <span class="online-dot"></span>
-                <p class="text-[10px] text-green-400 mt-1">الإِدَارَةُ نَشِطَةٌ</p>
+            <div class="flex items-center gap-2">
+                <span class="online-status"></span>
+                <span class="text-green-400 text-sm font-bold">المُوَظَّفُ نَشِطٌ</span>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div onclick="openChat('قِسْمِ الأَعْشَابِ')" class="glass-card p-8 cursor-pointer border-green-900/30 hover:bg-green-900/10">
-                <i class="fas fa-leaf text-5xl text-green-500 mb-6"></i>
-                <h3 class="text-2xl font-bold mb-3">الأَعْشَابُ الطِّبِّيَّةُ</h3>
-                <p class="text-zinc-400">تَصَفُّحُ المُنْتَجَاتِ وَالتَّوَاصُلُ مَعَ المُوَظَّفِ المَسْؤُولِ.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div onclick="openOffice('الرُّقْيَةِ الشَّرْعِيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
+                <i class="fas fa-book-open text-5xl text-purple-400 mb-4 group-hover:scale-110 transition"></i>
+                <h3 class="text-2xl font-bold mb-2">الرُّقْيَةُ الشَّرْعِيَّةُ</h3>
+                <p class="text-sm text-purple-300">بَرَامِجُ عِلَاجِيَّةٌ وَتَوَاصُلٌ مُبَاشِرٌ مَعَ الرَّاقِي.</p>
             </div>
-            <div onclick="openChat('قِسْمِ الزُّيُوتِ')" class="glass-card p-8 cursor-pointer border-yellow-900/30 hover:bg-yellow-900/10">
-                <i class="fas fa-oil-can text-5xl text-yellow-500 mb-6"></i>
-                <h3 class="text-2xl font-bold mb-3">الزُّيُوتُ الطَّبِيعِيَّةُ</h3>
-                <p class="text-zinc-400">طَلَبُ الزُّيُوتِ المُسْتَخْلَصَةِ وَرَفْعُ إِيصَالَاتِ الدَّفْعِ.</p>
+
+            <div onclick="openOffice('الأَعْشَابِ الطِّبِّيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
+                <i class="fas fa-leaf text-5xl text-green-400 mb-4 group-hover:scale-110 transition"></i>
+                <h3 class="text-2xl font-bold mb-2">الأَعْشَابُ الطِّبِّيَّةُ</h3>
+                <p class="text-sm text-purple-300">أَجْوَدُ الأَعْشَابِ وَالتَّرْكِيبَاتِ الطَّبِيعِيَّةِ السُّودَانِيَّةِ.</p>
+            </div>
+
+            <div onclick="openOffice('الزُّيُوتِ الطَّبِيعِيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
+                <i class="fas fa-oil-can text-5xl text-yellow-500 mb-4 group-hover:scale-110 transition"></i>
+                <h3 class="text-2xl font-bold mb-2">الزُّيُوتُ الطَّبِيعِيَّةُ</h3>
+                <p class="text-sm text-purple-300">زُيُوتٌ مُقَطَّرَةٌ لِلْعِلَاجِ وَالتَّجْمِيلِ بِنِقَاءٍ تَامٍّ.</p>
+            </div>
+
+            <div onclick="openOffice('التَّعَامِيدِ وَبِنْكُك')" class="glass-card p-8 cursor-pointer text-center group lg:col-span-3">
+                <i class="fas fa-money-bill-transfer text-4xl text-blue-400 mb-4"></i>
+                <h3 class="text-xl font-bold">قِسْمُ التَّعَامِيدِ المَالِيَّةِ (بِنْكُك)</h3>
+                <p class="text-sm text-purple-300">ارْفَعْ إِيصَالَاتِ الدَّفْعِ لِتَأْكِيدِ طَلَبَاتِكَ فَوْرِيّاً.</p>
             </div>
         </div>
     </div>
 
-    <div id="chatModal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-4 z-50">
-        <div class="glass-card w-full max-w-2xl">
-            <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/50">
-                <span id="chatTitle" class="gold-text text-lg">مَكْتَبُ المُرَاسَلَاتِ</span>
-                <button onclick="closeChat()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-3xl"></i></button>
+    <div id="modalOffice" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-2xl overflow-hidden border-purple-500">
+            <div class="p-6 border-b border-purple-900/50 flex justify-between items-center bg-purple-900/20">
+                <h3 id="officeTitle" class="purple-gradient text-2xl font-bold">مَكْتَبُ المُرَاسَلَاتِ</h3>
+                <button onclick="closeOffice()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-4xl"></i></button>
             </div>
-            <div class="p-6 h-80 overflow-y-auto" id="chatHistory">
-                <div class="flex items-start gap-3 mb-4">
-                    <div class="online-dot mt-2"></div>
-                    <div class="bg-zinc-800 p-4 rounded-2xl rounded-tr-none text-sm">
-                        مَرْحَبًا بِكَ فِي بَحْرِ الغُبُشِ. يُمْكِنُكَ الآنَ طَلَبُ مَا تَشَاءُ، رَفْعُ صُورَةِ الإِيصَالِ، أَوْ إِجْرَاءُ مُكَالَمَةٍ مُبَاشِرَةٍ.
-                    </div>
+            
+            <div class="p-8 h-80 overflow-y-auto" id="chatDisplay">
+                <div class="bg-purple-900/30 p-4 rounded-2xl rounded-tr-none mb-4 border-r-4 border-purple-500">
+                    مَرْحَبًا بِكَ فِي <span id="currentDept" class="text-yellow-400"></span>. نَحْنُ هُنَا لِخِدْمَتِكَ. يُمْكِنُكَ بَدْءُ اتِّصَالٍ صَوْتِيٍّ، مَرْئِيٍّ، أَوْ رَفْعِ إِيصَالِ الخِدْمَةِ.
                 </div>
             </div>
-            <div class="p-5 border-t border-zinc-800">
-                <div class="flex gap-4 mb-4">
-                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-green-500"><i class="fas fa-phone-alt"></i></button>
-                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-blue-500"><i class="fas fa-video"></i></button>
-                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-yellow-500"><i class="fas fa-microphone"></i></button>
+
+            <div class="p-6 border-t border-purple-900/50 bg-purple-950/20">
+                <div class="flex gap-4 mb-6">
+                    <button onclick="handleCall('صَوْتِيَّة')" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-green-400 border border-purple-500/20"><i class="fas fa-phone-alt text-xl"></i></button>
+                    <button onclick="handleCall('مَرْئِيَّة')" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-blue-400 border border-purple-500/20"><i class="fas fa-video text-xl"></i></button>
+                    <button onclick="document.getElementById('upload').click()" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-yellow-400 border border-purple-500/20">
+                        <i class="fas fa-cloud-upload-alt text-xl"></i>
+                        <input type="file" id="upload" class="hidden" onchange="alert('تَمَّ اخْتِيَارُ المَلَفِّ بِنَجَاحٍ')">
+                    </button>
                 </div>
                 <div class="relative">
-                    <input type="text" placeholder="اُكْتُبْ طَلَبَكَ هُنَا..." class="w-full bg-zinc-900 p-4 rounded-xl border border-zinc-700 focus:outline-none focus:border-yellow-600">
-                    <label class="absolute left-4 top-4 cursor-pointer text-zinc-500 hover:text-white">
-                        <i class="fas fa-paperclip text-xl"></i>
-                        <input type="file" class="hidden">
-                    </label>
+                    <input type="text" placeholder="اُكْتُبْ طَلَبَكَ هُنَا..." class="w-full bg-black border border-purple-500/30 p-4 rounded-2xl outline-none focus:border-purple-500">
+                    <button class="absolute left-4 top-4 text-purple-400 font-bold hover:text-white">إِرْسَال</button>
                 </div>
-                <button class="w-full btn-gold mt-4 py-3 rounded-xl">إِرْسَالُ الطَّلَبِ لِلْإِدَارَةِ</button>
             </div>
         </div>
     </div>
 
     <script>
-        function activateSystem() {
-            const user = document.getElementById('userName').value;
-            if(user.length >= 2) {
-                document.getElementById('displayUser').innerText = user;
-                document.getElementById('authSection').classList.add('hidden');
-                document.getElementById('mainSystem').classList.remove('hidden');
-                
-                // نِظَامُ تَنْبِيهِ المَدِيرِ (مُحَاكَاةُ إِرْسَالِ بَيَانَاتِ الزَّائِرِ)
-                console.log("تَنْبِيهٌ: دُخُولُ عُضْوٍ جَدِيدٍ بِاسْمِ: " + user);
-                // هُنَا يُمْكِنُ رَبْطُ تَنْبِيهِ Telegram API لاحقاً
+        function activateApp() {
+            const name = document.getElementById('guestName').value;
+            if(name.trim().length >= 2) {
+                document.getElementById('userNameShow').innerText = name;
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('appContainer').classList.remove('hidden');
+                console.log("تَنْبِيهٌ: دَخَلَ الزَّائِر " + name + " إِلَى مَوْقِعِ بَحْرِ الغُبُشِ");
             } else {
-                alert('الرَّجَاءُ كِتَابَةُ الِاسْمِ لِتَفْعِيلِ العُضْوِيَّةِ.');
+                alert('فَضْلاً، أَدْخِلِ اسْمَكَ لِتَفْعِيلِ العُضْوِيَّةِ.');
             }
         }
 
-        function openChat(section) {
-            document.getElementById('chatTitle').innerText = "مَكْتَبُ " + section;
-            document.getElementById('chatModal').classList.remove('hidden');
+        function openOffice(dept) {
+            document.getElementById('currentDept').innerText = "قِسْم " + dept;
+            document.getElementById('officeTitle').innerText = "مَكْتَبُ " + dept;
+            document.getElementById('modalOffice').classList.remove('hidden');
         }
 
-        function closeChat() {
-            document.getElementById('chatModal').classList.add('hidden');
+        function closeOffice() {
+            document.getElementById('modalOffice').classList.add('hidden');
+        }
+
+        function handleCall(type) {
+            alert('جَارٍ بَدْءُ مُكَالَمَةٍ ' + type + ' مَعَ الإِدَارَةِ... رَجَاءً انْتَظِرْ رَدَّ الموظَّفِ.');
         }
     </script>
 </body>
