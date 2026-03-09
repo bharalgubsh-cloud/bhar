@@ -5,93 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع بحر الغُبُش | للأعشاب الطبية والزيوت</title>
     <meta name="description" content="بحر الغبش لزيوت الأعشاب الطبيعية والمنتجات التقليدية - جودة وأصالة">
-    <meta name="keywords" content="بحر الغبش, أعشاب طبية, زيوت طبيعية, السودان, منتجات طبيعية">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; }
-        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-bg { background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); color: black; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
+        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 20px; transition: 0.3s; }
+        .online-dot { width: 12px; height: 12px; background: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #2ecc71; }
+        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="p-4">
 
-    <header class="py-10 text-center">
-        <h1 class="text-5xl font-bold gold-text mb-2">بَحْر الغُبُش</h1>
-        <p class="text-gray-400">لِلأَعْشَابِ الطِّبِّيَّةِ وَالزُّيُوتِ الطَّبِيعِيَّةِ</p>
-    </header>
-
-    <section class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div class="glass p-6 rounded-2xl text-center">
-            <i class="fas fa-leaf text-4xl mb-4 text-green-500"></i>
-            <h3 class="text-2xl font-bold mb-2">الأَعْشَابُ الطِّبِّيَّةُ</h3>
-            <p class="text-gray-400">نُوَفِّرُ أَجْوَدَ أَنْوَاعِ الأَعْشَابِ الطَّبِيعِيَّةِ لِلْعِلَاجِ وَالوِقَايَةِ.</p>
+    <div id="authSection" class="max-w-md mx-auto mt-20 text-center">
+        <h1 class="text-5xl gold-text mb-8 tracking-widest">بَحْرُ الغُبُشِ</h1>
+        <div class="glass-card p-10 shadow-2xl border-yellow-600/20">
+            <h2 class="text-2xl mb-6 text-white font-bold">تَسْجِيلُ عُضْوِيَّةٍ فَوْرِيَّةٍ</h2>
+            <p class="text-zinc-400 text-sm mb-6">أَهْلاً بِكَ فِي مَنْظُومَتِنَا؛ سَجِّلْ اسْمَكَ لِتَصَفُّحِ المُنْتَجَاتِ.</p>
+            <input id="userName" type="text" placeholder="اُكْتُبْ اسْمَكَ الكَامِلَ هُنَا" 
+                   class="w-full bg-zinc-900 border border-yellow-600/40 p-4 rounded-xl text-white mb-6 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-center text-lg">
+            <button onclick="activateSystem()" class="w-full btn-gold py-4 rounded-xl hover:scale-105 transition shadow-lg">إِرْسَالُ وَدُخُولٌ فَوْرِيٌّ</button>
         </div>
-        <div class="glass p-6 rounded-2xl text-center">
-            <i class="fas fa-vial text-4xl mb-4 text-yellow-500"></i>
-            <h3 class="text-2xl font-bold mb-2">الزُّيُوتُ الطَّبِيعِيَّةُ</h3>
-            <p class="text-gray-400">زُيُوتٌ مُسْتَخْلَصَةٌ بِعِنَايَةٍ لِلشَّعْرِ وَالبَشَرَةِ وَالصِّحَّةِ العَامَّةِ.</p>
-        </div>
-    </section>
+    </div>
 
-    <section class="max-w-2xl mx-auto px-4 mb-12">
-        <div class="glass p-8 rounded-3xl border-2 border-yellow-600/30">
-            <h2 class="text-2xl font-bold text-center gold-text mb-6">تَسْجِيلُ زَائِرٍ جَدِيدٍ</h2>
-            <div class="space-y-4">
-                <input type="text" placeholder="الاسْمُ الكَامِلُ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl">
-                <input type="tel" placeholder="رَقْمُ الهَاتِفِ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl">
-                <button class="w-full gold-bg font-bold py-4 rounded-xl shadow-lg">إِرْسَالُ البَيَانَاتِ</button>
+    <div id="mainSystem" class="hidden max-w-6xl mx-auto mt-6 animate-fadeIn">
+        <header class="flex justify-between items-center mb-8 p-4 glass-card">
+            <div>
+                <h2 class="text-xl gold-text">مَنْظُومَة بَحْر الغُبُش</h2>
+                <p class="text-xs text-zinc-500">مَرْحَبًا بِكَ: <span id="displayUser" class="text-yellow-500"></span></p>
+            </div>
+            <div class="text-center">
+                <span class="online-dot"></span>
+                <p class="text-[10px] text-green-400 mt-1">الإِدَارَةُ نَشِطَةٌ</p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div onclick="openChat('قِسْمِ الأَعْشَابِ')" class="glass-card p-8 cursor-pointer border-green-900/30 hover:bg-green-900/10">
+                <i class="fas fa-leaf text-5xl text-green-500 mb-6"></i>
+                <h3 class="text-2xl font-bold mb-3">الأَعْشَابُ الطِّبِّيَّةُ</h3>
+                <p class="text-zinc-400">تَصَفُّحُ المُنْتَجَاتِ وَالتَّوَاصُلُ مَعَ المُوَظَّفِ المَسْؤُولِ.</p>
+            </div>
+            <div onclick="openChat('قِسْمِ الزُّيُوتِ')" class="glass-card p-8 cursor-pointer border-yellow-900/30 hover:bg-yellow-900/10">
+                <i class="fas fa-oil-can text-5xl text-yellow-500 mb-6"></i>
+                <h3 class="text-2xl font-bold mb-3">الزُّيُوتُ الطَّبِيعِيَّةُ</h3>
+                <p class="text-zinc-400">طَلَبُ الزُّيُوتِ المُسْتَخْلَصَةِ وَرَفْعُ إِيصَالَاتِ الدَّفْعِ.</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="max-w-md mx-auto px-4 pb-20">
-        <div class="glass p-8 rounded-3xl text-center">
-            <h2 class="text-xl font-bold mb-6">دُخُولُ المَنْظُومَةِ الإِدَارِيَّةِ</h2>
-            <input type="password" placeholder="كَلِمَةُ المُرُورِ لِلْمُوَظَّفِينَ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl mb-4">
-            <button onclick="openOffice()" class="w-full border border-yellow-600 py-3 rounded-xl hover:bg-yellow-600/10 transition">دُخُولُ المَكْتَبِ</button>
-        </div>
-    </section>
-
-    <div id="staffOffice" class="fixed inset-0 bg-black z-50 hidden overflow-y-auto p-4">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold gold-text">مَكْتَبُ مُوَظَّفِ بَحْرِ الغُبُشِ</h2>
-            <button onclick="closeOffice()" class="bg-red-600 w-10 h-10 rounded-full flex items-center justify-center"><i class="fas fa-times"></i></button>
-        </div>
-        
-        <div class="glass p-6 rounded-2xl mb-4">
-            <p class="text-gray-300 text-center mb-6">مَرْحَباً بِكَ فِي بَحْرِ الغُبُشِ. اضْغَطْ عَلَى الأَيْقُونَةِ لِبَدْءِ التَّوَاصُلِ.</p>
-            <div class="flex justify-center gap-6 mb-8">
-                <button onclick="startCall('mic')" class="w-16 h-16 bg-zinc-800 rounded-full text-2xl text-blue-400 hover:bg-blue-600 hover:text-white transition"><i class="fas fa-microphone"></i></button>
-                <button onclick="startCall('video')" class="w-16 h-16 bg-zinc-800 rounded-full text-2xl text-green-400 hover:bg-green-600 hover:text-white transition"><i class="fas fa-video"></i></button>
-                <button onclick="startCall('phone')" class="w-16 h-16 bg-zinc-800 rounded-full text-2xl text-yellow-400 hover:bg-yellow-600 hover:text-white transition"><i class="fas fa-phone"></i></button>
+    <div id="chatModal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-4 z-50">
+        <div class="glass-card w-full max-w-2xl">
+            <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-900/50">
+                <span id="chatTitle" class="gold-text text-lg">مَكْتَبُ المُرَاسَلَاتِ</span>
+                <button onclick="closeChat()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-3xl"></i></button>
             </div>
-            <textarea placeholder="اكْتُبْ رِسَالَتَكَ لِلْمُوَظَّفِ..." class="w-full bg-zinc-900 border border-zinc-800 p-4 rounded-xl h-32"></textarea>
-            <button class="w-full gold-bg font-bold py-4 mt-4 rounded-xl">إِرْسَالُ التَّعْمِيدِ</button>
+            <div class="p-6 h-80 overflow-y-auto" id="chatHistory">
+                <div class="flex items-start gap-3 mb-4">
+                    <div class="online-dot mt-2"></div>
+                    <div class="bg-zinc-800 p-4 rounded-2xl rounded-tr-none text-sm">
+                        مَرْحَبًا بِكَ فِي بَحْرِ الغُبُشِ. يُمْكِنُكَ الآنَ طَلَبُ مَا تَشَاءُ، رَفْعُ صُورَةِ الإِيصَالِ، أَوْ إِجْرَاءُ مُكَالَمَةٍ مُبَاشِرَةٍ.
+                    </div>
+                </div>
+            </div>
+            <div class="p-5 border-t border-zinc-800">
+                <div class="flex gap-4 mb-4">
+                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-green-500"><i class="fas fa-phone-alt"></i></button>
+                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-blue-500"><i class="fas fa-video"></i></button>
+                    <button class="flex-1 bg-zinc-800 p-3 rounded-xl hover:text-yellow-500"><i class="fas fa-microphone"></i></button>
+                </div>
+                <div class="relative">
+                    <input type="text" placeholder="اُكْتُبْ طَلَبَكَ هُنَا..." class="w-full bg-zinc-900 p-4 rounded-xl border border-zinc-700 focus:outline-none focus:border-yellow-600">
+                    <label class="absolute left-4 top-4 cursor-pointer text-zinc-500 hover:text-white">
+                        <i class="fas fa-paperclip text-xl"></i>
+                        <input type="file" class="hidden">
+                    </label>
+                </div>
+                <button class="w-full btn-gold mt-4 py-3 rounded-xl">إِرْسَالُ الطَّلَبِ لِلْإِدَارَةِ</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function openOffice() { document.getElementById('staffOffice').classList.remove('hidden'); }
-        function closeOffice() { document.getElementById('staffOffice').classList.add('hidden'); }
-
-        // إرشادات تشغيل الميكروفون والكاميرا
-        async function startCall(type) {
-            try {
-                if (type === 'mic') {
-                    await navigator.mediaDevices.getUserMedia({ audio: true });
-                    alert("تَمَّ تَقْعِيلُ المِيكْرُوفُونِ.. ابْدَأْ التَّسْجِيلَ الصَّوْتِيَّ");
-                } else if (type === 'video') {
-                    await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-                    alert("تَمَّ تَقْعِيلُ الكَامِيرَا.. جَارٍ بَدْءُ مُّكَالَمَةِ الفِيدْيُو");
-                } else {
-                    alert("جَارٍ الِاتِّصَالُ بِقِسْمِ المَبِيعَاتِ...");
-                }
-            } catch (err) {
-                alert("عُذْراً: يَجِبُ إِعْطَاءُ الإِذْنِ لِلْمُتَصَفِّحِ لِتَشْغِيلِ الكَامِيرَا أَوِ المِيكْرُوفُونِ.");
+        function activateSystem() {
+            const user = document.getElementById('userName').value;
+            if(user.length >= 2) {
+                document.getElementById('displayUser').innerText = user;
+                document.getElementById('authSection').classList.add('hidden');
+                document.getElementById('mainSystem').classList.remove('hidden');
+                
+                // نِظَامُ تَنْبِيهِ المَدِيرِ (مُحَاكَاةُ إِرْسَالِ بَيَانَاتِ الزَّائِرِ)
+                console.log("تَنْبِيهٌ: دُخُولُ عُضْوٍ جَدِيدٍ بِاسْمِ: " + user);
+                // هُنَا يُمْكِنُ رَبْطُ تَنْبِيهِ Telegram API لاحقاً
+            } else {
+                alert('الرَّجَاءُ كِتَابَةُ الِاسْمِ لِتَفْعِيلِ العُضْوِيَّةِ.');
             }
+        }
+
+        function openChat(section) {
+            document.getElementById('chatTitle').innerText = "مَكْتَبُ " + section;
+            document.getElementById('chatModal').classList.remove('hidden');
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').classList.add('hidden');
         }
     </script>
 </body>
