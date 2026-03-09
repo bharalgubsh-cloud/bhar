@@ -3,164 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مَوْقِعُ بَحْرِ الغُبُشِ | بَوَّابَةُ الدَّفْعِ وَالإِدَارَةُ</title>
+    <title>مَوْقِعُ بَحْرِ الغُبُشِ | نُسْخَةُ الحِمَايَةِ وَالأَمْنِ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; }
+        body { 
+            font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5;
+            /* تَعْطِيلُ تَحْدِيدِ النَّصِّ */
+            user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
+        }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-        .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; transition: 0.3s; }
-        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; transition: 0.3s; cursor: pointer; }
-        .payment-box { background: rgba(30, 30, 30, 0.8); border: 1px dashed #bf953f; padding: 15px; border-radius: 15px; margin-top: 10px; display: none; }
-        .points-badge { background: linear-gradient(to left, #27ae60, #2ecc71); color: white; padding: 2px 8px; border-radius: 20px; font-size: 10px; }
+        .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; }
+        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; cursor: pointer; }
+        
+        /* تَنْبِيهُ الحِمَايَةِ */
+        #securityAlert { display: none; position: fixed; top: 20px; right: 20px; background: #d32f2f; color: white; padding: 15px; border-radius: 10px; z-index: 2000; font-weight: bold; animation: shake 0.5s; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+        /* نِظَامُ المُلَقِّنِ */
+        #prompterOverlay { display: none; position: fixed; inset: 0; background: black; z-index: 1000; flex-direction: column; align-items: center; justify-content: center; }
+        #prompterText { font-size: 3rem; text-align: center; color: white; width: 85%; height: 60vh; overflow: hidden; position: relative; border: 2px solid #bf953f; padding: 20px; border-radius: 20px; }
+        .prompter-scroll { position: absolute; width: 100%; transition: transform linear; }
     </style>
 </head>
-<body class="p-2 md:p-8">
+<body oncontextmenu="showSecurityAlert(event)" onkeydown="checkSecurity(event)">
+
+    <div id="securityAlert"><i class="fas fa-shield-alt ml-2"></i> عُذْرًا! مُحْتَوَى بَحْرِ الغُبُشِ مَحْمِيٌّ بِأَمْرِ الإِدَارَةِ.</div>
 
     <div id="loginPage" class="max-w-md mx-auto mt-20 text-center">
         <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
-        <div class="glass-card p-10 shadow-2xl border-yellow-600/30">
-            <h2 class="text-xl mb-6 font-bold uppercase">دُخُولُ مَوْقِعِ بَحْرِ الغُبُشِ</h2>
-            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّسْجِيلِ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
-            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">تَفْعِيلُ المَوْقِعِ</button>
+        <div class="glass-card p-10 shadow-2xl">
+            <h2 class="text-xl mb-6 font-bold uppercase tracking-widest">دُخُولُ المَوْقِعِ الحَصِينِ</h2>
+            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ هُنَا..." class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">تَفْعِيلُ الدِّرْعِ وَالدُّخُولِ</button>
         </div>
     </div>
 
     <div id="mainApp" class="hidden max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-8 p-5 glass-card border-yellow-600/10">
+        <header class="flex justify-between items-center mb-8 p-5 glass-card">
             <div>
-                <h2 class="text-2xl gold-text font-bold uppercase">مَوْقِعُ بَحْرِ الغُبُشِ</h2>
-                <div class="flex items-center gap-2">
-                    <p class="text-[10px] text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
-                    <div class="points-badge"><i class="fas fa-coins ml-1"></i>نِقَاطِي: <span id="userPoints">0</span></div>
-                </div>
+                <h2 class="text-2xl gold-text font-bold uppercase">بَحْرُ الغُبُشِ 🛡️</h2>
+                <p class="text-[10px] text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
             </div>
-            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-green-500 text-[10px] font-bold tracking-widest uppercase">Bahr Al-Ghubush Official</span></div>
+            <div class="flex gap-2">
+                <button onclick="openPrompter()" class="bg-red-800 text-white px-4 py-2 rounded-xl text-[10px] font-bold"><i class="fas fa-video ml-1"></i> المُلَقِّنُ</button>
+                <button onclick="sendWeeklyReport()" class="bg-zinc-800 text-yellow-500 px-4 py-2 rounded-xl text-[10px] font-bold">الأَرْشِيفُ</button>
+            </div>
         </header>
 
         <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
             <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
             <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
             <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
-            <button onclick="openBooking()" class="glass-card px-6 py-4 min-w-[130px] border-red-500 text-red-500 font-bold"><i class="fas fa-calendar-check mb-1"></i><br>المَوَاعِيدُ</button>
-            <button onclick="openReviews()" class="glass-card px-6 py-4 min-w-[130px] border-orange-500 text-orange-400 font-bold"><i class="fas fa-star mb-1"></i><br>تَقْيِيمَاتٌ</button>
-            <button id="adminBtn" onclick="toggleAdminPanel()" class="hidden glass-card px-6 py-4 min-w-[130px] border-white/20 text-white font-bold"><i class="fas fa-user-shield mb-1"></i><br>المُدِيرُ</button>
         </div>
 
         <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"></div>
     </div>
 
-    <div id="chatModal" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-2xl overflow-hidden border-yellow-600 shadow-2xl">
-            <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-900">
-                <h3 class="gold-text uppercase tracking-widest"><i class="fas fa-wallet ml-2"></i>دَفْعُ مَوْقِعِ بَحْرِ الغُبُشِ</h3>
-                <button onclick="closeModal()" class="text-red-500"><i class="fas fa-times-circle text-3xl"></i></button>
-            </div>
-            
-            <div class="p-6 h-64 overflow-y-auto" id="chatFlow">
-                <div class="bg-zinc-800 p-4 rounded-xl mb-4 text-sm border-r-4 border-yellow-600">
-                    <span id="chatText"></span>
-                </div>
-
-                <div id="paymentOptions" class="hidden space-y-3">
-                    <p class="text-[10px] text-zinc-500 mb-2 font-bold uppercase tracking-widest text-center">اخْتَرْ وَسِيلَةَ الدَّفْعِ الآمِنَةِ:</p>
-                    <div class="grid grid-cols-2 gap-2">
-                        <button onclick="selectPayment('bankak')" class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 hover:border-yellow-600 transition text-[11px] font-bold"><i class="fas fa-university ml-2 text-yellow-500"></i>بِنْكَك</button>
-                        <button onclick="selectPayment('fawry')" class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 hover:border-yellow-600 transition text-[11px] font-bold"><i class="fas fa-bolt ml-2 text-green-500"></i>فَوْرِي</button>
-                    </div>
-
-                    <div id="bankakBox" class="payment-box">
-                        <p class="text-[10px] text-yellow-500 font-bold mb-1 italic uppercase">حِسَابُ بِنْكَك الرَّسْمِيُّ:</p>
-                        <p class="text-sm font-bold tracking-widest">2985827</p>
-                        <p class="text-[9px] text-zinc-400 mt-1">عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
-                    </div>
-                    <div id="fawryBox" class="payment-box">
-                        <p class="text-[10px] text-green-500 font-bold mb-1 italic uppercase">حِسَابُ فَوْرِي الرَّسْمِيُّ:</p>
-                        <p class="text-sm font-bold tracking-widest">51170108</p>
-                        <p class="text-[9px] text-zinc-400 mt-1">عَبْدَالالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-6 border-t border-zinc-800 bg-zinc-900/50">
-                <div class="flex gap-2">
-                    <input type="text" id="userInput" placeholder="أَرْفِقْ رَقْمَ العَمَلِيَّةِ هُنَا..." class="flex-1 bg-black border border-zinc-800 p-4 rounded-xl outline-none focus:border-yellow-600 text-sm">
-                    <button onclick="sendMessage()" class="btn-gold px-8 text-xs font-bold uppercase tracking-widest">إِرْسَال</button>
-                </div>
+    <div id="prompterOverlay">
+        <div id="prompterText">
+            <div id="scrollContent" class="prompter-scroll">
+                يَا دُكْتُور عَبْدَالصَّمَد، جَاهِزُونَ لِلتَّصْوِيرِ... <br><br>
+                بَحْرُ الغُبُشِ لِلرُّقْيَةِ وَالأَعْشَابِ... <br><br>
+                نُقَدِّمُ لَكُمْ جَوْهَرَ العِلَاجِ وَالشِّفَاءِ...
             </div>
         </div>
-    </div>
-
-    <div id="adminPanel" class="hidden fixed inset-0 bg-black/90 z-[60] p-8">
-        <div class="glass-card max-w-2xl mx-auto p-6 h-full overflow-y-auto border-red-900">
-            <button onclick="toggleAdminPanel()" class="float-left text-red-500"><i class="fas fa-times"></i></button>
-            <h3 class="gold-text mb-6">سِجِلُّ مَوْقِعِ بَحْرِ الغُبُشِ الشَّامِلِ</h3>
-            <div id="adminLog" class="text-[10px] font-mono space-y-2 text-zinc-400 italic"></div>
+        <div class="mt-10 flex gap-4">
+            <button onclick="startScroll()" class="btn-gold px-10 py-3">بَدْءُ التَّلْقِينِ</button>
+            <button onclick="closePrompter()" class="bg-red-600 px-10 py-3 rounded-xl">خُرُوج</button>
         </div>
     </div>
 
     <script>
-        let isAdmin = false; let isVIP = false;
-        let userName = ""; let currentMode = "";
-        let userPoints = 0;
+        let userName = ""; let scrollInterval; let scrollPos = 0;
+        const drWhatsapp = "249121494942";
 
-        const data = {
-            roqya: ["العين", "الحسد", "السحر المرشوش", "السحر المأكول والمشروب", "السحر السفلي", "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"],
-            herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "عشبة المدينة", p: 10000}],
-            oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}, {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, {n: "زيت إكليل الجبل", p: 10000}]
-        };
+        // نِظَامُ الحِمَايَةِ
+        function showSecurityAlert(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById('securityAlert');
+            alertBox.style.display = 'block';
+            setTimeout(() => alertBox.style.display = 'none', 3000);
+        }
+
+        function checkSecurity(e) {
+            // مَنْعُ Ctrl+C, Ctrl+U, F12
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's') || e.keyCode === 123) {
+                showSecurityAlert(e);
+                return false;
+            }
+        }
 
         function entry() {
             userName = document.getElementById('uName').value;
-            if(userName === "1234") { isAdmin = true; document.getElementById('adminBtn').classList.remove('hidden'); }
             if(userName.length < 2) return alert('أَدْخِلِ الِاسْمَ');
             document.getElementById('displayUser').innerText = userName;
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
+            window.speechSynthesis.speak(new SpeechSynthesisUtterance("نظام الحماية مفعل في بحر الغبش"));
             showTab('roqya');
         }
 
         function showTab(type) {
             const container = document.getElementById('container'); container.innerHTML = "";
+            const data = {
+                roqya: ["العين", "الحسد", "السحر الأسود", "سحر الأرحام", "المس الشيطاني", "الجن الطيار"],
+                herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}],
+                oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}]
+            };
             let items = (type === 'roqya') ? data.roqya.map(i => ({n: i, p: 75000})) : (type === 'herbs' ? data.herbs : data.oils);
             items.forEach(item => {
-                container.innerHTML += `<div class="glass-card p-6 text-center">
-                    <h4 class="font-bold text-[11px] mb-2 h-10 uppercase tracking-tighter">${item.n}</h4>
+                container.innerHTML += `<div class="glass-card p-6 text-center shadow-lg">
+                    <h4 class="font-bold text-[12px] mb-2 uppercase tracking-tighter">${item.n}</h4>
                     <p class="gold-text mb-4 text-xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
-                    <button onclick="buy('${item.n}', ${item.p})" class="btn-gold w-full py-3 text-[10px] uppercase tracking-widest">تَأْكِيدُ الطَّلَبِ</button>
+                    <button class="btn-gold w-full py-3 text-[10px] font-bold">بَدْءُ الطَّلَبِ</button>
                 </div>`;
             });
         }
 
-        function buy(n, p) {
-            currentMode = "شِرَاء: " + n;
-            document.getElementById('chatText').innerHTML = `مَوْقِعُ بَحْرِ الغُبُشِ - مَكْتَبُ الطَّلَبَاتِ<br>لَقَدْ اخْتَرْتَ: ${n}<br>المَبْلَغُ المَطْلُوبُ: ${p.toLocaleString()} ج.س`;
-            document.getElementById('paymentOptions').classList.remove('hidden');
-            document.getElementById('chatModal').classList.remove('hidden');
+        function openPrompter() { document.getElementById('prompterOverlay').style.display = 'flex'; }
+        function closePrompter() { clearInterval(scrollInterval); document.getElementById('prompterOverlay').style.display = 'none'; }
+        function startScroll() {
+            const content = document.getElementById('scrollContent');
+            scrollPos = 0;
+            clearInterval(scrollInterval);
+            scrollInterval = setInterval(() => { scrollPos -= 1; content.style.transform = `translateY(${scrollPos}px)`; }, 40);
         }
 
-        function selectPayment(type) {
-            document.getElementById('bankakBox').style.display = (type === 'bankak') ? 'block' : 'none';
-            document.getElementById('fawryBox').style.display = (type === 'fawry') ? 'block' : 'none';
-        }
-
-        function sendMessage() {
-            const msg = document.getElementById('userInput').value; if(!msg) return alert('أَدْخِلْ بَيَانَاتِ العَمَلِيَّةِ');
-            document.getElementById('adminLog').innerHTML += `<div>[${userName}] (${currentMode}): ${msg}</div>`;
-            alert("تَمَّ إِرْسَالُ البَيَانَاتِ بِنَجَاحٍ إِلَى إِدَارَةِ مَوْقِعِ بَحْرِ الغُبُشِ.");
-            closeModal();
-        }
-
-        function openBooking() {
-            currentMode = "حَجْزُ مَوْعِدٍ";
-            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - الحَجْزُ<br>اُكْتُبْ المَوْعِدَ المُنَاسِبَ لَكَ سَيِّدِي.";
-            document.getElementById('paymentOptions').classList.add('hidden');
-            document.getElementById('chatModal').classList.remove('hidden');
-        }
-
-        function toggleAdminPanel() { document.getElementById('adminPanel').classList.toggle('hidden'); }
-        function closeModal() { document.getElementById('chatModal').classList.add('hidden'); }
+        function sendWeeklyReport() { window.open(`https://wa.me/${drWhatsapp}?text=طلب_تقرير_بحر_الغبش`, '_blank'); }
     </script>
 </body>
 </html>
