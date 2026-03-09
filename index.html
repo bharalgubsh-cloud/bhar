@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منظومة بحر الغُبُش | الإصدار المعتمد</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; }
+        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-bg { background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); color: black; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
+        .tab-active { color: #d4af37; border-bottom: 2px solid #d4af37; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- نظام التنبيهات (Toast) -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden animate-bounce">
+        <div class="bg-zinc-900 border-b-4 border-yellow-600 px-6 py-3 rounded-xl shadow-2xl font-bold text-white" id="toastMsg"></div>
+    </div>
+
+    <!-- شاشة الدخول الرئيسية -->
+    <div id="view-login" class="min-h-screen flex items-center justify-center p-6">
+        <div class="glass p-10 w-full max-w-md rounded-[2.5rem] text-center shadow-2xl">
+            <h1 class="text-5xl font-bold gold-text mb-2">بحر الغُبُش</h1>
+            <p class="text-gray-500 mb-8 font-bold italic">المنظومة الإدارية المتكاملة</p>
+            
+            <div class="space-y-4 text-right">
+                <input type="text" id="userInput" class="w-full p-4 bg-zinc-900 border border-zinc-700 rounded-2xl outline-none focus:border-yellow-500 text-center font-bold" placeholder="البريد الإلكتروني أو الاسم">
+                <input type="password" id="passInput" class="w-full p-4 bg-zinc-900 border border-zinc-700 rounded-2xl outline-none focus:border-yellow-500 text-center font-bold" placeholder="كلمة المرور">
+                <button onclick="handleAuth()" class="w-full gold-bg font-black py-4 rounded-2xl shadow-xl hover:scale-[1.02] transition-transform text-xl">دخول</button>
+                <div class="flex justify-between px-2 text-xs text-gray-500 font-bold">
+                    <button onclick="setRole('visitor')">دخول كزائر</button>
+                    <button onclick="showToast('تواصل مع الإدارة لاستعادة الرمز')">نسيت الرمز؟</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- واجهة المنظومة (المحتوى الرئيسي) -->
+    <div id="view-main" class="hidden min-h-screen flex flex-col pb-24">
+        <header class="p-6 flex justify-between items-center border-b border-yellow-900/30 bg-black/80 sticky top-0 z-50 backdrop-blur-md">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 gold-bg rounded-xl flex items-center justify-center font-black shadow-lg">ب</div>
+                <div class="flex flex-col">
+                    <span class="gold-text font-black text-xl leading-none">بحر الغبش</span>
+                    <span id="userRoleBadge" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1"></span>
+                </div>
+            </div>
+            <button onclick="location.reload()" class="text-gray-500 hover:text-red-500 transition-colors"><i class="fas fa-power-off text-2xl"></i></button>
+        </header>
+
+        <main id="app-content" class="flex-1 p-4 max-w-4xl mx-auto w-full">
+            <!-- المحتوى يتم توليده برمجياً -->
+        </main>
+
+        <!-- التنقل السفلي -->
+        <nav id="bottomNav" class="fixed bottom-0 left-0 right-0 glass border-t border-yellow-900/20 p-3 flex justify-around items-center z-50">
+            <!-- يتم توليد الأزرار بناء على الصلاحية -->
+        </nav>
+    </div>
+
+    <script>
+        // --- قاعدة البيانات الحقيقية المعتمدة ---
+        const credentials = {
+            "bharalgubsh@gmail.com": { pass: "aboooha778899", role: "admin", name: "الشيخ عبد اللطيف" },
+            "abdalsamadabdalwahed@gmail.com": { pass: "flor19935", role: "deputy", name: "النائب عبد الصمد" },
+            "staff": { pass: "2025", role: "staff", name: "المناوب" }
+        };
+
+        const products = [
+            { id: 1, name: "زيت الزيتون المرقي", price: "15,000", icon: "🧴" },
+            { id: 2, name: "خلطة العسل الملكية", price: "45,000", icon: "🍯" },
+            { id: 3, name: "بخور الغبش الخاص", price: "12,500", icon: "💨" }
+        ];
+
+        let currentUser = null;
+        let currentTab = 'home';
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 3000);
+        }
+
+        function handleAuth() {
+            const user = document.getElementById('userInput').value;
+            const pass = document.getElementById('passInput').value;
+
+            if (credentials[user] && credentials[user].pass === pass) {
+                currentUser = credentials[user];
+                startApp();
+            } else if (user && pass === "") { // دخول زائر سريع
+                currentUser = { role: 'visitor', name: user };
+                startApp();
+            } else {
+                showToast("بيانات الدخول غير صحيحة");
+            }
+        }
+
+        function startApp() {
+            document.getElementById('view-login').classList.add('hidden');
+            document.getElementById('view-main').classList.remove('hidden');
+            document.getElementById('userRoleBadge').innerText = currentUser.name;
+            renderNav();
+            renderContent('home');
+        }
+
+        function renderNav() {
+            const nav = document.getElementById('bottomNav');
+            let btns = `
+                <button onclick="renderContent('home')" class="flex flex-col items-center gap-1"><i class="fas fa-home"></i><span class="text-[10px]">الرئيسية</span></button>
+                <button onclick="renderContent('shop')" class="flex flex-col items-center gap-1"><i class="fas fa-shopping-bag"></i><span class="text-[10px]">المتجر</span></button>
+                <button onclick="renderContent('chat')" class="flex flex-col items-center gap-1"><i class="fas fa-comment-dots"></i><span class="text-[10px]">المراسلة</span></button>
+            `;
+            if (currentUser.role === 'admin' || currentUser.role === 'deputy') {
+                btns += `<button onclick="renderContent('admin')" class="flex flex-col items-center gap-1 text-red-500"><i class="fas fa-shield-alt"></i><span class="text-[10px]">الرقابة</span></button>`;
+            }
+            nav.innerHTML = btns;
+        }
+
+        function renderContent(tab) {
+            const content = document.getElementById('app-content');
+            if (tab === 'home') {
+                content.innerHTML = `
+                    <div class="space-y-6">
+                        <div class="glass p-8 rounded-[2rem] border-r-8 border-yellow-600 animate-fade">
+                            <h2 class="text-2xl font-black mb-2">مرحباً بك في المنظومة</h2>
+                            <p class="text-gray-400 font-bold">أهلاً بك يا ${currentUser.name}. النظام جاهز لاستقبال الطلبات.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="glass p-6 rounded-3xl text-center"><i class="fas fa-users text-2xl text-yellow-600 mb-2"></i><div class="text-2xl font-black">1,240</div><div class="text-xs text-gray-500">زائر</div></div>
+                            <div class="glass p-6 rounded-3xl text-center"><i class="fas fa-check-double text-2xl text-green-600 mb-2"></i><div class="text-2xl font-black">89</div><div class="text-xs text-gray-500">طلب ناجح</div></div>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'shop') {
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 gap-4">
+                        ${products.map(p => `
+                            <div class="glass p-6 rounded-3xl flex justify-between items-center border border-zinc-800">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-4xl">${p.icon}</span>
+                                    <div><h4 class="font-black text-lg">${p.name}</h4><p class="text-yellow-600 font-black">${p.price} ج.س</p></div>
+                                </div>
+                                <button onclick="showToast('تمت إضافة الطلب')" class="gold-bg px-6 py-2 rounded-xl font-bold">طلب</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (tab === 'chat') {
+                content.innerHTML = `
+                    <div class="glass rounded-[2rem] h-[65vh] flex flex-col overflow-hidden">
+                        <div class="p-4 bg-zinc-900 border-b border-yellow-900/20 font-bold text-center">المكتب الاستشاري المباشر</div>
+                        <div class="flex-1 p-4 overflow-y-auto space-y-4" id="chat-msgs">
+                            <div class="bg-zinc-800 p-4 rounded-2xl rounded-tr-none max-w-[80%] ml-auto text-sm font-bold">السلام عليكم، كيف يمكننا خدمتك اليوم؟</div>
+                        </div>
+                        <div class="p-4 flex gap-2 border-t border-zinc-800">
+                            <input id="msgInp" class="flex-1 bg-zinc-900 p-3 rounded-xl outline-none" placeholder="اكتب هنا...">
+                            <button onclick="sendMsg()" class="gold-bg w-12 h-12 rounded-xl flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                `;
+            } else if (tab === 'admin') {
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <h2 class="text-xl font-black text-red-500"><i class="fas fa-user-shield ml-2"></i>غرفة الرقابة العليا</h2>
+                        <div class="glass p-6 rounded-3xl">
+                            <h3 class="font-bold mb-4 border-b border-zinc-800 pb-2">طلبات بانتظار المراجعة (إيصالات)</h3>
+                            <div class="space-y-3">
+                                <div class="p-4 bg-zinc-900 rounded-2xl flex justify-between items-center border-r-4 border-amber-500">
+                                    <div class="text-sm font-bold">طلب: زيت مرقي - الزائر: أحمد</div>
+                                    <button onclick="showToast('جاري فتح الإيصال المحمي')" class="text-blue-400 text-xs">عرض الإيصال <i class="fas fa-lock ml-1"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function sendMsg() {
+            const inp = document.getElementById('msgInp');
+            if(!inp.value) return;
+            const chat = document.getElementById('chat-msgs');
+            chat.innerHTML += `<div class="bg-yellow-600 text-black p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm font-bold">${inp.value}</div>`;
+            inp.value = "";
+            chat.scrollTop = chat.scrollHeight;
+        }
+    </script>
+</body>
+</html>
