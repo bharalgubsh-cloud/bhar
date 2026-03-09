@@ -3,115 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مَوْقِعُ بَحْرِ الغُبُشِ | التَّقْيِيمَاتُ وَالإِدَارَةُ الشَّامِلَةُ</title>
+    <title>مَوْقِعُ بَحْرِ الغُبُشِ | بَوَّابَةُ الدَّفْعِ وَالإِدَارَةُ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
         .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; transition: 0.3s; }
         .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; transition: 0.3s; cursor: pointer; }
-        .vip-card { border: 1px solid #f1c40f; box-shadow: 0 0 20px rgba(241, 196, 15, 0.15); }
-        .review-node { background: rgba(30, 30, 30, 0.5); border-right: 4px solid #bf953f; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 11px; }
+        .payment-box { background: rgba(30, 30, 30, 0.8); border: 1px dashed #bf953f; padding: 15px; border-radius: 15px; margin-top: 10px; display: none; }
+        .points-badge { background: linear-gradient(to left, #27ae60, #2ecc71); color: white; padding: 2px 8px; border-radius: 20px; font-size: 10px; }
     </style>
 </head>
 <body class="p-2 md:p-8">
 
-    <div id="loginPage" class="max-w-md mx-auto mt-20 text-center animate-fadeIn">
+    <div id="loginPage" class="max-w-md mx-auto mt-20 text-center">
         <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
         <div class="glass-card p-10 shadow-2xl border-yellow-600/30">
-            <h2 class="text-xl mb-6 font-bold uppercase">تَسْجِيلُ دُخُولِ بَحْرِ الغُبُشِ</h2>
-            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّعَرُّفِ عَلَيْكَ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none focus:border-yellow-500">
-            <button onclick="entry()" class="w-full btn-gold py-4 text-lg uppercase tracking-widest">تَفْعِيلُ المَوْقِعِ</button>
+            <h2 class="text-xl mb-6 font-bold uppercase">دُخُولُ مَوْقِعِ بَحْرِ الغُبُشِ</h2>
+            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّسْجِيلِ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">تَفْعِيلُ المَوْقِعِ</button>
         </div>
     </div>
 
     <div id="mainApp" class="hidden max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-8 p-5 glass-card border-yellow-600/20">
+        <header class="flex justify-between items-center mb-8 p-5 glass-card border-yellow-600/10">
             <div>
                 <h2 class="text-2xl gold-text font-bold uppercase">مَوْقِعُ بَحْرِ الغُبُشِ</h2>
                 <div class="flex items-center gap-2">
-                    <p class="text-xs text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
-                    <span id="vipBadge" class="hidden bg-yellow-600 text-black text-[10px] px-2 rounded font-bold">عُضْوٌ مُمَيَّزٌ VIP</span>
+                    <p class="text-[10px] text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
+                    <div class="points-badge"><i class="fas fa-coins ml-1"></i>نِقَاطِي: <span id="userPoints">0</span></div>
                 </div>
             </div>
-            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-green-500 text-[10px] font-bold uppercase">Bahr Al-Ghubush Online</span></div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-green-500 text-[10px] font-bold tracking-widest uppercase">Bahr Al-Ghubush Official</span></div>
         </header>
 
         <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
             <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
             <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
             <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
-            <button onclick="openConsultation()" class="glass-card px-6 py-4 min-w-[130px] border-blue-500 text-blue-400 font-bold"><i class="fas fa-user-md mb-1"></i><br>اسْتِشَارَةٌ</button>
+            <button onclick="openBooking()" class="glass-card px-6 py-4 min-w-[130px] border-red-500 text-red-500 font-bold"><i class="fas fa-calendar-check mb-1"></i><br>المَوَاعِيدُ</button>
             <button onclick="openReviews()" class="glass-card px-6 py-4 min-w-[130px] border-orange-500 text-orange-400 font-bold"><i class="fas fa-star mb-1"></i><br>تَقْيِيمَاتٌ</button>
-            <button id="adminBtn" onclick="toggleAdminPanel()" class="hidden glass-card px-6 py-4 min-w-[130px] border-red-500 text-red-500 font-bold"><i class="fas fa-user-shield mb-1"></i><br>تَحَكُّمٌ</button>
+            <button id="adminBtn" onclick="toggleAdminPanel()" class="hidden glass-card px-6 py-4 min-w-[130px] border-white/20 text-white font-bold"><i class="fas fa-user-shield mb-1"></i><br>المُدِيرُ</button>
         </div>
 
-        <div id="adminPanel" class="hidden mb-10 glass-card p-6 border-red-900/50">
-            <h3 class="text-red-500 font-bold mb-6 italic underline underline-offset-8">إِدَارَةُ مَوْقِعِ بَحْرِ الغُبُشِ (البَرْمَجَةُ العُلْيَا)</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-black/40 p-4 rounded-xl border border-zinc-800">
-                    <p class="text-[10px] text-zinc-500 mb-2 font-bold uppercase">إِعْدَادَاتُ المَوْقِعِ</p>
-                    <div class="flex gap-2">
-                        <input type="number" id="priceRoqya" value="75000" class="w-1/2 bg-zinc-900 border border-zinc-700 p-2 rounded text-yellow-500">
-                        <input type="text" id="couponCode" value="BAHR10" class="w-1/2 bg-zinc-900 border border-zinc-700 p-2 rounded text-green-500 uppercase">
-                    </div>
-                    <button onclick="saveAdminChanges()" class="btn-gold w-full mt-4 py-2 text-[10px]">حِفْظُ البَيَانَاتِ</button>
-                </div>
-                <div class="bg-black/40 p-4 rounded-xl border border-zinc-800 h-40 overflow-y-auto">
-                    <p class="text-[10px] text-red-500 mb-2 font-bold uppercase tracking-widest">سِجِلُّ نَشَاطِ مَوْقِعِ بَحْرِ الغُبُشِ</p>
-                    <div id="adminLog" class="text-[9px] space-y-1 font-mono text-zinc-400 italic"></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 animate-fadeIn"></div>
+        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"></div>
     </div>
 
     <div id="chatModal" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-2xl overflow-hidden border-yellow-600 shadow-2xl">
             <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-900">
-                <h3 id="modalTitle" class="gold-text uppercase"><i class="fas fa-comments ml-2"></i>مَوْقِعُ بَحْرِ الغُبُشِ</h3>
-                <button onclick="closeModal()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-3xl"></i></button>
+                <h3 class="gold-text uppercase tracking-widest"><i class="fas fa-wallet ml-2"></i>دَفْعُ مَوْقِعِ بَحْرِ الغُبُشِ</h3>
+                <button onclick="closeModal()" class="text-red-500"><i class="fas fa-times-circle text-3xl"></i></button>
             </div>
             
-            <div id="reviewDisplay" class="hidden p-6 h-40 overflow-y-auto border-b border-zinc-800">
-                <p class="text-[10px] text-zinc-500 mb-4 font-bold italic underline uppercase tracking-widest">شَهَادَاتُ مَنْ تَعَالَمُوا فِي مَوْقِعِ بَحْرِ الغُبُشِ:</p>
-                <div id="reviewsList" class="space-y-2">
-                    <div class="review-node"><b>عُمَرُ:</b> "جَزَاكُمُ اللهُ خَيْرًا، نِعْمَةُ العِلَاجِ وَالرُّقْيَةِ."</div>
-                </div>
-            </div>
-
-            <div class="p-6 h-48 overflow-y-auto" id="chatFlow">
+            <div class="p-6 h-64 overflow-y-auto" id="chatFlow">
                 <div class="bg-zinc-800 p-4 rounded-xl mb-4 text-sm border-r-4 border-yellow-600">
                     <span id="chatText"></span>
+                </div>
+
+                <div id="paymentOptions" class="hidden space-y-3">
+                    <p class="text-[10px] text-zinc-500 mb-2 font-bold uppercase tracking-widest text-center">اخْتَرْ وَسِيلَةَ الدَّفْعِ الآمِنَةِ:</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="selectPayment('bankak')" class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 hover:border-yellow-600 transition text-[11px] font-bold"><i class="fas fa-university ml-2 text-yellow-500"></i>بِنْكَك</button>
+                        <button onclick="selectPayment('fawry')" class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 hover:border-yellow-600 transition text-[11px] font-bold"><i class="fas fa-bolt ml-2 text-green-500"></i>فَوْرِي</button>
+                    </div>
+
+                    <div id="bankakBox" class="payment-box">
+                        <p class="text-[10px] text-yellow-500 font-bold mb-1 italic uppercase">حِسَابُ بِنْكَك الرَّسْمِيُّ:</p>
+                        <p class="text-sm font-bold tracking-widest">2985827</p>
+                        <p class="text-[9px] text-zinc-400 mt-1">عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                    </div>
+                    <div id="fawryBox" class="payment-box">
+                        <p class="text-[10px] text-green-500 font-bold mb-1 italic uppercase">حِسَابُ فَوْرِي الرَّسْمِيُّ:</p>
+                        <p class="text-sm font-bold tracking-widest">51170108</p>
+                        <p class="text-[9px] text-zinc-400 mt-1">عَبْدَالالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                    </div>
                 </div>
             </div>
 
             <div class="p-6 border-t border-zinc-800 bg-zinc-900/50">
-                <div id="couponSection" class="flex gap-2 mb-4 hidden">
-                    <input type="text" id="userCoupon" placeholder="كُودُ خَصْمِ بَحْرِ الغُبُشِ" class="flex-1 bg-black border border-zinc-800 p-3 rounded-xl outline-none text-[10px] text-center uppercase tracking-widest text-green-500">
-                    <button onclick="applyCoupon()" class="bg-green-600 text-black font-bold px-4 rounded-xl text-xs uppercase">تَفْعِيل</button>
-                </div>
-                <div class="flex gap-2 mb-4">
-                    <button id="receiptBtn" onclick="document.getElementById('rUp').click()" class="flex-1 bg-yellow-600/10 border border-yellow-600 text-yellow-600 p-3 hidden rounded-xl font-bold text-xs uppercase tracking-tighter"><i class="fas fa-receipt ml-1"></i>إِيصَال بِنْكَك</button>
-                    <input type="file" id="rUp" class="hidden">
-                </div>
                 <div class="flex gap-2">
-                    <input type="text" id="userInput" placeholder="اُكْتُبْ هُنَا..." class="flex-1 bg-black border border-zinc-800 p-4 rounded-xl outline-none focus:border-yellow-600 text-sm">
+                    <input type="text" id="userInput" placeholder="أَرْفِقْ رَقْمَ العَمَلِيَّةِ هُنَا..." class="flex-1 bg-black border border-zinc-800 p-4 rounded-xl outline-none focus:border-yellow-600 text-sm">
                     <button onclick="sendMessage()" class="btn-gold px-8 text-xs font-bold uppercase tracking-widest">إِرْسَال</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="adminPanel" class="hidden fixed inset-0 bg-black/90 z-[60] p-8">
+        <div class="glass-card max-w-2xl mx-auto p-6 h-full overflow-y-auto border-red-900">
+            <button onclick="toggleAdminPanel()" class="float-left text-red-500"><i class="fas fa-times"></i></button>
+            <h3 class="gold-text mb-6">سِجِلُّ مَوْقِعِ بَحْرِ الغُبُشِ الشَّامِلِ</h3>
+            <div id="adminLog" class="text-[10px] font-mono space-y-2 text-zinc-400 italic"></div>
+        </div>
+    </div>
+
     <script>
         let isAdmin = false; let isVIP = false;
-        let globalRoqyaPrice = 75000;
-        let activeCoupon = "BAHR10";
-        let currentItemPrice = 0;
         let userName = ""; let currentMode = "";
+        let userPoints = 0;
 
         const data = {
             roqya: ["العين", "الحسد", "السحر المرشوش", "السحر المأكول والمشروب", "السحر السفلي", "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"],
@@ -121,11 +113,9 @@
 
         function entry() {
             userName = document.getElementById('uName').value;
-            if(userName === "1234") { isAdmin = true; document.getElementById('displayUser').innerText = "المُدِيرُ العَامُّ"; document.getElementById('adminBtn').classList.remove('hidden'); }
-            else if(userName === "VIP77") { isVIP = true; document.getElementById('displayUser').innerText = "عُضْوٌ مُمَيَّزٌ"; document.getElementById('vipBadge').classList.remove('hidden'); }
-            else if(userName.length > 1) { document.getElementById('displayUser').innerText = userName; }
-            else return alert('أَدْخِلِ الِاسْمَ');
-
+            if(userName === "1234") { isAdmin = true; document.getElementById('adminBtn').classList.remove('hidden'); }
+            if(userName.length < 2) return alert('أَدْخِلِ الِاسْمَ');
+            document.getElementById('displayUser').innerText = userName;
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             showTab('roqya');
@@ -133,70 +123,44 @@
 
         function showTab(type) {
             const container = document.getElementById('container'); container.innerHTML = "";
-            let items = (type === 'roqya') ? data.roqya.map(i => ({n: i, p: globalRoqyaPrice})) : (type === 'herbs' ? data.herbs : data.oils);
-            let icon = (type === 'roqya') ? "fa-scroll text-purple-500" : (type === 'herbs' ? "fa-leaf text-green-500" : "fa-flask text-yellow-500");
-
+            let items = (type === 'roqya') ? data.roqya.map(i => ({n: i, p: 75000})) : (type === 'herbs' ? data.herbs : data.oils);
             items.forEach(item => {
-                let finalP = isVIP ? item.p * 0.8 : item.p;
-                container.innerHTML += `<div class="glass-card p-6 text-center ${isVIP ? 'vip-card' : ''}">
-                    <i class="fas ${icon} text-3xl mb-4 group-hover:scale-110 transition"></i>
-                    <h4 class="font-bold text-sm mb-2 h-10 uppercase tracking-tighter">${item.n}</h4>
-                    <p class="gold-text mb-4 text-xl font-bold font-mono">${finalP.toLocaleString()} SDG</p>
-                    <button onclick="buy('${item.n}', ${finalP})" class="btn-gold w-full py-3 text-[10px] uppercase tracking-widest">شِــــــــرَاء الآن</button>
+                container.innerHTML += `<div class="glass-card p-6 text-center">
+                    <h4 class="font-bold text-[11px] mb-2 h-10 uppercase tracking-tighter">${item.n}</h4>
+                    <p class="gold-text mb-4 text-xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
+                    <button onclick="buy('${item.n}', ${item.p})" class="btn-gold w-full py-3 text-[10px] uppercase tracking-widest">تَأْكِيدُ الطَّلَبِ</button>
                 </div>`;
             });
         }
 
         function buy(n, p) {
-            currentMode = "شِرَاء: " + n; currentItemPrice = p;
-            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - مَكْتَبُ الطَّلَبَاتِ<br>لَقَدْ اخْتَرْتَ: " + n + "<br>السِّعْرُ: " + p.toLocaleString() + " ج.س";
-            document.getElementById('couponSection').classList.remove('hidden');
-            document.getElementById('receiptBtn').classList.remove('hidden');
-            document.getElementById('reviewDisplay').classList.add('hidden');
+            currentMode = "شِرَاء: " + n;
+            document.getElementById('chatText').innerHTML = `مَوْقِعُ بَحْرِ الغُبُشِ - مَكْتَبُ الطَّلَبَاتِ<br>لَقَدْ اخْتَرْتَ: ${n}<br>المَبْلَغُ المَطْلُوبُ: ${p.toLocaleString()} ج.س`;
+            document.getElementById('paymentOptions').classList.remove('hidden');
             document.getElementById('chatModal').classList.remove('hidden');
         }
 
-        function openConsultation() {
-            currentMode = "اسْتِشَارَةٌ فَنِّيَّةٌ";
-            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - قِسْمُ الِاسْتِشَارَاتِ<br>اُكْتُبْ شَكْوَاكَ هُنَا لِيَرُدَّ عَلَيْكَ المَدِيرُ فَوْرِيّاً.";
-            document.getElementById('couponSection').classList.add('hidden');
-            document.getElementById('receiptBtn').classList.add('hidden');
-            document.getElementById('reviewDisplay').classList.add('hidden');
-            document.getElementById('chatModal').classList.remove('hidden');
-        }
-
-        function openReviews() {
-            currentMode = "شَهَادَةُ شِفَاءٍ";
-            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - شَهَادَاتُ الزُّوَّارِ<br>شَارِكْنَا تَجْرِبَتَكَ مَعَ العِلَاجِ لِيَرَاهَا الجَمِيعُ.";
-            document.getElementById('couponSection').classList.add('hidden');
-            document.getElementById('receiptBtn').classList.add('hidden');
-            document.getElementById('reviewDisplay').classList.remove('hidden');
-            document.getElementById('chatModal').classList.remove('hidden');
+        function selectPayment(type) {
+            document.getElementById('bankakBox').style.display = (type === 'bankak') ? 'block' : 'none';
+            document.getElementById('fawryBox').style.display = (type === 'fawry') ? 'block' : 'none';
         }
 
         function sendMessage() {
-            const msg = document.getElementById('userInput').value; if(!msg) return;
-            if(currentMode === "شَهَادَةُ شِفَاءٍ") {
-                document.getElementById('reviewsList').innerHTML += `<div class="review-node"><b>${userName}:</b> "${msg}"</div>`;
-            }
+            const msg = document.getElementById('userInput').value; if(!msg) return alert('أَدْخِلْ بَيَانَاتِ العَمَلِيَّةِ');
             document.getElementById('adminLog').innerHTML += `<div>[${userName}] (${currentMode}): ${msg}</div>`;
             alert("تَمَّ إِرْسَالُ البَيَانَاتِ بِنَجَاحٍ إِلَى إِدَارَةِ مَوْقِعِ بَحْرِ الغُبُشِ.");
-            document.getElementById('userInput').value = "";
+            closeModal();
         }
 
-        function applyCoupon() {
-            if(document.getElementById('userCoupon').value.toUpperCase() === activeCoupon) alert("تَمَّ قُبُولُ خَصْمِ مَوْقِعِ بَحْرِ الغُبُشِ!");
-            else alert("الكُوبُونُ غَيْرُ مُفَعَّلٍ");
+        function openBooking() {
+            currentMode = "حَجْزُ مَوْعِدٍ";
+            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - الحَجْزُ<br>اُكْتُبْ المَوْعِدَ المُنَاسِبَ لَكَ سَيِّدِي.";
+            document.getElementById('paymentOptions').classList.add('hidden');
+            document.getElementById('chatModal').classList.remove('hidden');
         }
 
         function toggleAdminPanel() { document.getElementById('adminPanel').classList.toggle('hidden'); }
         function closeModal() { document.getElementById('chatModal').classList.add('hidden'); }
-        function saveAdminChanges() { 
-            globalRoqyaPrice = parseInt(document.getElementById('priceRoqya').value);
-            activeCoupon = document.getElementById('couponCode').value.toUpperCase();
-            alert("تَمَّ تَحْدِيثُ بَيَانَاتِ مَوْقِعِ بَحْرِ الغُبُشِ.");
-            showTab('roqya'); toggleAdminPanel();
-        }
     </script>
 </body>
 </html>
