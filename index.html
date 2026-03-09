@@ -3,197 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع بحر الغُبُش |للاعشاب الطبية والزيوت</title>
-    <meta name="description" content="بحر الغبش لزيوت الأعشاب الطبيعية والمنتجات التقليدية - جودة وأصالة">
-<meta name="keywords" content="بحر الغبش, أعشاب طبية, زيوت طبيعية, السودان, منتجات طبيعية">
+    <title>بحر الغُبُش | للرقية الشرعية والزيوت والأعشاب الطبيعية</title>
+    
+    <meta name="description" content="موقع بحر الغبش الرسمي - متخصصون في الرقية الشرعية، علاج السحر والمس، وأجود أنواع الزيوت والأعشاب الطبيعية في السودان.">
+    <meta name="keywords" content="بحر الغبش, رقية شرعية, زيوت طبيعية, أعشاب طبية, علاج السحر, السودان, زيت الزيتون المرقي">
+    <meta name="author" content="بحر الغبش">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; }
-        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-bg { background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%); color: black; }
-        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); }
-        .tab-active { color: #d4af37; border-bottom: 2px solid #d4af37; }
+        :root { --gold: #d4af37; --bg-dark: #050505; }
+        body { font-family: 'Changa', sans-serif; background: var(--bg-dark); color: #e5e5e5; scroll-behavior: smooth; }
+        .gold-gradient { background: linear-gradient(135deg, #d4af37, #f9e27d, #b8860b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.1); border-radius: 20px; }
+        .btn-gold { background: linear-gradient(135deg, #d4af37, #b8860b); color: #000; font-weight: bold; }
+        .section-hide { display: none; }
+        .active { display: block; animation: fadeInUp 0.4s ease; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-    <!-- نظام التنبيهات (Toast) -->
-    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-[9999] hidden animate-bounce">
-        <div class="bg-zinc-900 border-b-4 border-yellow-600 px-6 py-3 rounded-xl shadow-2xl font-bold text-white" id="toastMsg"></div>
-    </div>
-
-    <!-- شاشة الدخول الرئيسية -->
-    <div id="view-login" class="min-h-screen flex items-center justify-center p-6">
-        <div class="glass p-10 w-full max-w-md rounded-[2.5rem] text-center shadow-2xl">
-            <h1 class="text-5xl font-bold gold-text mb-2">بحر الغُبُش</h1>
-            <p class="text-gray-500 mb-8 font-bold italic">المنظومة الإدارية المتكاملة</p>
+    <div id="login-view" class="min-h-screen flex items-center justify-center p-4">
+        <div class="glass p-8 w-full max-w-md text-center shadow-2xl">
+            <h1 class="text-6xl font-bold gold-gradient mb-2">بحر الغُبُش</h1>
+            <p class="text-zinc-500 mb-8 font-bold italic">المركز الشامل للرقية والزيوت والأعشاب</p>
             
-            <div class="space-y-4 text-right">
-                <input type="text" id="userInput" class="w-full p-4 bg-zinc-900 border border-zinc-700 rounded-2xl outline-none focus:border-yellow-500 text-center font-bold" placeholder="البريد الإلكتروني أو الاسم">
-                <input type="password" id="passInput" class="w-full p-4 bg-zinc-900 border border-zinc-700 rounded-2xl outline-none focus:border-yellow-500 text-center font-bold" placeholder="كلمة المرور">
-                <button onclick="handleAuth()" class="w-full gold-bg font-black py-4 rounded-2xl shadow-xl hover:scale-[1.02] transition-transform text-xl">دخول</button>
-                <div class="flex justify-between px-2 text-xs text-gray-500 font-bold">
-                    <button onclick="setRole('visitor')">دخول كزائر</button>
-                    <button onclick="showToast('تواصل مع الإدارة لاستعادة الرمز')">نسيت الرمز؟</button>
-                </div>
+            <div id="entry-options" class="space-y-4">
+                <input type="text" id="v-name" class="w-full p-4 bg-zinc-900 border border-zinc-800 rounded-2xl outline-none focus:border-gold text-center font-bold" placeholder="ادخل اسمك الكريم">
+                <button onclick="visitorEntry()" class="w-full btn-gold py-4 rounded-2xl text-xl shadow-lg transition-transform hover:scale-105">دخول موقع بحر الغبش</button>
+                <button onclick="toggleView('admin-form')" class="text-zinc-600 text-xs block w-full mt-4">دخول الإدارة والنائب</button>
+                <button onclick="toggleView('staff-apply')" class="text-blue-500 text-xs font-bold underline">تقديم طلب توظيف بموقع بحر الغبش</button>
+            </div>
+
+            <div id="admin-form" class="section-hide space-y-4">
+                <input type="text" id="a-email" class="w-full p-4 bg-zinc-900 border border-zinc-800 rounded-2xl" placeholder="البريد الإلكتروني للإدارة">
+                <input type="password" id="a-pass" class="w-full p-4 bg-zinc-900 border border-zinc-800 rounded-2xl" placeholder="كلمة المرور">
+                <button onclick="adminEntry()" class="w-full btn-gold py-4 rounded-2xl">دخول آمن للمدير</button>
+                <button onclick="toggleView('entry-options')" class="text-red-500 text-xs mt-2">رجوع</button>
+            </div>
+
+            <div id="staff-apply" class="section-hide space-y-4 text-right">
+                <h3 class="text-gold font-bold text-center border-b border-zinc-800 pb-2 mb-4">استمارة انضمام لكادر بحر الغبش</h3>
+                <input type="text" placeholder="الاسم الكامل" class="w-full p-3 bg-zinc-900 rounded-xl border border-zinc-800">
+                <input type="email" placeholder="البريد الإلكتروني" class="w-full p-3 bg-zinc-900 rounded-xl border border-zinc-800">
+                <label class="text-xs text-zinc-500">ارفع صورتك الشخصية:</label>
+                <input type="file" class="w-full text-xs text-zinc-400">
+                <label class="text-xs text-zinc-500">ارفع السيرة الذاتية (PDF/Image):</label>
+                <input type="file" class="w-full text-xs text-zinc-400">
+                <label class="text-xs text-zinc-500">ارفع صورة التوقيع:</label>
+                <input type="file" class="w-full text-xs text-zinc-400">
+                <button onclick="alert('تم إرسال طلبك لإدارة بحر الغبش للمراجعة')" class="w-full bg-blue-700 py-3 rounded-xl font-bold">إرسال الطلب</button>
+                <button onclick="toggleView('entry-options')" class="text-red-500 text-xs w-full text-center">إلغاء</button>
             </div>
         </div>
     </div>
 
-    <!-- واجهة المنظومة (المحتوى الرئيسي) -->
-    <div id="view-main" class="hidden min-h-screen flex flex-col pb-24">
-        <header class="p-6 flex justify-between items-center border-b border-yellow-900/30 bg-black/80 sticky top-0 z-50 backdrop-blur-md">
+    <div id="app-view" class="section-hide min-h-screen flex flex-col">
+        <header class="p-4 glass m-2 flex justify-between items-center sticky top-0 z-50">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 gold-bg rounded-xl flex items-center justify-center font-black shadow-lg">ب</div>
+                <div class="w-10 h-10 btn-gold rounded-xl flex items-center justify-center font-black shadow-lg text-xl">ب</div>
                 <div class="flex flex-col">
-                    <span class="gold-text font-black text-xl leading-none">بحر الغبش</span>
-                    <span id="userRoleBadge" class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-1"></span>
+                    <span class="gold-gradient font-black text-2xl leading-none">بحر الغبش</span>
+                    <span id="user-role" class="text-[10px] text-zinc-500 font-bold uppercase mt-1"></span>
                 </div>
             </div>
-            <button onclick="location.reload()" class="text-gray-500 hover:text-red-500 transition-colors"><i class="fas fa-power-off text-2xl"></i></button>
+            <button onclick="location.reload()" class="text-zinc-600 hover:text-red-500 text-xl transition-colors"><i class="fas fa-power-off"></i></button>
         </header>
 
-        <main id="app-content" class="flex-1 p-4 max-w-4xl mx-auto w-full">
-            <!-- المحتوى يتم توليده برمجياً -->
+        <main class="flex-1 p-4 pb-28 overflow-y-auto">
+            <section id="healing-sec" class="app-sec active space-y-4">
+                <h2 class="text-xl font-black gold-gradient italic border-b border-zinc-900 pb-2">أقسام الرقية الشرعية والبرامج الروحانية</h2>
+                <div class="grid grid-cols-1 gap-3">
+                    <div class="glass p-4 border-r-4 border-red-800">
+                        <h4 class="font-bold text-lg">سحر المرض والفراق والأرحام</h4>
+                        <p class="text-[11px] text-zinc-500 leading-relaxed">علاجات متخصصة في موقع بحر الغبش للسحر المأكول والمشروب وتشويه الجمال.</p>
+                        <button onclick="openChat('علاج السحر')" class="mt-3 btn-gold px-4 py-1 rounded-lg text-[10px]">بدء الاستشارة والطلب</button>
+                    </div>
+                    <div class="glass p-4 border-r-4 border-purple-800">
+                        <h4 class="font-bold text-lg">المس الشيطاني والريح الأحمر</h4>
+                        <p class="text-[11px] text-zinc-500 leading-relaxed">برامج متكاملة لطرد المس العاشق، القرين المؤذي، أم الصبيان، والتابعة.</p>
+                        <button onclick="openChat('علاج المس والقرين')" class="mt-3 btn-gold px-4 py-1 rounded-lg text-[10px]">بدء الاستشارة والطلب</button>
+                    </div>
+                    <div class="glass p-4 border-r-4 border-blue-800">
+                        <h4 class="font-bold text-lg">العين والحسد القوي</h4>
+                        <p class="text-[11px] text-zinc-500 leading-relaxed">فك عقد العين والحسد التي تسبب تعطيل الأرزاق والزواج.</p>
+                        <button onclick="openChat('علاج العين')" class="mt-3 btn-gold px-4 py-1 rounded-lg text-[10px]">بدء الاستشارة والطلب</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="shop-sec" class="app-sec section-hide space-y-4">
+                <h2 class="text-xl font-black gold-gradient border-b border-zinc-900 pb-2">زيوت وأعشاب بحر الغبش (ج.س)</h2>
+                <div id="oils-container" class="grid grid-cols-1 gap-3">
+                    </div>
+            </section>
+
+            <section id="forum-sec" class="app-sec section-hide h-[70vh] flex flex-col">
+                <h2 class="text-xl font-black gold-gradient mb-4">مجلس تجارب بحر الغبش</h2>
+                <div id="forum-chat" class="flex-1 glass p-4 overflow-y-auto space-y-4 mb-4 text-right">
+                    <div class="bg-zinc-800 p-3 rounded-xl rounded-tr-none self-end max-w-[85%]">
+                        <p class="text-[9px] text-gold font-bold">إدارة بحر الغبش</p>
+                        <p class="text-sm italic font-bold">هنا يشارك الزوار تجاربهم مع العلاج والزيوت.</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input id="forum-input" class="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 outline-none" placeholder="اكتب تجربتك مع بحر الغبش...">
+                    <button onclick="sendForumMsg()" class="btn-gold w-14 h-14 rounded-2xl"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </section>
         </main>
 
-        <!-- التنقل السفلي -->
-        <nav id="bottomNav" class="fixed bottom-0 left-0 right-0 glass border-t border-yellow-900/20 p-3 flex justify-around items-center z-50">
-            <!-- يتم توليد الأزرار بناء على الصلاحية -->
+        <div id="private-modal" class="fixed inset-0 bg-black/95 z-[100] section-hide flex flex-col p-4 animate">
+            <div class="flex justify-between items-center mb-4 border-b border-zinc-900 pb-2 text-right">
+                <h3 id="chat-title" class="text-xl gold-gradient font-bold italic">مكتب موظف بحر الغبش</h3>
+                <button onclick="toggleView('private-modal', true)" class="text-red-500 text-2xl"><i class="fas fa-times-circle"></i></button>
+            </div>
+            <div id="priv-box" class="flex-1 glass overflow-y-auto p-4 space-y-4">
+                <div class="bg-zinc-800 p-4 rounded-2xl text-sm leading-relaxed">مرحباً بك في بحر الغبش. اطلب ما تحتاجه، وارفع صورة إيصال "بنكك" للتعميد، أو ابدأ تسجيلاً صوتياً لشرح حالتك.</div>
+            </div>
+            <div class="p-4 space-y-4">
+                <div class="flex justify-around text-2xl text-zinc-600 bg-zinc-900/50 p-3 rounded-2xl">
+                    <button title="تسجيل صوتي" class="hover:text-gold"><i class="fas fa-microphone"></i></button>
+                    <button title="مكالمة فيديو" class="hover:text-gold"><i class="fas fa-video"></i></button>
+                    <button title="مكالمة صوتية" class="hover:text-gold"><i class="fas fa-phone"></i></button>
+                    <label title="رفع إيصال أو صورة" class="hover:text-gold cursor-pointer"><i class="fas fa-image"></i><input type="file" class="hidden"></label>
+                </div>
+                <div class="flex gap-2">
+                    <input id="priv-input" class="flex-1 bg-zinc-900 p-4 rounded-2xl border border-zinc-800 outline-none" placeholder="اكتب رسالتك للموظف...">
+                    <button onclick="sendPrivMsg()" class="btn-gold px-8 rounded-2xl">إرسال</button>
+                </div>
+            </div>
+        </div>
+
+        <nav class="fixed bottom-0 left-0 right-0 glass border-t-0 rounded-t-[35px] p-4 flex justify-around items-center z-[60] shadow-2xl">
+            <button onclick="showTab('healing-sec')" class="flex flex-col items-center gap-1 text-zinc-500" id="nav-healing"><i class="fas fa-quran"></i><span class="text-[9px] font-bold">الرقية</span></button>
+            <button onclick="showTab('shop-sec')" class="flex flex-col items-center gap-1 text-zinc-500" id="nav-shop"><i class="fas fa-flask"></i><span class="text-[9px] font-bold">الزيوت</span></button>
+            <button onclick="showTab('forum-sec')" class="flex flex-col items-center gap-1 text-zinc-500" id="nav-forum"><i class="fas fa-comments"></i><span class="text-[9px] font-bold">المجلس</span></button>
         </nav>
     </div>
 
     <script>
-        // --- قاعدة البيانات الحقيقية المعتمدة ---
-        const credentials = {
-            "bharalgubsh@gmail.com": { pass: "aboooha778899", role: "admin", name: "الشيخ عبد اللطيف" },
-            "abdalsamadabdalwahed@gmail.com": { pass: "flor19935", role: "deputy", name: "النائب عبد الصمد" },
-            "staff": { pass: "2025", role: "staff", name: "المناوب" }
-        };
-
+        let user = null;
         const products = [
-            { id: 1, name: "زيت الزيتون المرقي", price: "15,000", icon: "🧴" },
-            { id: 2, name: "خلطة العسل الملكية", price: "45,000", icon: "🍯" },
-            { id: 3, name: "بخور الغبش الخاص", price: "12,500", icon: "💨" }
+            { name: "زيت الزيتون المرقي", price: 15000, desc: "للمس والسحر والتحصين" },
+            { name: "زيت السمسم الأصلي", price: 8000, desc: "للحساسية والدهن العام" },
+            { name: "زيت النيم الطبيعي", price: 12000, desc: "للمشاكل الجلدية والصدفية" },
+            { name: "زيت العُشر", price: 20000, desc: "لآلام المفاصل والمس الشيطاني" },
+            { name: "زيت الخروع", price: 7500, desc: "للمعدة والقولون العصبي" },
+            { name: "زيت الحبة السوداء", price: 18000, desc: "لتقوية المناعة والشفاء" },
+            { name: "زيت الحلبة", price: 9000, desc: "للتسمين والتقوية البدنية" },
+            { name: "زيت إكليل الجبل", price: 14000, desc: "للشعر والذاكرة والنشاط" }
         ];
 
-        let currentUser = null;
-        let currentTab = 'home';
-
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            document.getElementById('toastMsg').innerText = msg;
-            t.classList.remove('hidden');
-            setTimeout(() => t.classList.add('hidden'), 3000);
-        }
-
-        function handleAuth() {
-            const user = document.getElementById('userInput').value;
-            const pass = document.getElementById('passInput').value;
-
-            if (credentials[user] && credentials[user].pass === pass) {
-                currentUser = credentials[user];
-                startApp();
-            } else if (user && pass === "") { // دخول زائر سريع
-                currentUser = { role: 'visitor', name: user };
-                startApp();
-            } else {
-                showToast("بيانات الدخول غير صحيحة");
+        function toggleView(id, hide = false) {
+            const el = document.getElementById(id);
+            if (hide) el.classList.add('section-hide');
+            else {
+                document.getElementById('entry-options').classList.add('section-hide');
+                document.getElementById('admin-form').classList.add('section-hide');
+                document.getElementById('staff-apply').classList.add('section-hide');
+                el.classList.remove('section-hide');
+                el.classList.add('active');
             }
         }
 
-        function startApp() {
-            document.getElementById('view-login').classList.add('hidden');
-            document.getElementById('view-main').classList.remove('hidden');
-            document.getElementById('userRoleBadge').innerText = currentUser.name;
-            renderNav();
-            renderContent('home');
+        function visitorEntry() {
+            const name = document.getElementById('v-name').value;
+            if (!name) return alert("الرجاء كتابة اسمك الكريم");
+            user = { name: name, role: 'زائر' };
+            init();
         }
 
-        function renderNav() {
-            const nav = document.getElementById('bottomNav');
-            let btns = `
-                <button onclick="renderContent('home')" class="flex flex-col items-center gap-1"><i class="fas fa-home"></i><span class="text-[10px]">الرئيسية</span></button>
-                <button onclick="renderContent('shop')" class="flex flex-col items-center gap-1"><i class="fas fa-shopping-bag"></i><span class="text-[10px]">المتجر</span></button>
-                <button onclick="renderContent('chat')" class="flex flex-col items-center gap-1"><i class="fas fa-comment-dots"></i><span class="text-[10px]">المراسلة</span></button>
-            `;
-            if (currentUser.role === 'admin' || currentUser.role === 'deputy') {
-                btns += `<button onclick="renderContent('admin')" class="flex flex-col items-center gap-1 text-red-500"><i class="fas fa-shield-alt"></i><span class="text-[10px]">الرقابة</span></button>`;
-            }
-            nav.innerHTML = btns;
+        function adminEntry() {
+            const email = document.getElementById('a-email').value;
+            const pass = document.getElementById('a-pass').value;
+            if (email === "bharalgubsh@gmail.com" && pass === "aboooha778899") {
+                user = { name: "الشيخ عبد اللطيف", role: "المدير العام" };
+                init();
+            } else { alert("بيانات الدخول غير صحيحة"); }
         }
 
-        function renderContent(tab) {
-            const content = document.getElementById('app-content');
-            if (tab === 'home') {
-                content.innerHTML = `
-                    <div class="space-y-6">
-                        <div class="glass p-8 rounded-[2rem] border-r-8 border-yellow-600 animate-fade">
-                            <h2 class="text-2xl font-black mb-2">مرحباً بك في المنظومة</h2>
-                            <p class="text-gray-400 font-bold">أهلاً بك يا ${currentUser.name}. النظام جاهز لاستقبال الطلبات.</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="glass p-6 rounded-3xl text-center"><i class="fas fa-users text-2xl text-yellow-600 mb-2"></i><div class="text-2xl font-black">1,240</div><div class="text-xs text-gray-500">زائر</div></div>
-                            <div class="glass p-6 rounded-3xl text-center"><i class="fas fa-check-double text-2xl text-green-600 mb-2"></i><div class="text-2xl font-black">89</div><div class="text-xs text-gray-500">طلب ناجح</div></div>
-                        </div>
-                    </div>
-                `;
-            } else if (tab === 'shop') {
-                content.innerHTML = `
-                    <div class="grid grid-cols-1 gap-4">
-                        ${products.map(p => `
-                            <div class="glass p-6 rounded-3xl flex justify-between items-center border border-zinc-800">
-                                <div class="flex items-center gap-4">
-                                    <span class="text-4xl">${p.icon}</span>
-                                    <div><h4 class="font-black text-lg">${p.name}</h4><p class="text-yellow-600 font-black">${p.price} ج.س</p></div>
-                                </div>
-                                <button onclick="showToast('تمت إضافة الطلب')" class="gold-bg px-6 py-2 rounded-xl font-bold">طلب</button>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            } else if (tab === 'chat') {
-                content.innerHTML = `
-                    <div class="glass rounded-[2rem] h-[65vh] flex flex-col overflow-hidden">
-                        <div class="p-4 bg-zinc-900 border-b border-yellow-900/20 font-bold text-center">المكتب الاستشاري المباشر</div>
-                        <div class="flex-1 p-4 overflow-y-auto space-y-4" id="chat-msgs">
-                            <div class="bg-zinc-800 p-4 rounded-2xl rounded-tr-none max-w-[80%] ml-auto text-sm font-bold">السلام عليكم، كيف يمكننا خدمتك اليوم؟</div>
-                        </div>
-                        <div class="p-4 flex gap-2 border-t border-zinc-800">
-                            <input id="msgInp" class="flex-1 bg-zinc-900 p-3 rounded-xl outline-none" placeholder="اكتب هنا...">
-                            <button onclick="sendMsg()" class="gold-bg w-12 h-12 rounded-xl flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                `;
-            } else if (tab === 'admin') {
-                content.innerHTML = `
-                    <div class="space-y-4">
-                        <h2 class="text-xl font-black text-red-500"><i class="fas fa-user-shield ml-2"></i>غرفة الرقابة العليا</h2>
-                        <div class="glass p-6 rounded-3xl">
-                            <h3 class="font-bold mb-4 border-b border-zinc-800 pb-2">طلبات بانتظار المراجعة (إيصالات)</h3>
-                            <div class="space-y-3">
-                                <div class="p-4 bg-zinc-900 rounded-2xl flex justify-between items-center border-r-4 border-amber-500">
-                                    <div class="text-sm font-bold">طلب: زيت مرقي - الزائر: أحمد</div>
-                                    <button onclick="showToast('جاري فتح الإيصال المحمي')" class="text-blue-400 text-xs">عرض الإيصال <i class="fas fa-lock ml-1"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
+        function init() {
+            document.getElementById('login-view').classList.add('section-hide');
+            document.getElementById('app-view').classList.remove('section-hide');
+            document.getElementById('user-role').innerText = user.name;
+            renderOils();
         }
 
-        function sendMsg() {
-            const inp = document.getElementById('msgInp');
-            if(!inp.value) return;
-            const chat = document.getElementById('chat-msgs');
-            chat.innerHTML += `<div class="bg-yellow-600 text-black p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm font-bold">${inp.value}</div>`;
+        function renderOils() {
+            const cont = document.getElementById('oils-container');
+            cont.innerHTML = products.map(p => `
+                <div class="glass p-4 flex justify-between items-center shadow-lg">
+                    <div class="text-right">
+                        <h5 class="font-bold text-sm gold-gradient">${p.name}</h5>
+                        <p class="text-[9px] text-zinc-500">${p.desc}</p>
+                        <span class="text-gold font-black text-xs">${p.price.toLocaleString()} ج.س</span>
+                    </div>
+                    <button onclick="openChat('${p.name}')" class="btn-gold px-5 py-2 rounded-xl text-[10px] shadow-md">شراء</button>
+                </div>
+            `).join('');
+        }
+
+        function showTab(id) {
+            document.querySelectorAll('.app-sec').forEach(s => s.classList.add('section-hide'));
+            document.getElementById(id).classList.remove('section-hide');
+            document.getElementById(id).classList.add('active');
+        }
+
+        function openChat(title) {
+            document.getElementById('chat-title').innerText = "شراء: " + title;
+            document.getElementById('private-modal').classList.remove('section-hide');
+        }
+
+        function sendForumMsg() {
+            const inp = document.getElementById('forum-input');
+            const box = document.getElementById('forum-chat');
+            if (!inp.value) return;
+            box.insertAdjacentHTML('beforeend', `<div class="bg-zinc-900 border border-zinc-800 p-3 rounded-xl self-start max-w-[85%] animate text-right">
+                <p class="text-[8px] text-gold font-bold">${user.name}</p><p class="text-sm">${inp.value}</p></div>`);
             inp.value = "";
-            chat.scrollTop = chat.scrollHeight;
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function sendPrivMsg() {
+            const inp = document.getElementById('priv-input');
+            const box = document.getElementById('priv-box');
+            if (!inp.value) return;
+            box.insertAdjacentHTML('beforeend', `<div class="bg-yellow-600/20 border border-yellow-600/30 p-3 rounded-xl self-start max-w-[85%] animate text-sm font-bold text-right">${inp.value}</div>`);
+            inp.value = "";
+            box.scrollTop = box.scrollHeight;
         }
     </script>
 </body>
-
 </html>
