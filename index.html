@@ -3,135 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مَوْقِعُ بَحْرِ الغُبُشِ | نُسْخَةُ الحِمَايَةِ وَالأَمْنِ</title>
+    <meta name="description" content="مَوْقِعُ بَحْرِ الغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ وَالأَعْشَابِ - بِإِشْرَافِ الدُّكْتُور عَبْدَالصَّمَد">
+    <link rel="canonical" href="https://bahar-al-gubsh.com/">
+    
+    <title>مَوْقِعُ بَحْرِ الغُبُشِ | نِظَامُ العُضْوِيَّةِ وَالعِلَاجِ الشَّامِلِ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { 
-            font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5;
-            /* تَعْطِيلُ تَحْدِيدِ النَّصِّ */
-            user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;
-        }
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; user-select: none; }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
         .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; }
         .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; cursor: pointer; }
-        
-        /* تَنْبِيهُ الحِمَايَةِ */
-        #securityAlert { display: none; position: fixed; top: 20px; right: 20px; background: #d32f2f; color: white; padding: 15px; border-radius: 10px; z-index: 2000; font-weight: bold; animation: shake 0.5s; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-
-        /* نِظَامُ المُلَقِّنِ */
-        #prompterOverlay { display: none; position: fixed; inset: 0; background: black; z-index: 1000; flex-direction: column; align-items: center; justify-content: center; }
-        #prompterText { font-size: 3rem; text-align: center; color: white; width: 85%; height: 60vh; overflow: hidden; position: relative; border: 2px solid #bf953f; padding: 20px; border-radius: 20px; }
-        .prompter-scroll { position: absolute; width: 100%; transition: transform linear; }
+        .vip-card { background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #bf953f; border-radius: 15px; position: relative; overflow: hidden; }
     </style>
 </head>
-<body oncontextmenu="showSecurityAlert(event)" onkeydown="checkSecurity(event)">
+<body oncontextmenu="return false;">
 
-    <div id="securityAlert"><i class="fas fa-shield-alt ml-2"></i> عُذْرًا! مُحْتَوَى بَحْرِ الغُبُشِ مَحْمِيٌّ بِأَمْرِ الإِدَارَةِ.</div>
-
-    <div id="loginPage" class="max-w-md mx-auto mt-20 text-center">
-        <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
-        <div class="glass-card p-10 shadow-2xl">
-            <h2 class="text-xl mb-6 font-bold uppercase tracking-widest">دُخُولُ المَوْقِعِ الحَصِينِ</h2>
+    <div id="loginPage" class="max-w-md mx-auto mt-20 text-center px-4">
+        <h1 class="text-6xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
+        <div class="glass-card p-8 shadow-2xl">
+            <h2 class="text-lg mb-6 font-bold uppercase">تَسْجِيلُ الدُّخُولِ لِلنِّظَامِ</h2>
             <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ هُنَا..." class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
-            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">تَفْعِيلُ الدِّرْعِ وَالدُّخُولِ</button>
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">دُخُولُ المَوْقِعِ</button>
         </div>
     </div>
 
-    <div id="mainApp" class="hidden max-w-7xl mx-auto">
-        <header class="flex justify-between items-center mb-8 p-5 glass-card">
+    <div id="mainApp" class="hidden max-w-7xl mx-auto px-4 pb-32">
+        <header class="flex justify-between items-center mb-8 p-5 glass-card mt-4">
             <div>
-                <h2 class="text-2xl gold-text font-bold uppercase">بَحْرُ الغُبُشِ 🛡️</h2>
-                <p class="text-[10px] text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
+                <h2 class="text-xl gold-text font-bold uppercase tracking-widest">بَحْرُ الغُبُشِ ⚓</h2>
+                <p class="text-[10px] text-zinc-500">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
             </div>
             <div class="flex gap-2">
-                <button onclick="openPrompter()" class="bg-red-800 text-white px-4 py-2 rounded-xl text-[10px] font-bold"><i class="fas fa-video ml-1"></i> المُلَقِّنُ</button>
-                <button onclick="sendWeeklyReport()" class="bg-zinc-800 text-yellow-500 px-4 py-2 rounded-xl text-[10px] font-bold">الأَرْشِيفُ</button>
+                <button onclick="showID()" class="bg-yellow-600 text-black px-3 py-2 rounded-lg text-[10px] font-bold">بِطَاقَةُ VIP</button>
+                <button onclick="openPrompter()" class="bg-red-800 text-white px-3 py-2 rounded-lg text-[10px] font-bold">المُلَقِّنُ</button>
             </div>
         </header>
 
         <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
-            <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
-            <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
-            <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
+            <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
+            <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
+            <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
         </div>
 
-        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"></div>
+        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
     </div>
 
-    <div id="prompterOverlay">
-        <div id="prompterText">
-            <div id="scrollContent" class="prompter-scroll">
-                يَا دُكْتُور عَبْدَالصَّمَد، جَاهِزُونَ لِلتَّصْوِيرِ... <br><br>
-                بَحْرُ الغُبُشِ لِلرُّقْيَةِ وَالأَعْشَابِ... <br><br>
-                نُقَدِّمُ لَكُمْ جَوْهَرَ العِلَاجِ وَالشِّفَاءِ...
+    <div id="idModal" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
+        <div class="vip-card w-full max-w-sm p-8 text-center relative shadow-2xl">
+            <div class="absolute top-0 right-0 p-4 gold-text text-xs">ID CARD</div>
+            <h3 class="gold-text text-2xl mb-4 font-bold">بَحْرُ الغُبُشِ</h3>
+            <div class="w-24 h-24 bg-zinc-800 rounded-full mx-auto mb-4 border-2 border-yellow-600 flex items-center justify-center">
+                <i class="fas fa-user-shield text-4xl text-yellow-600"></i>
             </div>
-        </div>
-        <div class="mt-10 flex gap-4">
-            <button onclick="startScroll()" class="btn-gold px-10 py-3">بَدْءُ التَّلْقِينِ</button>
-            <button onclick="closePrompter()" class="bg-red-600 px-10 py-3 rounded-xl">خُرُوج</button>
+            <h4 id="idName" class="text-xl font-bold text-white mb-2"></h4>
+            <p class="text-yellow-500 text-xs font-mono mb-6 uppercase">ORGANIZATION MANAGER MEMBER</p>
+            <div class="border-t border-zinc-800 pt-4 text-[10px] text-zinc-500 font-bold">
+                رَقْمُ العُضْوِيَّةِ: <span id="idNumber"></span>
+            </div>
+            <button onclick="closeID()" class="mt-8 text-red-500 text-xs uppercase font-bold">إِغْلَاقُ البِطَاقَةِ</button>
         </div>
     </div>
 
     <script>
-        let userName = ""; let scrollInterval; let scrollPos = 0;
+        let userName = "";
         const drWhatsapp = "249121494942";
 
-        // نِظَامُ الحِمَايَةِ
-        function showSecurityAlert(e) {
-            e.preventDefault();
-            const alertBox = document.getElementById('securityAlert');
-            alertBox.style.display = 'block';
-            setTimeout(() => alertBox.style.display = 'none', 3000);
-        }
-
-        function checkSecurity(e) {
-            // مَنْعُ Ctrl+C, Ctrl+U, F12
-            if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's') || e.keyCode === 123) {
-                showSecurityAlert(e);
-                return false;
-            }
-        }
+        const database = {
+            roqya: [
+                "العين", "الحسد", "السحر المرشوش", "السحر المأكول", "السحر السفلي", 
+                "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", 
+                "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", 
+                "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"
+            ],
+            herbs: [
+                {n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, 
+                {n: "عشبة المدينة", p: 10000}, {n: "حرمل", p: 3000}, {n: "سدر مطحون", p: 5000}
+            ],
+            oils: [
+                {n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}, 
+                {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, 
+                {n: "زيت إكليل الجبل", p: 12000}, {n: "زيت الكافور", p: 8000}
+            ]
+        };
 
         function entry() {
             userName = document.getElementById('uName').value;
             if(userName.length < 2) return alert('أَدْخِلِ الِاسْمَ');
             document.getElementById('displayUser').innerText = userName;
+            document.getElementById('idName').innerText = userName;
+            document.getElementById('idNumber').innerText = Math.floor(Math.random() * 900000) + 100000;
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
-            window.speechSynthesis.speak(new SpeechSynthesisUtterance("نظام الحماية مفعل في بحر الغبش"));
             showTab('roqya');
         }
 
         function showTab(type) {
-            const container = document.getElementById('container'); container.innerHTML = "";
-            const data = {
-                roqya: ["العين", "الحسد", "السحر الأسود", "سحر الأرحام", "المس الشيطاني", "الجن الطيار"],
-                herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}],
-                oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}]
-            };
-            let items = (type === 'roqya') ? data.roqya.map(i => ({n: i, p: 75000})) : (type === 'herbs' ? data.herbs : data.oils);
+            const container = document.getElementById('container');
+            container.innerHTML = "";
+            let items = (type === 'roqya') ? database.roqya.map(i => ({n: i, p: 75000})) : database[type];
+            
             items.forEach(item => {
-                container.innerHTML += `<div class="glass-card p-6 text-center shadow-lg">
-                    <h4 class="font-bold text-[12px] mb-2 uppercase tracking-tighter">${item.n}</h4>
+                container.innerHTML += `<div class="glass-card p-6 text-center border-yellow-600/10 hover:border-yellow-600 transition duration-500">
+                    <h4 class="font-bold text-[12px] mb-2 uppercase">${item.n}</h4>
                     <p class="gold-text mb-4 text-xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
-                    <button class="btn-gold w-full py-3 text-[10px] font-bold">بَدْءُ الطَّلَبِ</button>
+                    <button class="btn-gold w-full py-3 text-[10px] font-bold uppercase">طَلَبُ الخِدْمَةِ</button>
                 </div>`;
             });
         }
 
-        function openPrompter() { document.getElementById('prompterOverlay').style.display = 'flex'; }
-        function closePrompter() { clearInterval(scrollInterval); document.getElementById('prompterOverlay').style.display = 'none'; }
-        function startScroll() {
-            const content = document.getElementById('scrollContent');
-            scrollPos = 0;
-            clearInterval(scrollInterval);
-            scrollInterval = setInterval(() => { scrollPos -= 1; content.style.transform = `translateY(${scrollPos}px)`; }, 40);
-        }
-
-        function sendWeeklyReport() { window.open(`https://wa.me/${drWhatsapp}?text=طلب_تقرير_بحر_الغبش`, '_blank'); }
+        function showID() { document.getElementById('idModal').classList.remove('hidden'); }
+        function closeID() { document.getElementById('idModal').classList.add('hidden'); }
     </script>
 </body>
 </html>
