@@ -3,128 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع بحر الغُبُش | للأعشاب والزيوت والرقية</title>
-    <meta name="description" content="موقع بحر الغبش المتخصص في الأعشاب الطبية، الزيوت الطبيعية، وبرامج الرقية الشرعية المعتمدة.">
+    <title>مَوْقِعُ بَحْرِ الغُبُشِ | التَّقْيِيمَاتُ وَالإِدَارَةُ الشَّامِلَةُ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #0a0510; color: #f3f0ff; overflow-x: hidden; }
-        .purple-gradient { background: linear-gradient(to right, #a855f7, #d8b4fe, #7e22ce); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-        .glass-card { background: rgba(30, 10, 50, 0.4); backdrop-filter: blur(15px); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 25px; transition: 0.4s; }
-        .glass-card:hover { transform: translateY(-5px); border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2); }
-        .btn-purple { background: linear-gradient(135deg, #7e22ce, #a855f7); color: white; font-weight: bold; }
-        .online-status { width: 12px; height: 12px; background: #22c55e; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #22c55e; animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; overflow-x: hidden; }
+        .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+        .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; transition: 0.3s; }
+        .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; transition: 0.3s; cursor: pointer; }
+        .vip-card { border: 1px solid #f1c40f; box-shadow: 0 0 20px rgba(241, 196, 15, 0.15); }
+        .review-node { background: rgba(30, 30, 30, 0.5); border-right: 4px solid #bf953f; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 11px; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="p-2 md:p-8">
 
-    <div id="loginSection" class="max-w-md mx-auto mt-24 text-center">
-        <h1 class="text-6xl purple-gradient mb-10">بَحْرُ الغُبُشِ</h1>
-        <div class="glass-card p-10">
-            <h2 class="text-xl mb-6 text-purple-200">تَسْجِيلُ دُخُولِ الزَّائِرِ</h2>
-            <input id="guestName" type="text" placeholder="اُكْتُبْ اسْمَكَ هُنَا لِلتَّفْعِيلِ" 
-                   class="w-full bg-zinc-900 border border-purple-500/30 p-4 rounded-2xl text-white mb-6 text-center focus:ring-2 focus:ring-purple-500 outline-none">
-            <button onclick="activateApp()" class="w-full btn-purple py-4 rounded-2xl shadow-lg">دُخُولٌ مُبَاشِرٌ لِلْمَوْقِعِ</button>
+    <div id="loginPage" class="max-w-md mx-auto mt-20 text-center animate-fadeIn">
+        <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
+        <div class="glass-card p-10 shadow-2xl border-yellow-600/30">
+            <h2 class="text-xl mb-6 font-bold uppercase">تَسْجِيلُ دُخُولِ بَحْرِ الغُبُشِ</h2>
+            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّعَرُّفِ عَلَيْكَ" class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none focus:border-yellow-500">
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg uppercase tracking-widest">تَفْعِيلُ المَوْقِعِ</button>
         </div>
     </div>
 
-    <div id="appContainer" class="hidden max-w-6xl mx-auto">
-        <header class="flex justify-between items-center mb-10 p-6 glass-card">
+    <div id="mainApp" class="hidden max-w-7xl mx-auto">
+        <header class="flex justify-between items-center mb-8 p-5 glass-card border-yellow-600/20">
             <div>
-                <h2 class="text-2xl purple-gradient">مَوْقِع بَحْر الغُبُش</h2>
-                <p class="text-xs text-purple-300">أَهْلاً بِكَ: <span id="userNameShow" class="font-bold"></span></p>
+                <h2 class="text-2xl gold-text font-bold uppercase">مَوْقِعُ بَحْرِ الغُبُشِ</h2>
+                <div class="flex items-center gap-2">
+                    <p class="text-xs text-zinc-500 italic">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
+                    <span id="vipBadge" class="hidden bg-yellow-600 text-black text-[10px] px-2 rounded font-bold">عُضْوٌ مُمَيَّزٌ VIP</span>
+                </div>
             </div>
-            <div class="flex items-center gap-2">
-                <span class="online-status"></span>
-                <span class="text-green-400 text-sm font-bold">المُوَظَّفُ نَشِطٌ</span>
-            </div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span class="text-green-500 text-[10px] font-bold uppercase">Bahr Al-Ghubush Online</span></div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div onclick="openOffice('الرُّقْيَةِ الشَّرْعِيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
-                <i class="fas fa-book-open text-5xl text-purple-400 mb-4 group-hover:scale-110 transition"></i>
-                <h3 class="text-2xl font-bold mb-2">الرُّقْيَةُ الشَّرْعِيَّةُ</h3>
-                <p class="text-sm text-purple-300">بَرَامِجُ عِلَاجِيَّةٌ وَتَوَاصُلٌ مُبَاشِرٌ مَعَ الرَّاقِي.</p>
-            </div>
+        <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
+            <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
+            <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
+            <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px]"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
+            <button onclick="openConsultation()" class="glass-card px-6 py-4 min-w-[130px] border-blue-500 text-blue-400 font-bold"><i class="fas fa-user-md mb-1"></i><br>اسْتِشَارَةٌ</button>
+            <button onclick="openReviews()" class="glass-card px-6 py-4 min-w-[130px] border-orange-500 text-orange-400 font-bold"><i class="fas fa-star mb-1"></i><br>تَقْيِيمَاتٌ</button>
+            <button id="adminBtn" onclick="toggleAdminPanel()" class="hidden glass-card px-6 py-4 min-w-[130px] border-red-500 text-red-500 font-bold"><i class="fas fa-user-shield mb-1"></i><br>تَحَكُّمٌ</button>
+        </div>
 
-            <div onclick="openOffice('الأَعْشَابِ الطِّبِّيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
-                <i class="fas fa-leaf text-5xl text-green-400 mb-4 group-hover:scale-110 transition"></i>
-                <h3 class="text-2xl font-bold mb-2">الأَعْشَابُ الطِّبِّيَّةُ</h3>
-                <p class="text-sm text-purple-300">أَجْوَدُ الأَعْشَابِ وَالتَّرْكِيبَاتِ الطَّبِيعِيَّةِ السُّودَانِيَّةِ.</p>
-            </div>
-
-            <div onclick="openOffice('الزُّيُوتِ الطَّبِيعِيَّةِ')" class="glass-card p-8 cursor-pointer text-center group">
-                <i class="fas fa-oil-can text-5xl text-yellow-500 mb-4 group-hover:scale-110 transition"></i>
-                <h3 class="text-2xl font-bold mb-2">الزُّيُوتُ الطَّبِيعِيَّةُ</h3>
-                <p class="text-sm text-purple-300">زُيُوتٌ مُقَطَّرَةٌ لِلْعِلَاجِ وَالتَّجْمِيلِ بِنِقَاءٍ تَامٍّ.</p>
-            </div>
-
-            <div onclick="openOffice('التَّعَامِيدِ وَبِنْكُك')" class="glass-card p-8 cursor-pointer text-center group lg:col-span-3">
-                <i class="fas fa-money-bill-transfer text-4xl text-blue-400 mb-4"></i>
-                <h3 class="text-xl font-bold">قِسْمُ التَّعَامِيدِ المَالِيَّةِ (بِنْكُك)</h3>
-                <p class="text-sm text-purple-300">ارْفَعْ إِيصَالَاتِ الدَّفْعِ لِتَأْكِيدِ طَلَبَاتِكَ فَوْرِيّاً.</p>
+        <div id="adminPanel" class="hidden mb-10 glass-card p-6 border-red-900/50">
+            <h3 class="text-red-500 font-bold mb-6 italic underline underline-offset-8">إِدَارَةُ مَوْقِعِ بَحْرِ الغُبُشِ (البَرْمَجَةُ العُلْيَا)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-black/40 p-4 rounded-xl border border-zinc-800">
+                    <p class="text-[10px] text-zinc-500 mb-2 font-bold uppercase">إِعْدَادَاتُ المَوْقِعِ</p>
+                    <div class="flex gap-2">
+                        <input type="number" id="priceRoqya" value="75000" class="w-1/2 bg-zinc-900 border border-zinc-700 p-2 rounded text-yellow-500">
+                        <input type="text" id="couponCode" value="BAHR10" class="w-1/2 bg-zinc-900 border border-zinc-700 p-2 rounded text-green-500 uppercase">
+                    </div>
+                    <button onclick="saveAdminChanges()" class="btn-gold w-full mt-4 py-2 text-[10px]">حِفْظُ البَيَانَاتِ</button>
+                </div>
+                <div class="bg-black/40 p-4 rounded-xl border border-zinc-800 h-40 overflow-y-auto">
+                    <p class="text-[10px] text-red-500 mb-2 font-bold uppercase tracking-widest">سِجِلُّ نَشَاطِ مَوْقِعِ بَحْرِ الغُبُشِ</p>
+                    <div id="adminLog" class="text-[9px] space-y-1 font-mono text-zinc-400 italic"></div>
+                </div>
             </div>
         </div>
+
+        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20 animate-fadeIn"></div>
     </div>
 
-    <div id="modalOffice" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
-        <div class="glass-card w-full max-w-2xl overflow-hidden border-purple-500">
-            <div class="p-6 border-b border-purple-900/50 flex justify-between items-center bg-purple-900/20">
-                <h3 id="officeTitle" class="purple-gradient text-2xl font-bold">مَكْتَبُ المُرَاسَلَاتِ</h3>
-                <button onclick="closeOffice()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-4xl"></i></button>
+    <div id="chatModal" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-2xl overflow-hidden border-yellow-600 shadow-2xl">
+            <div class="p-5 border-b border-zinc-800 flex justify-between items-center bg-zinc-900">
+                <h3 id="modalTitle" class="gold-text uppercase"><i class="fas fa-comments ml-2"></i>مَوْقِعُ بَحْرِ الغُبُشِ</h3>
+                <button onclick="closeModal()" class="text-red-500 hover:rotate-90 transition"><i class="fas fa-times-circle text-3xl"></i></button>
             </div>
             
-            <div class="p-8 h-80 overflow-y-auto" id="chatDisplay">
-                <div class="bg-purple-900/30 p-4 rounded-2xl rounded-tr-none mb-4 border-r-4 border-purple-500">
-                    مَرْحَبًا بِكَ فِي <span id="currentDept" class="text-yellow-400"></span>. نَحْنُ هُنَا لِخِدْمَتِكَ. يُمْكِنُكَ بَدْءُ اتِّصَالٍ صَوْتِيٍّ، مَرْئِيٍّ، أَوْ رَفْعِ إِيصَالِ الخِدْمَةِ.
+            <div id="reviewDisplay" class="hidden p-6 h-40 overflow-y-auto border-b border-zinc-800">
+                <p class="text-[10px] text-zinc-500 mb-4 font-bold italic underline uppercase tracking-widest">شَهَادَاتُ مَنْ تَعَالَمُوا فِي مَوْقِعِ بَحْرِ الغُبُشِ:</p>
+                <div id="reviewsList" class="space-y-2">
+                    <div class="review-node"><b>عُمَرُ:</b> "جَزَاكُمُ اللهُ خَيْرًا، نِعْمَةُ العِلَاجِ وَالرُّقْيَةِ."</div>
                 </div>
             </div>
 
-            <div class="p-6 border-t border-purple-900/50 bg-purple-950/20">
-                <div class="flex gap-4 mb-6">
-                    <button onclick="handleCall('صَوْتِيَّة')" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-green-400 border border-purple-500/20"><i class="fas fa-phone-alt text-xl"></i></button>
-                    <button onclick="handleCall('مَرْئِيَّة')" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-blue-400 border border-purple-500/20"><i class="fas fa-video text-xl"></i></button>
-                    <button onclick="document.getElementById('upload').click()" class="flex-1 bg-zinc-900 p-4 rounded-2xl hover:text-yellow-400 border border-purple-500/20">
-                        <i class="fas fa-cloud-upload-alt text-xl"></i>
-                        <input type="file" id="upload" class="hidden" onchange="alert('تَمَّ اخْتِيَارُ المَلَفِّ بِنَجَاحٍ')">
-                    </button>
+            <div class="p-6 h-48 overflow-y-auto" id="chatFlow">
+                <div class="bg-zinc-800 p-4 rounded-xl mb-4 text-sm border-r-4 border-yellow-600">
+                    <span id="chatText"></span>
                 </div>
-                <div class="relative">
-                    <input type="text" placeholder="اُكْتُبْ طَلَبَكَ هُنَا..." class="w-full bg-black border border-purple-500/30 p-4 rounded-2xl outline-none focus:border-purple-500">
-                    <button class="absolute left-4 top-4 text-purple-400 font-bold hover:text-white">إِرْسَال</button>
+            </div>
+
+            <div class="p-6 border-t border-zinc-800 bg-zinc-900/50">
+                <div id="couponSection" class="flex gap-2 mb-4 hidden">
+                    <input type="text" id="userCoupon" placeholder="كُودُ خَصْمِ بَحْرِ الغُبُشِ" class="flex-1 bg-black border border-zinc-800 p-3 rounded-xl outline-none text-[10px] text-center uppercase tracking-widest text-green-500">
+                    <button onclick="applyCoupon()" class="bg-green-600 text-black font-bold px-4 rounded-xl text-xs uppercase">تَفْعِيل</button>
+                </div>
+                <div class="flex gap-2 mb-4">
+                    <button id="receiptBtn" onclick="document.getElementById('rUp').click()" class="flex-1 bg-yellow-600/10 border border-yellow-600 text-yellow-600 p-3 hidden rounded-xl font-bold text-xs uppercase tracking-tighter"><i class="fas fa-receipt ml-1"></i>إِيصَال بِنْكَك</button>
+                    <input type="file" id="rUp" class="hidden">
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="userInput" placeholder="اُكْتُبْ هُنَا..." class="flex-1 bg-black border border-zinc-800 p-4 rounded-xl outline-none focus:border-yellow-600 text-sm">
+                    <button onclick="sendMessage()" class="btn-gold px-8 text-xs font-bold uppercase tracking-widest">إِرْسَال</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function activateApp() {
-            const name = document.getElementById('guestName').value;
-            if(name.trim().length >= 2) {
-                document.getElementById('userNameShow').innerText = name;
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('appContainer').classList.remove('hidden');
-                console.log("تَنْبِيهٌ: دَخَلَ الزَّائِر " + name + " إِلَى مَوْقِعِ بَحْرِ الغُبُشِ");
-            } else {
-                alert('فَضْلاً، أَدْخِلِ اسْمَكَ لِتَفْعِيلِ العُضْوِيَّةِ.');
+        let isAdmin = false; let isVIP = false;
+        let globalRoqyaPrice = 75000;
+        let activeCoupon = "BAHR10";
+        let currentItemPrice = 0;
+        let userName = ""; let currentMode = "";
+
+        const data = {
+            roqya: ["العين", "الحسد", "السحر المرشوش", "السحر المأكول والمشروب", "السحر السفلي", "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"],
+            herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "عشبة المدينة", p: 10000}],
+            oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}, {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, {n: "زيت إكليل الجبل", p: 10000}]
+        };
+
+        function entry() {
+            userName = document.getElementById('uName').value;
+            if(userName === "1234") { isAdmin = true; document.getElementById('displayUser').innerText = "المُدِيرُ العَامُّ"; document.getElementById('adminBtn').classList.remove('hidden'); }
+            else if(userName === "VIP77") { isVIP = true; document.getElementById('displayUser').innerText = "عُضْوٌ مُمَيَّزٌ"; document.getElementById('vipBadge').classList.remove('hidden'); }
+            else if(userName.length > 1) { document.getElementById('displayUser').innerText = userName; }
+            else return alert('أَدْخِلِ الِاسْمَ');
+
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+            showTab('roqya');
+        }
+
+        function showTab(type) {
+            const container = document.getElementById('container'); container.innerHTML = "";
+            let items = (type === 'roqya') ? data.roqya.map(i => ({n: i, p: globalRoqyaPrice})) : (type === 'herbs' ? data.herbs : data.oils);
+            let icon = (type === 'roqya') ? "fa-scroll text-purple-500" : (type === 'herbs' ? "fa-leaf text-green-500" : "fa-flask text-yellow-500");
+
+            items.forEach(item => {
+                let finalP = isVIP ? item.p * 0.8 : item.p;
+                container.innerHTML += `<div class="glass-card p-6 text-center ${isVIP ? 'vip-card' : ''}">
+                    <i class="fas ${icon} text-3xl mb-4 group-hover:scale-110 transition"></i>
+                    <h4 class="font-bold text-sm mb-2 h-10 uppercase tracking-tighter">${item.n}</h4>
+                    <p class="gold-text mb-4 text-xl font-bold font-mono">${finalP.toLocaleString()} SDG</p>
+                    <button onclick="buy('${item.n}', ${finalP})" class="btn-gold w-full py-3 text-[10px] uppercase tracking-widest">شِــــــــرَاء الآن</button>
+                </div>`;
+            });
+        }
+
+        function buy(n, p) {
+            currentMode = "شِرَاء: " + n; currentItemPrice = p;
+            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - مَكْتَبُ الطَّلَبَاتِ<br>لَقَدْ اخْتَرْتَ: " + n + "<br>السِّعْرُ: " + p.toLocaleString() + " ج.س";
+            document.getElementById('couponSection').classList.remove('hidden');
+            document.getElementById('receiptBtn').classList.remove('hidden');
+            document.getElementById('reviewDisplay').classList.add('hidden');
+            document.getElementById('chatModal').classList.remove('hidden');
+        }
+
+        function openConsultation() {
+            currentMode = "اسْتِشَارَةٌ فَنِّيَّةٌ";
+            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - قِسْمُ الِاسْتِشَارَاتِ<br>اُكْتُبْ شَكْوَاكَ هُنَا لِيَرُدَّ عَلَيْكَ المَدِيرُ فَوْرِيّاً.";
+            document.getElementById('couponSection').classList.add('hidden');
+            document.getElementById('receiptBtn').classList.add('hidden');
+            document.getElementById('reviewDisplay').classList.add('hidden');
+            document.getElementById('chatModal').classList.remove('hidden');
+        }
+
+        function openReviews() {
+            currentMode = "شَهَادَةُ شِفَاءٍ";
+            document.getElementById('chatText').innerHTML = "مَوْقِعُ بَحْرِ الغُبُشِ - شَهَادَاتُ الزُّوَّارِ<br>شَارِكْنَا تَجْرِبَتَكَ مَعَ العِلَاجِ لِيَرَاهَا الجَمِيعُ.";
+            document.getElementById('couponSection').classList.add('hidden');
+            document.getElementById('receiptBtn').classList.add('hidden');
+            document.getElementById('reviewDisplay').classList.remove('hidden');
+            document.getElementById('chatModal').classList.remove('hidden');
+        }
+
+        function sendMessage() {
+            const msg = document.getElementById('userInput').value; if(!msg) return;
+            if(currentMode === "شَهَادَةُ شِفَاءٍ") {
+                document.getElementById('reviewsList').innerHTML += `<div class="review-node"><b>${userName}:</b> "${msg}"</div>`;
             }
+            document.getElementById('adminLog').innerHTML += `<div>[${userName}] (${currentMode}): ${msg}</div>`;
+            alert("تَمَّ إِرْسَالُ البَيَانَاتِ بِنَجَاحٍ إِلَى إِدَارَةِ مَوْقِعِ بَحْرِ الغُبُشِ.");
+            document.getElementById('userInput').value = "";
         }
 
-        function openOffice(dept) {
-            document.getElementById('currentDept').innerText = "قِسْم " + dept;
-            document.getElementById('officeTitle').innerText = "مَكْتَبُ " + dept;
-            document.getElementById('modalOffice').classList.remove('hidden');
+        function applyCoupon() {
+            if(document.getElementById('userCoupon').value.toUpperCase() === activeCoupon) alert("تَمَّ قُبُولُ خَصْمِ مَوْقِعِ بَحْرِ الغُبُشِ!");
+            else alert("الكُوبُونُ غَيْرُ مُفَعَّلٍ");
         }
 
-        function closeOffice() {
-            document.getElementById('modalOffice').classList.add('hidden');
-        }
-
-        function handleCall(type) {
-            alert('جَارٍ بَدْءُ مُكَالَمَةٍ ' + type + ' مَعَ الإِدَارَةِ... رَجَاءً انْتَظِرْ رَدَّ الموظَّفِ.');
+        function toggleAdminPanel() { document.getElementById('adminPanel').classList.toggle('hidden'); }
+        function closeModal() { document.getElementById('chatModal').classList.add('hidden'); }
+        function saveAdminChanges() { 
+            globalRoqyaPrice = parseInt(document.getElementById('priceRoqya').value);
+            activeCoupon = document.getElementById('couponCode').value.toUpperCase();
+            alert("تَمَّ تَحْدِيثُ بَيَانَاتِ مَوْقِعِ بَحْرِ الغُبُشِ.");
+            showTab('roqya'); toggleAdminPanel();
         }
     </script>
 </body>
