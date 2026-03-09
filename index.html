@@ -3,118 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="مَوْقِعُ بَحْرِ الغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ وَالأَعْشَابِ - بِإِشْرَافِ الدُّكْتُور عَبْدَالصَّمَد">
+    <meta name="description" content="مَوْقِعُ بَحْرِ الْغُبُشِ لِلرُّقْيَةِ الشَّرْعِيَّةِ - الدُّكْتُور عَبْدَالصَّمَد - مَتْجَرٌ عَالَمِيٌّ وَبَثٌّ مُبَاشِرٌ">
     <link rel="canonical" href="https://bahar-al-gubsh.com/">
     
-    <title>مَوْقِعُ بَحْرِ الغُبُشِ | نِظَامُ العُضْوِيَّةِ وَالعِلَاجِ الشَّامِلِ</title>
+    <title>بَحْرُ الْغُبُشِ | الْمَنْظُومَةُ الْعَالَمِيَّةُ الشَّامِلَةُ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; user-select: none; }
+        body { font-family: 'Changa', sans-serif; background-color: #050505; color: #e5e5e5; user-select: none; overflow-x: hidden; }
         .gold-text { background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-        .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; }
+        .glass-card { background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(191, 149, 63, 0.2); border-radius: 20px; transition: 0.4s; }
         .btn-gold { background: linear-gradient(135deg, #bf953f, #b38728); color: black; font-weight: bold; border-radius: 12px; cursor: pointer; }
-        .vip-card { background: linear-gradient(135deg, #1a1a1a 0%, #000 100%); border: 2px solid #bf953f; border-radius: 15px; position: relative; overflow: hidden; }
+        #liveAlert { display: none; background: linear-gradient(90deg, #ff0000, #990000); color: white; padding: 10px; text-align: center; font-weight: bold; position: sticky; top: 0; z-index: 2000; }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
+    <div id="liveAlert"><i class="fas fa-broadcast-tower ml-2"></i> بَثٌّ مُبَاشِرٌ مَعَ الدُّكْتُور عَبْدَالصَّمَد! <a id="liveLink" href="#" target="_blank" class="underline mr-4">اِنْضَمَّ الآنَ</a></div>
+
     <div id="loginPage" class="max-w-md mx-auto mt-20 text-center px-4">
-        <h1 class="text-6xl gold-text font-bold mb-10 tracking-tighter">بَحْرُ الغُبُشِ</h1>
-        <div class="glass-card p-8 shadow-2xl">
-            <h2 class="text-lg mb-6 font-bold uppercase">تَسْجِيلُ الدُّخُولِ لِلنِّظَامِ</h2>
-            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ هُنَا..." class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
-            <button onclick="entry()" class="w-full btn-gold py-4 text-lg">دُخُولُ المَوْقِعِ</button>
+        <h1 class="text-7xl gold-text font-bold mb-10 tracking-tighter uppercase">بَحْرُ الْغُبُشِ</h1>
+        <div class="glass-card p-10 border-yellow-600/30">
+            <h2 class="text-xl mb-6 font-bold text-white uppercase tracking-widest">دُخُولُ النِّظَامِ السَّامِي</h2>
+            <input id="uName" type="text" placeholder="اُكْتُبْ اسْمَكَ لِلتَّسْجِيلِ..." class="w-full bg-zinc-900 border border-zinc-700 p-4 rounded-xl text-white mb-6 text-center outline-none">
+            <button onclick="entry()" class="w-full btn-gold py-4 text-lg uppercase">فَتْحُ الْمَوْسُوعَةِ</button>
         </div>
     </div>
 
-    <div id="mainApp" class="hidden max-w-7xl mx-auto px-4 pb-32">
-        <header class="flex justify-between items-center mb-8 p-5 glass-card mt-4">
+    <div id="mainApp" class="hidden max-w-7xl mx-auto px-4 pb-40">
+        <header class="flex justify-between items-center mb-8 p-6 glass-card mt-6">
             <div>
-                <h2 class="text-xl gold-text font-bold uppercase tracking-widest">بَحْرُ الغُبُشِ ⚓</h2>
-                <p class="text-[10px] text-zinc-500">مَرْحَبًا: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
+                <h2 class="text-2xl gold-text font-bold tracking-widest">بَحْرُ الْغُبُشِ ⚓</h2>
+                <p class="text-[10px] text-zinc-500 uppercase">الْمُدِيرُ: <span id="displayUser" class="text-yellow-500 font-bold"></span></p>
             </div>
             <div class="flex gap-2">
-                <button onclick="showID()" class="bg-yellow-600 text-black px-3 py-2 rounded-lg text-[10px] font-bold">بِطَاقَةُ VIP</button>
-                <button onclick="openPrompter()" class="bg-red-800 text-white px-3 py-2 rounded-lg text-[10px] font-bold">المُلَقِّنُ</button>
+                <button id="backBtn" onclick="goBack()" class="btn-gold px-4 py-2 text-[10px] hidden">رُجُوعٌ</button>
+                <a href="https://www.facebook.com/share/1CujuhCQ5E/" target="_blank" class="bg-blue-900 text-white px-4 py-2 rounded-xl text-[10px] font-bold flex items-center">
+                    <i class="fab fa-facebook ml-1"></i> فِيسْبُوك
+                </a>
+                <button onclick="openCart()" class="bg-zinc-800 text-white px-4 py-2 rounded-xl text-[10px] font-bold relative">
+                    <i class="fas fa-shopping-basket"></i> السَّلَّةُ <span id="cartCount" class="cart-badge">0</span>
+                </button>
             </div>
         </header>
 
-        <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
-            <button onclick="showTab('roqya')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-scroll text-purple-500 mb-1"></i><br>الرُّقْيَةُ</button>
-            <button onclick="showTab('herbs')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-leaf text-green-500 mb-1"></i><br>الأَعْشَابُ</button>
-            <button onclick="showTab('oils')" class="glass-card px-6 py-4 min-w-[130px] font-bold"><i class="fas fa-oil-can text-yellow-500 mb-1"></i><br>الزُّيُوتُ</button>
+        <div id="navigationTabs" class="flex overflow-x-auto gap-4 mb-10 pb-4 no-scrollbar">
+            <button onclick="showTab('roqya')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-purple-900"><i class="fas fa-scroll text-purple-500 mb-2 text-xl"></i><br>الرُّقْيَةُ (18)</button>
+            <button onclick="showTab('herbs')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-green-900"><i class="fas fa-leaf text-green-500 mb-2 text-xl"></i><br>الْأَعْشَابُ</button>
+            <button onclick="showTab('oils')" class="glass-card px-8 py-5 min-w-[150px] font-bold border-yellow-900"><i class="fas fa-oil-can text-yellow-500 mb-2 text-xl"></i><br>الزُّيُوتُ</button>
         </div>
 
-        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+        <div id="container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"></div>
     </div>
 
-    <div id="idModal" class="fixed inset-0 bg-black/95 hidden z-50 flex items-center justify-center p-4">
-        <div class="vip-card w-full max-w-sm p-8 text-center relative shadow-2xl">
-            <div class="absolute top-0 right-0 p-4 gold-text text-xs">ID CARD</div>
-            <h3 class="gold-text text-2xl mb-4 font-bold">بَحْرُ الغُبُشِ</h3>
-            <div class="w-24 h-24 bg-zinc-800 rounded-full mx-auto mb-4 border-2 border-yellow-600 flex items-center justify-center">
-                <i class="fas fa-user-shield text-4xl text-yellow-600"></i>
+    <div id="cartModal" class="fixed inset-0 bg-black/95 hidden z-[3000] flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg p-8">
+            <h3 class="gold-text text-xl mb-6 text-center">سَلَّةُ طَلَبَاتِ بَحْرِ الْغُبُشِ</h3>
+            <div id="cartItems" class="max-h-40 overflow-y-auto mb-4 text-sm"></div>
+            
+            <div class="mb-4">
+                <label class="block text-[10px] text-zinc-500 mb-2 uppercase tracking-widest">تَوْثِيقُ الدَّفْعِ (إِيصَالُ التَّحْوِيلِ):</label>
+                <input type="file" id="receiptImg" accept="image/*" class="w-full bg-zinc-900 border border-zinc-700 p-2 rounded-lg text-white text-[10px]">
             </div>
-            <h4 id="idName" class="text-xl font-bold text-white mb-2"></h4>
-            <p class="text-yellow-500 text-xs font-mono mb-6 uppercase">ORGANIZATION MANAGER MEMBER</p>
-            <div class="border-t border-zinc-800 pt-4 text-[10px] text-zinc-500 font-bold">
-                رَقْمُ العُضْوِيَّةِ: <span id="idNumber"></span>
+
+            <div class="border-t border-zinc-700 pt-4 mb-6 flex justify-between font-bold">
+                <span>الْإِجْمَالِيُّ:</span> <span id="cartTotal" class="text-yellow-500">0 SDG</span>
             </div>
-            <button onclick="closeID()" class="mt-8 text-red-500 text-xs uppercase font-bold">إِغْلَاقُ البِطَاقَةِ</button>
+            <button onclick="sendCartToWhatsapp()" class="w-full btn-gold py-4 mb-3 uppercase">إِرْسَالُ الطَّلَبِ وَالْإِيصَالِ</button>
+            <button onclick="closeCart()" class="w-full text-zinc-500 text-[10px]">إِغْلَاقُ السَّلَّةِ</button>
         </div>
     </div>
 
     <script>
-        let userName = "";
+        let userName = ""; let lastTab = ""; let cart = [];
         const drWhatsapp = "249121494942";
 
         const database = {
-            roqya: [
-                "العين", "الحسد", "السحر المرشوش", "السحر المأكول", "السحر السفلي", 
-                "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", 
-                "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", 
-                "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"
-            ],
-            herbs: [
-                {n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, 
-                {n: "عشبة المدينة", p: 10000}, {n: "حرمل", p: 3000}, {n: "سدر مطحون", p: 5000}
-            ],
-            oils: [
-                {n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5000}, 
-                {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, 
-                {n: "زيت إكليل الجبل", p: 12000}, {n: "زيت الكافور", p: 8000}
-            ]
+            roqya: ["العين", "الحسد", "السحر المرشوش", "السحر المأكول", "السحر السفلي", "سحر الفودو", "السحر الأسود", "السحر الأحمر", "السحر الأبيض", "سحر الأرحام", "سحر عدم الإنجاب", "سحر تشويه الجمال", "المس الشيطاني", "الجن العاشق", "الجن الطيار", "الجن المارد", "الريح الأحمر", "القرين"],
+            herbs: [{n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "عشبة المدينة", p: 10000}, {n: "حرمل", p: 3500}, {n: "سدر مطحون", p: 5000}, {n: "مر حجازي", p: 12000}, {n: "قرض", p: 3000}, {n: "محلب", p: 6000}],
+            oils: [{n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت السمسم", p: 5500}, {n: "زيت الحبة السوداء", p: 10000}, {n: "زيت الخروع", p: 5000}, {n: "زيت إكليل الجبل", p: 12000}, {n: "زيت الكافور", p: 8500}, {n: "زيت النعناع", p: 4000}, {n: "زيت السذاب", p: 15000}]
         };
 
         function entry() {
             userName = document.getElementById('uName').value;
-            if(userName.length < 2) return alert('أَدْخِلِ الِاسْمَ');
+            if(userName.length < 2) return alert('يُرْجَى كِتَابَةُ الِاسْمِ');
             document.getElementById('displayUser').innerText = userName;
-            document.getElementById('idName').innerText = userName;
-            document.getElementById('idNumber').innerText = Math.floor(Math.random() * 900000) + 100000;
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('mainApp').classList.remove('hidden');
             showTab('roqya');
         }
 
         function showTab(type) {
+            lastTab = type;
             const container = document.getElementById('container');
             container.innerHTML = "";
             let items = (type === 'roqya') ? database.roqya.map(i => ({n: i, p: 75000})) : database[type];
-            
             items.forEach(item => {
-                container.innerHTML += `<div class="glass-card p-6 text-center border-yellow-600/10 hover:border-yellow-600 transition duration-500">
-                    <h4 class="font-bold text-[12px] mb-2 uppercase">${item.n}</h4>
-                    <p class="gold-text mb-4 text-xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
-                    <button class="btn-gold w-full py-3 text-[10px] font-bold uppercase">طَلَبُ الخِدْمَةِ</button>
+                container.innerHTML += `
+                <div class="glass-card p-8 text-center border-yellow-600/10 hover:border-yellow-600 transform hover:-translate-y-2 duration-500">
+                    <h4 class="font-bold text-[13px] mb-4 text-white uppercase">${item.n}</h4>
+                    <p class="gold-text mb-6 text-2xl font-bold font-mono">${item.p.toLocaleString()} SDG</p>
+                    <button onclick="addToCart('${item.n}', ${item.p})" class="btn-gold w-full py-4 text-[10px]">أَضِفْ لِلسَّلَّةِ</button>
                 </div>`;
             });
         }
 
-        function showID() { document.getElementById('idModal').classList.remove('hidden'); }
-        function closeID() { document.getElementById('idModal').classList.add('hidden'); }
+        function addToCart(name, price) {
+            cart.push({name, price});
+            document.getElementById('cartCount').innerText = cart.length;
+            alert(`تَمَّتْ إِضَافَةُ ${name}`);
+        }
+
+        function openCart() {
+            const list = document.getElementById('cartItems');
+            list.innerHTML = ""; let total = 0;
+            cart.forEach(item => { total += item.price; list.innerHTML += `<div class="flex justify-between mb-2"><span>${item.name}</span><span>${item.price} SDG</span></div>`; });
+            document.getElementById('cartTotal').innerText = total.toLocaleString() + " SDG";
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function closeCart() { document.getElementById('cartModal').classList.add('hidden'); }
+
+        function sendCartToWhatsapp() {
+            if(cart.length === 0) return alert("السَّلَّةُ فَارِغَةٌ!");
+            let msg = `طَلَبُ شِرَاءٍ (بَحْرُ الْغُبُشِ)%0Aالِاسْمُ: ${userName}%0Aالْمُشْتَرَيَاتُ:%0A`;
+            cart.forEach(i => msg += `- ${i.name}%0A`);
+            msg += `%0Aالْإِجْمَالِيُّ: ${document.getElementById('cartTotal').innerText}%0A(سَأُرْسِلُ صُورَةَ الْإِيصَالِ الآنَ)`;
+            window.open(`https://wa.me/${drWhatsapp}?text=${msg}`, '_blank');
+        }
+
+        function goBack() { showTab(lastTab || 'roqya'); }
     </script>
 </body>
 </html>
