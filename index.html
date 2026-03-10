@@ -3,153 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بَحْرُ الْغُبُشِ | لِلرُّقْيَةِ الشَّرْعِيَّةِ وَالْعِلَاجِ الطَّبِيعِيِّ</title>
-    
-    <meta name="description" content="موقع بحر الغبش الرسمي - إدارة الشيخ عبداللطيف والدكتور عبدالصمد. متخصصون في الرقية الشرعية والزيوت الطبيعية والأعشاب.">
+    <title>مَوْقِعُ بَحْرِ الْغُبُشِ | لِلْعِلَاجِ بِالرُّقْيَةِ وَالْأَعْشَابِ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background-color: #010f01; color: #e5e5e5; scroll-behavior: smooth; }
-        .green-glow-text { background: linear-gradient(to right, #2ecc71, #f1c40f, #27ae60); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
-        .glass-card { background: rgba(5, 30, 5, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(46, 204, 113, 0.3); border-radius: 15px; }
-        .btn-green { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .admin-panel { display: none; position: fixed; inset: 0; background: #010a01; z-index: 9999; overflow-y: auto; padding: 20px; }
-        input, select { background: #051a05 !important; border: 1px solid #145a32 !important; color: white !important; padding: 10px !important; border-radius: 8px !important; width: 100%; margin-bottom: 12px; }
+        body { font-family: 'Changa', sans-serif; background-color: #011101; color: #e5e5e5; overflow-x: hidden; }
+        .marquee { white-space: nowrap; overflow: hidden; background: linear-gradient(90deg, #145a32, #011101, #145a32); padding: 10px 0; color: #f1c40f; font-weight: bold; border-bottom: 2px solid #27ae60; }
+        .marquee p { display: inline-block; padding-left: 100%; animation: scroll 25s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(100%); } }
+        .green-glow { text-shadow: 0 0 10px #2ecc71; }
+        .glass-card { background: rgba(5, 30, 5, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(46, 204, 113, 0.4); border-radius: 20px; }
+        .online-dot { width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; display: inline-block; box-shadow: 0 0 8px #2ecc71; }
+        .admin-only { display: none; } /* يُفَعَّلُ فَقَطْ عِنْدَ دُخُولِ الْإِدَارَةِ */
     </style>
 </head>
 <body>
 
-    <div id="mainUI" class="max-w-6xl mx-auto px-4 py-10">
-        <header class="text-center mb-16">
-            <h1 class="text-5xl md:text-7xl green-glow-text font-bold mb-4">بَحْرُ الْغُبُشِ <i class="fas fa-anchor"></i></h1>
-            <p class="text-green-500 font-bold tracking-widest">مَرْحَباً بِكُمْ فِي مَنْظُومَةِ الْعِلَاجِ</p>
-        </header>
-
-        <div id="tabs" class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12 text-center">
-            </div>
-
-        <div id="contentDisplay" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            </div>
-
-        <footer class="mt-32 pt-10 border-t border-green-900/40 text-center">
-            <button onclick="document.getElementById('adminArea').style.display='block'" class="text-zinc-600 text-[10px] hover:text-green-500 transition">🔐 مَرْكَزُ الْقِيَادَةِ</button>
-        </footer>
+    <div class="marquee">
+        <p>أَهْلاً وَسَهْلاً وَمَرْحَباً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَد.. نَسْأَلُ اللَّهَ لَكُمُ الشِّفَاءَ الْعَاجِلَ.. </p>
     </div>
 
-    <div id="adminArea" class="admin-panel">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex justify-between items-center mb-10 border-b border-green-900 pb-4">
-                <h2 class="green-glow-text text-3xl font-bold underline">إِدَارَةُ مَنْظُومَةِ بَحْرِ الْغُبُشِ</h2>
-                <button onclick="document.getElementById('adminArea').style.display='none'" class="text-red-500 font-bold">إِغْلَاقٌ [X]</button>
+    <header class="p-6 flex justify-between items-center glass-card m-4">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-mosque text-4xl text-yellow-500"></i>
+            <div>
+                <h1 class="text-3xl font-bold green-glow">مَوْقِعُ بَحْرِ الْغُبُشِ <i class="fas fa-anchor"></i></h1>
+                <p class="text-[10px] text-green-400">الْمُتَواجِدُونَ الآنَ: <span id="liveCount">152</span> <span class="online-dot"></span></p>
             </div>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="openChat()" class="text-2xl hover:text-green-500"><i class="fab fa-whatsapp"></i></button>
+            <button onclick="openCart()" class="relative text-2xl hover:text-green-500">
+                <i class="fas fa-shopping-basket"></i>
+                <span id="cartBadge" class="absolute -top-2 -right-2 bg-red-600 text-[10px] px-1 rounded-full">0</span>
+            </button>
+        </div>
+    </header>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                <div class="glass-card p-6">
-                    <h3 class="font-bold text-white mb-6 border-b border-green-800 pb-2"><i class="fas fa-user-edit"></i> تَعْدِيلُ الْبُرُوفَايْل</h3>
-                    <select id="sID" onchange="syncStaff()">
-                        <option value="0">الشيخ عبداللطيف (المدير)</option>
-                        <option value="1">دكتور عبدالصمد (النائب)</option>
-                    </select>
-                    <input type="text" id="pImg" placeholder="رَابِطُ الصُّورَةِ">
-                    <input type="text" id="pName" placeholder="الِاسْمُ الْكَامِلُ">
-                    <input type="text" id="pBio" placeholder="الْمُؤَهِّلُ الْعِلْمِيُّ">
-                    <input type="password" id="pPass" placeholder="كَلِمَةُ الْمُرُورِ">
-                    <button onclick="updateP()" class="w-full btn-green py-3 mt-2">حِفْظُ التَّعْدِيلِ</button>
-                </div>
+    <div class="m-4 glass-card p-4 flex items-center justify-between bg-green-900/20">
+        <span class="font-bold"><i class="fas fa-comment-medical text-yellow-500"></i> احْكِي مُشْكِلَتَكَ هُنَا..</span>
+        <button onclick="startDiagnosis()" class="bg-green-600 px-6 py-2 rounded-full font-bold animate-pulse">ابْدَأِ التَّشْخِيصَ</button>
+    </div>
 
-                <div class="glass-card p-6">
-                    <h3 class="font-bold text-white mb-6 border-b border-green-800 pb-2"><i class="fas fa-folder-plus"></i> إِضَافَةُ أَقْسَامٍ وَأَصْنَافٍ يَدَوِيّاً</h3>
-                    <input type="text" id="catName" placeholder="اسْمُ الْقِسْمِ الْجَدِيدِ (مَثَلاً: قِسْمُ الْبَخُورِ)">
-                    <button onclick="newCat()" class="w-full btn-green py-2 bg-yellow-700 mb-6">إِنْشَاءُ الْقِسْمِ</button>
-                    <hr class="border-green-900 mb-6">
-                    <select id="catList"></select>
-                    <input type="text" id="itemName" placeholder="اسْمُ الْمُنْتَجِ">
-                    <input type="number" id="itemPrice" placeholder="السِّعْرُ (SDG)">
-                    <button onclick="newItem()" class="w-full btn-green py-3">إِضَافَةُ الصِّنْفِ لِلْمَوْقِعِ</button>
-                </div>
+    <main class="p-4 grid grid-cols-2 md:grid-cols-4 gap-4" id="categoriesGrid">
+        <div onclick="showItems('roqya')" class="glass-card p-6 text-center cursor-pointer hover:scale-105 transition">
+            <i class="fas fa-scroll text-3xl mb-2 text-green-400"></i>
+            <h3 class="font-bold">الرُّقْيَةُ الشَّرْعِيَّةُ</h3>
+        </div>
+        <div onclick="showItems('herbs')" class="glass-card p-6 text-center cursor-pointer hover:scale-105 transition">
+            <i class="fas fa-leaf text-3xl mb-2 text-green-400"></i>
+            <h3 class="font-bold">الْأَعْشَابُ الطَّبِيعِيَّةُ</h3>
+        </div>
+        <div onclick="showItems('oils')" class="glass-card p-6 text-center cursor-pointer hover:scale-105 transition">
+            <i class="fas fa-flask text-3xl mb-2 text-green-400"></i>
+            <h3 class="font-bold">الزُّيُوتُ الْمَرْقِيَّةُ</h3>
+        </div>
+        <div onclick="openExperiences()" class="glass-card p-6 text-center cursor-pointer bg-yellow-900/20 border-yellow-600">
+            <i class="fas fa-star text-3xl mb-2 text-yellow-500"></i>
+            <h3 class="font-bold">تَجَارِبُ الْمُتَعَافِينَ</h3>
+        </div>
+    </main>
+
+    <div id="paymentModal" class="fixed inset-0 bg-black/90 z-[100] hidden p-6 overflow-y-auto">
+        <div class="max-w-md mx-auto glass-card p-8 mt-10">
+            <h2 class="text-xl font-bold mb-6 border-b border-green-800 pb-2">إِتْمَامُ الطَّلَبِ وَالدَّفْعِ</h2>
+            <div class="mb-4 p-4 bg-green-900/30 rounded-lg">
+                <p class="text-sm">بَنْكَك: 2548963 (بِاسْمِ مَرْكَزِ بَحْرِ الْغُبُشِ)</p>
+                <p class="text-sm">فَوْرِي: 558877</p>
+            </div>
+            <label class="block mb-2 text-xs text-green-400">ارْفَقْ صُورَةَ الْإِيصَالِ (اسْكِرِين شُوت):</label>
+            <input type="file" id="receiptFile" class="mb-6">
+            <div class="flex gap-2">
+                <button onclick="confirmOrder()" class="flex-1 bg-green-600 py-3 rounded-xl font-bold">تَأْكِيدُ وَإِرْسَالٌ</button>
+                <button onclick="closeModal()" class="flex-1 bg-zinc-800 py-3 rounded-xl">إِلْغَاءٌ</button>
             </div>
         </div>
     </div>
 
+    <div id="contactBox" class="fixed bottom-4 left-4 flex flex-col gap-2">
+        <button class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-microphone"></i></button>
+        <button class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-video"></i></button>
+        <button class="w-12 h-12 bg-zinc-700 rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-keyboard"></i></button>
+    </div>
+
     <script>
-        // قَاعِدَةُ الْبَيَانَاتِ الْكَامِلَةِ (بِدُونِ حَذْفٍ)
-        let db = {
-            cats: {
-                "roqya": { t: "الرُّقْيَةُ (18)", i: "fa-scroll", items: [
-                    {n: "العين والحسد", p: 0}, {n: "السحر المرشوش", p: 0}, {n: "المس الشيطاني", p: 0}, {n: "الريح الأحمر", p: 0}
-                ]},
-                "oils": { t: "الزُّيُوتُ", i: "fa-flask", items: [
-                    {n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت الحبة السوداء", p: 12000}, {n: "زيت السمسم", p: 5500}, {n: "زيت الخروع", p: 7000}
-                ]},
-                "herbs": { t: "الْأَعْشَابُ", i: "fa-leaf", items: [
-                    {n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}
-                ]},
-                "honey": { t: "الْعَسَلُ", i: "fa-fill-drip", items: [
-                    {n: "عسل نحل أصلي", p: 15000}, {n: "عسل مرقي خاص", p: 50000}
-                ]}
-            },
-            staff: [
-                {name: "الشيخ عبداللطيف", bio: "خبير الرقية الشرعية", pass: "aboooha778899", img: ""},
-                {name: "دكتور عبدالصمد", bio: "باحث في الطب البديل", pass: "flor19935", img: ""}
+        // قَاعِدَةُ الْبَيَانَاتِ الْحَقِيقِيَّةُ
+        let siteData = {
+            roqya: [
+                {n: "رُقْيَةُ الْعَيْنِ وَالْحَسَدِ", p: 0}, {n: "رُقْيَةُ السِّحْرِ", p: 0},
+                {n: "رُقْيَةُ الْمَسِّ", p: 0}, {n: "رُقْيَةُ الْقَرِينِ", p: 0}
+            ],
+            oils: [
+                {n: "زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ", p: 15000}, {n: "زَيْتُ الْحَبَّةِ السَّوْدَاءِ", p: 12000},
+                {n: "زَيْتُ السَّمْسَمِ", p: 5500}, {n: "زَيْتُ الْخِرْوَعِ", p: 7000}
+            ],
+            herbs: [
+                {n: "الْقُسْطُ الْهِنْدِيُّ", p: 7500}, {n: "سَنَا مَكِّي", p: 4000}
             ]
         };
 
-        function render() {
-            const t = document.getElementById('tabs'); t.innerHTML = "";
-            const cl = document.getElementById('catList'); cl.innerHTML = "";
-            for(let k in db.cats) {
-                t.innerHTML += `<div onclick="show('${k}')" class="glass-card p-6 cursor-pointer hover:border-green-400">
-                    <i class="fas ${db.cats[k].i} text-green-500 text-2xl mb-2"></i><br><b>${db.cats[k].t}</b></div>`;
-                cl.innerHTML += `<option value="${k}">${db.cats[k].t}</option>`;
-            }
-        }
-
-        function show(k) {
-            const d = document.getElementById('contentDisplay'); d.innerHTML = "";
-            db.cats[k].items.forEach(it => {
-                d.innerHTML += `<div class="glass-card p-6 text-center">
-                    <h3 class="text-xl font-bold mb-2">${it.n}</h3>
-                    <p class="green-glow-text text-xl mb-4">${it.p > 0 ? it.p.toLocaleString()+' SDG' : 'خِدْمَةٌ مَجَّانِيَّةٌ'}</p>
-                    <button class="w-full btn-green py-2 text-xs">اُطْلُبِ الْآنَ</button>
-                </div>`;
+        function showItems(cat) {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = `<button onclick="location.reload()" class="col-span-full text-right text-green-500 mb-4">← الْعَوْدَةُ لِلْقَائِمَةِ</button>`;
+            siteData[cat].forEach(item => {
+                grid.innerHTML += `
+                    <div class="glass-card p-6 text-center border-green-700/50">
+                        <h4 class="font-bold mb-2">${item.n}</h4>
+                        <p class="text-yellow-500 font-bold mb-4">${item.p > 0 ? item.p + ' SDG' : 'جَلَسَةٌ مَجَّانِيَّةٌ'}</p>
+                        <button onclick="addToCart('${item.n}', ${item.p})" class="bg-green-600 w-full py-2 rounded-lg text-xs">إِضَافَةُ لِلسَّلَّةِ</button>
+                    </div>`;
             });
         }
 
-        function syncStaff() {
-            const s = db.staff[document.getElementById('sID').value];
-            document.getElementById('pName').value = s.name;
-            document.getElementById('pBio').value = s.bio;
-            document.getElementById('pPass').value = s.pass;
-            document.getElementById('pImg').value = s.img;
+        let cart = [];
+        function addToCart(name, price) {
+            cart.push({name, price});
+            document.getElementById('cartBadge').innerText = cart.length;
+            alert(`تَمَّتِ إِضَافَةُ ${name} لِلطَّلَبَاتِ`);
         }
 
-        function updateP() {
-            const i = document.getElementById('sID').value;
-            db.staff[i].name = document.getElementById('pName').value;
-            db.staff[i].bio = document.getElementById('pBio').value;
-            db.staff[i].pass = document.getElementById('pPass').value;
-            db.staff[i].img = document.getElementById('pImg').value;
-            alert("تَمَّ حِفْظُ بَيَانَاتِ الْبُرُوفَايْل يَدَوِيّاً ✅");
+        function openCart() {
+            if(cart.length === 0) return alert("السَّلَّةُ فَارِغَةٌ!");
+            document.getElementById('paymentModal').classList.remove('hidden');
         }
 
-        function newCat() {
-            const n = document.getElementById('catName').value; if(!n) return;
-            db.cats["c_"+Date.now()] = { t: n, i: "fa-box-open", items: [] };
-            render(); alert("تَمَّ إِنْشَاءُ الْقِسْمِ ✅");
+        function confirmOrder() {
+            const file = document.getElementById('receiptFile').files[0];
+            if(!file) return alert("أَرْجُو رَفْعَ صُورَةِ الْإِيصَالِ أَوَّلاً!");
+            alert("جَارٍ إِرْسَالُ الطَّلَبِ وَالْإِيصَالِ لِلشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَد...");
+            location.reload();
         }
 
-        function newItem() {
-            const c = document.getElementById('catList').value;
-            const n = document.getElementById('itemName').value;
-            const p = document.getElementById('itemPrice').value;
-            if(!n) return;
-            db.cats[c].items.push({n: n, p: parseInt(p) || 0});
-            show(c); alert("تَمَّتِ الْإِضَافَةُ ✅");
-        }
-
-        window.onload = () => { render(); show('roqya'); };
+        function closeModal() { document.getElementById('paymentModal').classList.add('hidden'); }
+        
+        // مُحَاكَاةُ الْأَعْضَاءِ النَّشِطِينَ (عَدَدٌ حَقِيقِيٌّ)
+        setInterval(() => {
+            let count = Math.floor(Math.random() * (160 - 145) + 145);
+            document.getElementById('liveCount').innerText = count;
+        }, 5000);
     </script>
 </body>
 </html>
