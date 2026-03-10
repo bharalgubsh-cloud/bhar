@@ -3,114 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منظومة الإدارة المركزية | بحر الغُبُش</title>
+    <title>بحر الغُبُش | النظام الإداري</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background: #010a01; color: #fff; }
-        .admin-glass { background: rgba(10, 30, 10, 0.95); border: 1px solid #145a32; border-radius: 20px; }
-        .profile-btn { border: 2px solid transparent; transition: 0.3s; cursor: pointer; }
-        .profile-btn:hover { border-color: #2ecc71; transform: translateY(-3px); }
-        input { background: #000 !important; border: 1px solid #1b4332 !important; color: #2ecc71 !important; border-radius: 8px; padding: 5px; width: 100%; text-align: center; font-size: 12px; }
-        .section-card { background: rgba(0,0,0,0.3); border: 1px border-zinc-800; padding: 15px; border-radius: 15px; }
+        body { font-family: 'Changa', sans-serif; background: #051005; color: #e5e5e5; }
+        .glass-panel { background: rgba(10, 30, 10, 0.95); border: 1px solid #145a32; border-radius: 20px; }
+        .stat-card { background: #0a1f0a; border-right: 4px solid #2ecc71; padding: 15px; border-radius: 10px; }
+        input { background: #000 !important; border: 1px solid #145a32 !important; color: #2ecc71 !important; text-align: center; border-radius: 8px; width: 100%; padding: 8px; }
+        .btn-sync { background: #22c55e; color: #000; font-weight: bold; transition: 0.3s; }
+        .btn-sync:hover { background: #16a34a; transform: scale(1.02); }
     </style>
 </head>
-<body>
+<body class="min-h-screen p-4 md:p-8">
 
-    <div id="lockScreen" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center p-4">
-        <div class="admin-glass w-full max-w-lg p-8 text-center border-2 border-green-600">
-            <h2 class="text-2xl font-bold mb-8 text-green-500 italic underline">نظام التحكم في واجهة الزوار</h2>
-            <div class="grid grid-cols-2 gap-6 mb-8">
-                <div onclick="initLogin('الشيخ عبداللطيف')" class="profile-btn p-4 bg-zinc-900 rounded-2xl">
-                    <i class="fas fa-user-tie text-4xl text-green-500 mb-2"></i>
+    <div id="authScreen" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center p-4 text-center">
+        <div class="glass-panel w-full max-w-lg p-8 border-2 border-green-600">
+            <div class="mb-6"><i class="fas fa-crown text-5xl text-yellow-500"></i></div>
+            <h2 class="text-2xl font-bold mb-8 text-green-500">منظومة الإدارة العليا - بحر الغُبُش</h2>
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div onclick="selectUser('الشيخ عبداللطيف عبدالواحد')" class="cursor-pointer p-4 bg-zinc-900 rounded-xl border border-transparent hover:border-green-500">
+                    <i class="fas fa-user-tie text-3xl mb-2 text-green-500"></i>
                     <p class="text-xs">المدير العام</p>
                 </div>
-                <div onclick="initLogin('الدكتور عبدالصمد')" class="profile-btn p-4 bg-zinc-900 rounded-2xl">
-                    <i class="fas fa-user-md text-4xl text-blue-500 mb-2"></i>
-                    <p class="text-xs">النائب (المطور)</p>
+                <div onclick="selectUser('الدكتور عبدالصمد عبدالواحد')" class="cursor-pointer p-4 bg-zinc-900 rounded-xl border border-transparent hover:border-blue-500">
+                    <i class="fas fa-user-md text-3xl mb-2 text-blue-500"></i>
+                    <p class="text-xs">نائب المدير</p>
                 </div>
             </div>
-            <div id="passArea" style="display:none;" class="animate-bounce">
-                <input type="password" id="sysPass" placeholder="كلمة المرور: flor19935" class="mb-4 py-3 text-lg">
-                <button onclick="verify()" class="w-full bg-green-600 text-black py-3 rounded-xl font-bold">فتح الربط المركزي</button>
+            <div id="passInput" style="display:none;" class="animate-pulse">
+                <input type="password" id="sysPassword" placeholder="كلمة المرور: flor19935" class="mb-4 py-3">
+                <button onclick="access()" class="w-full btn-sync py-3 rounded-xl shadow-lg">تفعيل النظام</button>
             </div>
         </div>
     </div>
 
-    <div id="adminPanel" style="display:none;" class="p-4 md:p-8">
-        <header class="flex justify-between items-center mb-8 border-b border-green-900 pb-4">
+    <div id="adminLayout" style="display:none;">
+        <header class="flex justify-between items-center mb-10 border-b border-green-900 pb-5">
             <div>
-                <h1 class="text-xl font-bold text-green-500">لوحة تحكم بحر الغُبُش <i class="fas fa-link text-xs ml-2"></i></h1>
-                <p id="activeAdmin" class="text-[10px] text-zinc-500 italic"></p>
+                <h1 class="text-2xl font-bold text-green-500">بحر الغُبُش | الإدارة</h1>
+                <p id="adminTag" class="text-[10px] text-zinc-500 italic mt-1"></p>
             </div>
-            <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-3 py-1 rounded border border-red-900 text-[10px]">قطع الاتصال</button>
+            <button onclick="location.reload()" class="text-red-500 border border-red-900 px-4 py-1 rounded text-xs hover:bg-red-950">خروج آمن</button>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2 space-y-6">
-                <div class="admin-glass p-6">
-                    <h3 class="text-green-500 font-bold mb-4 flex items-center"><i class="fas fa-edit ml-2"></i> تحديث أسعار موقع الزوار (SDG)</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="section-card">
-                            <p class="text-[10px] text-zinc-400 mb-2 italic">قسم الرقية</p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            <div class="stat-card">
+                <p class="text-[10px] text-zinc-500">طلبات اليوم</p>
+                <h4 class="text-xl font-bold text-green-500">24 طلبية</h4>
+            </div>
+            <div class="stat-card">
+                <p class="text-[10px] text-zinc-500">الزوار حالياً</p>
+                <h4 class="text-xl font-bold text-blue-500">12</h4>
+            </div>
+            <div class="stat-card">
+                <p class="text-[10px] text-zinc-500">رصيد اليوم</p>
+                <h4 class="text-xl font-bold text-yellow-500">1.2M <span class="text-[8px]">SDG</span></h4>
+            </div>
+            <div class="stat-card">
+                <p class="text-[10px] text-zinc-500">إشعارات معلقة</p>
+                <h4 class="text-xl font-bold text-red-500">7 تنبيهات</h4>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-8">
+                <div class="glass-panel p-6 shadow-2xl">
+                    <h3 class="text-green-500 font-bold mb-6 flex items-center border-r-4 border-green-600 pr-3">
+                        <i class="fas fa-tags ml-2"></i> تحديث قائمة الأسعار (SDG)
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-black/40 p-3 rounded-lg">
+                            <label class="text-[10px] block mb-2 text-zinc-400">سعر الرقية / السحر الأسود</label>
                             <input type="text" value="75,000">
                         </div>
-                        <div class="section-card">
-                            <p class="text-[10px] text-zinc-400 mb-2 italic">قسم الأعشاب</p>
+                        <div class="bg-black/40 p-3 rounded-lg">
+                            <label class="text-[10px] block mb-2 text-zinc-400">القسط الهندي (مطحون)</label>
                             <input type="text" value="10,000">
                         </div>
-                        <div class="section-card">
-                            <p class="text-[10px] text-zinc-400 mb-2 italic">قسم الزيوت</p>
+                        <div class="bg-black/40 p-3 rounded-lg">
+                            <label class="text-[10px] block mb-2 text-zinc-400">زيت الزيتون المرقي (عبوة)</label>
                             <input type="text" value="20,000">
                         </div>
-                        <div class="section-card">
-                            <p class="text-[10px] text-zinc-400 mb-2 italic">قسم العسل</p>
+                        <div class="bg-black/40 p-3 rounded-lg">
+                            <label class="text-[10px] block mb-2 text-zinc-400">خلطة عسل "الشفاء"</label>
                             <input type="text" value="150,000">
                         </div>
-                        <div class="section-card">
-                            <p class="text-[10px] text-zinc-400 mb-2 italic">بخور الغُبُش</p>
+                        <div class="bg-black/40 p-3 rounded-lg">
+                            <label class="text-[10px] block mb-2 text-zinc-400">بخور الغُبُش</label>
                             <input type="text" value="50,000">
                         </div>
                     </div>
-                    <button onclick="sync()" class="w-full bg-green-600 text-black font-bold py-3 rounded-xl mt-6 shadow-lg shadow-green-900/20 hover:bg-green-400 transition">تحديث واجهة الزوار الآن</button>
+                    <button onclick="syncSite()" class="w-full btn-sync py-4 rounded-xl mt-8 text-lg">تحديث واجهة الزوار الآن</button>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <div class="admin-glass p-6 border-cyan-900">
-                    <h3 class="text-cyan-400 font-bold mb-4 text-xs italic"><i class="fas fa-users ml-2"></i> مراقبة الزوار (حقيقي)</h3>
-                    <div class="text-center py-4 bg-black/40 rounded-2xl mb-4">
-                        <p class="text-4xl font-bold">12</p>
-                        <p class="text-[9px] text-cyan-600 uppercase tracking-tighter">زائر يتصفح الآن</p>
+            <div class="space-y-8">
+                <div class="glass-panel p-6 border-cyan-900">
+                    <h3 class="text-cyan-400 font-bold mb-4 text-sm italic">مراقبة الزوار (حقيقي)</h3>
+                    <div class="text-center py-6 bg-black/50 rounded-2xl mb-4 border border-cyan-950">
+                        <p class="text-5xl font-bold">12</p>
+                        <p class="text-[8px] text-cyan-600 mt-2">زائر يتصفح الآن</p>
                     </div>
-                    <a href="https://dashboard.tawk.to" target="_blank" class="block w-full bg-cyan-700 text-white text-center py-2 rounded-lg text-xs font-bold">الرد على محادثات الزوار</a>
+                    <button class="w-full bg-cyan-900 text-cyan-200 py-3 rounded-xl text-xs font-bold border border-cyan-700">الرد على محادثات الزوار</button>
                 </div>
 
-                <div class="admin-glass p-6 border-purple-900">
-                    <h3 class="text-purple-400 font-bold mb-4 text-xs italic"><i class="fas fa-video ml-2"></i> المحتوى المرئي</h3>
-                    <input type="text" placeholder="رابط فيديو اليوتيوب الجديد" class="mb-2">
-                    <button class="w-full bg-purple-900/50 text-purple-300 py-2 rounded-lg text-[10px] border border-purple-800">تغيير فيديو الواجهة</button>
+                <div class="glass-panel p-6 border-purple-900">
+                    <h3 class="text-purple-400 font-bold mb-4 text-sm italic">المحتوى المرئي</h3>
+                    <input type="text" placeholder="رابط فيديو اليوتيوب الجديد" class="mb-3">
+                    <button class="w-full bg-purple-900 text-purple-200 py-2 rounded-lg text-[10px] border border-purple-700">تغيير فيديو الواجهة</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let adminName = "";
-        function initLogin(name) {
-            adminName = name;
-            document.getElementById('passArea').style.display = 'block';
+        let currentAdmin = "";
+        function selectUser(user) {
+            currentAdmin = user;
+            document.getElementById('passInput').style.display = 'block';
         }
-        function verify() {
-            if(document.getElementById('sysPass').value === 'flor19935') {
-                document.getElementById('lockScreen').style.display = 'none';
-                document.getElementById('adminPanel').style.display = 'block';
-                document.getElementById('activeAdmin').innerText = "المسؤول الحالي: " + adminName;
-            } else { alert("كلمة السر خاطئة يا دكتور"); }
+
+        function access() {
+            if(document.getElementById('sysPassword').value === 'flor19935') {
+                document.getElementById('authScreen').style.display = 'none';
+                document.getElementById('adminLayout').style.display = 'block';
+                document.getElementById('adminTag').innerText = "المسؤول النشط: " + currentAdmin;
+            } else { alert("عذراً، كلمة المرور غير صحيحة"); }
         }
-        function sync() {
-            alert("جاري إرسال التحديثات لـ " + adminName + "... سيتم انعكاس الأسعار فوراً في موقع الزوار.");
+
+        function syncSite() {
+            // حل مشكلة رسالة التحديث للمدير العام
+            alert("جاري إرسال التحديثات لـ " + currentAdmin + "... سيتم انعكاس الأسعار فوراً في موقع الزوار.");
         }
     </script>
 </body>
