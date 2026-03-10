@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بَحْرُ الْغُبُشِ | الْإِدَارَةُ الْمَرْكَزِيَّةُ</title>
-    
-    <meta name="description" content="موقع بحر الغبش الرسمي للرقية الشرعية والعلاجات الطبيعية بإشراف الدكتور عبدالصمد والشيخ عبداللطيف.">
+    <title>بَحْرُ الْغُبُشِ | نِظَامُ الْإِدَارَةِ الشَّامِلُ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap');
         body { font-family: 'Changa', sans-serif; background-color: #011501; color: #e5e5e5; user-select: none; scroll-behavior: smooth; }
@@ -17,10 +14,9 @@
         .glass-card { background: rgba(5, 30, 5, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(46, 204, 113, 0.4); border-radius: 20px; transition: 0.3s; }
         .btn-green { background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; font-weight: bold; border-radius: 12px; cursor: pointer; transition: 0.3s; border: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .admin-panel-overlay { display: none; position: fixed; inset: 0; background: #010c01; z-index: 9999; overflow-y: auto; padding: 20px; }
-        .badge { font-size: 10px; padding: 2px 8px; border-radius: 5px; margin-right: 5px; vertical-align: middle; }
-        .badge-admin { background: #e74c3c; color: white; }
-        .badge-mod { background: #f1c40f; color: black; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid #2ecc71; object-fit: cover; }
         input, select, textarea { background: #051a05 !important; border: 1px solid #145a32 !important; color: white !important; padding: 12px !important; border-radius: 10px !important; width: 100%; margin-bottom: 10px; outline: none; }
+        .badge-rank { font-size: 10px; padding: 2px 8px; border-radius: 4px; color: white; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -28,11 +24,11 @@
     <div id="loginPage" class="max-w-md mx-auto mt-20 text-center px-4">
         <h1 class="text-6xl green-glow-text font-bold mb-10">بَحْرُ الْغُبُشِ <i class="fas fa-mosque"></i></h1>
         <div class="glass-card p-10 shadow-2xl border-green-800">
-            <h2 class="text-xl mb-6 font-bold text-white uppercase underline decoration-green-600">فَتْحُ الْمَنْظُومَةِ</h2>
+            <h2 class="text-xl mb-6 font-bold text-white underline decoration-green-600">فَتْحُ الْمَنْظُومَةِ</h2>
             <input id="uName" type="text" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ...">
             <button onclick="entry()" class="w-full btn-green py-4 text-lg">دُخُولُ الزُّوَّارِ</button>
             <div class="mt-8 pt-6 border-t border-green-900/50">
-                <button onclick="openAdmin()" class="text-green-500 font-bold text-sm">🔐 بَوَّابَةُ الْإِدَارَةِ وَالرُّتَبِ</button>
+                <button onclick="openAdmin()" class="text-green-500 font-bold text-sm">🔐 بَوَّابَةُ الْإِدَارَةِ (الْمُدِيرِ وَالنَّائِبِ)</button>
             </div>
         </div>
     </div>
@@ -40,28 +36,13 @@
     <div id="mainApp" class="hidden max-w-7xl mx-auto px-4 pb-40">
         <header class="flex justify-between items-center mb-8 p-6 glass-card mt-6">
             <div>
-                <h2 class="text-2xl green-glow-text font-bold uppercase">بَحْرُ الْغُبُشِ</h2>
-                <p class="text-[11px] text-green-500">مَرْحَباً: <span id="userBadgeArea"></span> <span id="displayUser" class="text-white font-bold"></span></p>
+                <h2 class="text-2xl green-glow-text font-bold">بَحْرُ الْغُبُشِ</h2>
+                <p class="text-[11px] text-green-500">مَرْحَباً بِكَ يَا: <span id="displayUser" class="text-white font-bold"></span></p>
             </div>
             <button onclick="toggleCart()" class="bg-zinc-800 text-white px-5 py-2 rounded-xl text-xs font-bold"><i class="fas fa-shopping-basket"></i> طَلَبَاتِي</button>
         </header>
 
-        <div class="glass-card p-6 mb-10 border-green-500">
-            <h3 class="text-white font-bold mb-4 flex items-center gap-2"><i class="fas fa-comment-medical text-green-400"></i> خِدْمَةُ التَّشْخِيصِ الْمُبَاشِرِ:</h3>
-            <div class="flex gap-4">
-                <input id="userProblem" type="text" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ لِيَصِلَ لِلْإِدَارَةِ..." class="mb-0">
-                <button onclick="sendProblem()" class="btn-green px-8 font-bold">إِرْسَالٌ</button>
-            </div>
-        </div>
-
-        <div id="navigationTabs" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
-            <button onclick="showTab('roqya')" class="glass-card p-6 font-bold text-center"><i class="fas fa-scroll text-green-400 block mb-2 text-2xl"></i>الرُّقْيَةُ</button>
-            <button onclick="showTab('herbs')" class="glass-card p-6 font-bold text-center"><i class="fas fa-leaf text-green-400 block mb-2 text-2xl"></i>الْأَعْشَابُ</button>
-            <button onclick="showTab('oils')" class="glass-card p-6 font-bold text-center"><i class="fas fa-flask text-green-400 block mb-2 text-2xl"></i>الزُّيُوتُ</button>
-            <button onclick="showTab('honey')" class="glass-card p-6 font-bold text-center"><i class="fas fa-fill-drip text-yellow-500 block mb-2 text-2xl"></i>الْعَسَلُ</button>
-            <button onclick="showTab('archive')" class="glass-card p-6 font-bold text-center"><i class="fas fa-play-circle text-green-400 block mb-2 text-2xl"></i>الْأَرْشِيفُ</button>
-            <button onclick="showTab('map')" class="glass-card p-6 font-bold text-center"><i class="fas fa-map-marked-alt text-green-400 block mb-2 text-2xl"></i>الْخَرِيطَةُ</button>
-        </div>
+        <div id="navigationTabs" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10"></div>
 
         <div id="contentHeader" class="hidden flex items-center gap-4 mb-6">
             <div onclick="goBackHome()" class="cursor-pointer bg-green-900/40 border border-green-500 text-green-500 p-2 px-4 rounded-full font-bold"> <i class="fas fa-chevron-right"></i> الْعَوْدَةُ</div>
@@ -70,9 +51,9 @@
     </div>
 
     <div id="adminPanel" class="admin-panel-overlay">
-        <div class="max-w-4xl mx-auto">
+        <div class="max-w-6xl mx-auto">
             <div class="flex justify-between items-center mb-8 border-b border-green-900 pb-4">
-                <h2 class="green-glow-text text-3xl font-bold">لَوْحَةُ قِيَادَةِ بَحْرِ الْغُبُشِ</h2>
+                <h2 class="green-glow-text text-3xl font-bold">مَرْكَزُ قِيَادَةِ بَحْرِ الْغُبُشِ</h2>
                 <button onclick="closeAdmin()" class="text-red-500 font-bold">إِغْلَاقٌ [X]</button>
             </div>
 
@@ -82,71 +63,111 @@
                 <button onclick="doLogin()" class="w-full btn-green py-3">دُخُولُ الْمَنْظُومَةِ</button>
             </div>
 
-            <div id="adminDashboard" class="hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card p-6 border-green-500">
-                    <h3 class="font-bold text-green-400 mb-4 border-b border-green-900 pb-2"><i class="fas fa-tags"></i> تَعْدِيلُ الْأَسْعَارِ وَالْأَقْسَامِ</h3>
-                    <select id="editCategory" onchange="loadItemsToEdit()">
-                        <option value="oils">قِسْمُ الزُّيُوتِ</option>
-                        <option value="honey">قِسْمُ الْعَسَلِ</option>
-                        <option value="herbs">قِسْمُ الْأَعْشَابُ</option>
-                    </select>
-                    <div id="editList" class="max-h-60 overflow-y-auto space-y-2 mb-4"></div>
+            <div id="adminDashboard" class="hidden space-y-8">
+                <div class="glass-card p-6">
+                    <h3 class="font-bold text-green-400 mb-6 border-b border-green-900 pb-2"><i class="fas fa-user-circle"></i> إِدَارَةُ طَاقَمِ الْعَمَلِ وَالْبُرُوفَايْلَاتِ</h3>
+                    <div id="staffGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+                    <button onclick="showAddStaffForm()" class="mt-6 btn-green px-6 py-2 text-sm">+ إِضَافَةُ عُضْوِ إِدَارَةٍ جَدِيدٍ</button>
                 </div>
 
-                <div class="glass-card p-6 border-green-500">
-                    <h3 class="font-bold text-green-400 mb-4 border-b border-green-900 pb-2"><i class="fas fa-users-cog"></i> إِدَارَةُ الرُّتَبِ (الْمُشْرِفِينَ)</h3>
-                    <input type="text" id="newAdminName" placeholder="اسْمُ الْمُشْرِفِ الْجَدِيدِ">
-                    <select id="newAdminRole">
-                        <option value="مشرف">مُشْرِفٌ</option>
-                        <option value="مشرف عام">مُشْرِفٌ عَامٌّ</option>
-                        <option value="مساعد">مُسَاعِدٌ</option>
-                    </select>
-                    <button onclick="addStaff()" class="w-full btn-green py-2 mb-4">إِضَافَةُ رُتْبَةٍ</button>
-                    <div id="staffList" class="text-xs space-y-1"></div>
-                </div>
-
-                <div class="glass-card p-6 border-green-500 col-span-full">
-                    <h3 class="font-bold text-green-400 mb-2">إِحْصَائِيَّاتُ الْمَوْقِعِ</h3>
-                    <div class="flex gap-10">
-                        <p>عَدَدُ الْأَعْضَاءِ: <span id="memberCount" class="text-white font-bold">152</span></p>
-                        <p>الْمُتَّصِلُونَ الآنَ: <span class="text-green-500 font-bold">12</span></p>
+                <div class="glass-card p-6">
+                    <h3 class="font-bold text-green-400 mb-6 border-b border-green-900 pb-2"><i class="fas fa-edit"></i> تَعْدِيلُ وَإِضَافَةُ الْأَقْسَامِ وَالْمُنْتَجَاتِ</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-sm mb-2 text-zinc-400">إِضَافَةُ صِنْفٍ جَدِيدٍ:</h4>
+                            <select id="targetCat"></select>
+                            <input type="text" id="newItemName" placeholder="اسْمُ الْمُنْتَجِ">
+                            <input type="number" id="newItemPrice" placeholder="السِّعْرُ (SDG)">
+                            <button onclick="addItem()" class="w-full btn-green py-2">إِضَافَةُ الْمُنْتَجِ</button>
+                        </div>
+                        <div>
+                            <h4 class="text-sm mb-2 text-zinc-400">إِضَافَةُ قِسْمٍ جَدِيدٍ كَامِلٍ:</h4>
+                            <input type="text" id="newCatName" placeholder="اسْمُ الْقِسْمِ (مَثَلاً: قِسْمُ الْبَخُورِ)">
+                            <button onclick="addCategory()" class="w-full btn-green py-2 bg-yellow-600">إِنْشَاءُ الْقِسْمِ</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="profileModal" class="admin-panel-overlay bg-black/80 flex items-center justify-center">
+        <div class="glass-card p-8 max-w-lg w-full">
+            <h3 class="font-bold text-xl mb-6">تَعْدِيلُ بَيَانَاتِ الْبُرُوفَايْل</h3>
+            <input type="hidden" id="editStaffIndex">
+            <label class="text-xs text-green-500">رَابِطُ صُورَةِ الْبُرُوفَايْل:</label>
+            <input type="text" id="editImg" placeholder="رَابِطُ الصُّورَةِ">
+            <label class="text-xs text-green-500">الِاسْمُ الْكَامِلُ:</label>
+            <input type="text" id="editName">
+            <label class="text-xs text-green-500">الْمُؤَهِّلُ الْعِلْمِيُّ:</label>
+            <input type="text" id="editBio">
+            <label class="text-xs text-green-500">كَلِمَةُ الْمُرُورِ:</label>
+            <input type="password" id="editPass">
+            <div class="flex gap-4 mt-6">
+                <button onclick="saveProfile()" class="flex-1 btn-green py-3">حِفْظُ التَّعْدِيلَاتِ</button>
+                <button onclick="document.getElementById('profileModal').style.display='none'" class="flex-1 bg-red-900 py-3 rounded-xl font-bold">إِلْغَاءٌ</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // DATABASE (قَاعِدَةُ الْبَيَانَاتِ الْقَابِلَةُ لِلتَّعْدِيلِ)
-        let data = {
-            oils: [
-                {n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت الحبة السوداء", p: 12000},
-                {n: "زيت السمسم", p: 5500}, {n: "زيت الخروع", p: 7000},
-                {n: "زيت الحلبة", p: 6000}, {n: "زيت النيم", p: 9000},
-                {n: "الزيت المعجزة", p: 30000}
-            ],
-            honey: [{n: "عسل أصلي", p: 15000}, {n: "عسل مرقي", p: 50000}],
-            herbs: [{n: "قسط هندي", p: 7500}, {n: "سنا مكي", p: 4000}],
-            roqya: ["العين", "الحسد", "السحر", "المس", "القرين", "الريح الأحمر"]
-        };
-
-        let staff = [
-            {name: "الشيخ عبداللطيف", role: "المدير العام"},
-            {name: "دكتور عبدالصمد", role: "النائب"}
-        ];
-
-        const accounts = {
-            "bharalgubsh@gmail.com": "aboooha778899",
-            "abdalsamadabdalwahed@gmail.com": "flor19935"
+        // قَاعِدَةُ الْبَيَانَاتِ الشَّامِلَةِ مَعَ اسْتِعَادَةِ كُلِّ الْمَحْتَوَيَاتِ
+        let db = {
+            categories: {
+                "roqya": { title: "الرُّقْيَةُ (18)", icon: "fa-scroll", items: [
+                    {n: "العين", p: 0}, {n: "الحسد", p: 0}, {n: "السحر المرشوش", p: 0}, {n: "السحر المأكول", p: 0},
+                    {n: "السحر السفلي", p: 0}, {n: "سحر الأرحام", p: 0}, {n: "المس الشيطاني", p: 0}, {n: "الجن العاشق", p: 0},
+                    {n: "الجن الطيار", p: 0}, {n: "الجن المارد", p: 0}, {n: "الريح الأحمر", p: 0}, {n: "القرين", p: 0}
+                ]},
+                "herbs": { title: "الْأَعْشَابُ", icon: "fa-leaf", items: [
+                    {n: "القسط الهندي", p: 7500}, {n: "سنا مكي", p: 4000}, {n: "لبان ذكر", p: 8000}, {n: "حرمل", p: 3500}
+                ]},
+                "oils": { title: "الزُّيُوتُ", icon: "fa-flask", items: [
+                    {n: "زيت الزيتون المرقي", p: 15000}, {n: "زيت الحبة السوداء", p: 12000}, {n: "الزيت المعجزة", p: 30000}
+                ]},
+                "honey": { title: "الْعَسَلُ", icon: "fa-fill-drip", items: [
+                    {n: "عسل أصلي", p: 15000}, {n: "عسل مرقي", p: 50000}
+                ]}
+            },
+            staff: [
+                {name: "الشيخ عبداللطيف", email: "bharalgubsh@gmail.com", pass: "aboooha778899", role: "المدير العام", bio: "خبير الرقية الشرعية", img: "https://via.placeholder.com/80/052e05/ffffff?text=L"},
+                {name: "دكتور عبدالصمد", email: "abdalsamadabdalwahed@gmail.com", pass: "flor19935", role: "النائب", bio: "باحث في الطب البديل", img: "https://via.placeholder.com/80/052e05/ffffff?text=S"}
+            ]
         };
 
         function entry() {
             const u = document.getElementById('uName').value;
-            if(!u) return alert('يُرْجَى كِتَابَةُ الِاسْمِ');
+            if(!u) return;
             document.getElementById('displayUser').innerText = u;
             document.getElementById('loginPage').style.display = 'none';
             document.getElementById('mainApp').classList.remove('hidden');
-            showTab('roqya');
+            renderNav();
+        }
+
+        function renderNav() {
+            const nav = document.getElementById('navigationTabs');
+            nav.innerHTML = "";
+            for(let key in db.categories) {
+                nav.innerHTML += `
+                    <button onclick="showTab('${key}')" class="glass-card p-6 font-bold text-center">
+                        <i class="fas ${db.categories[key].icon} text-green-400 block mb-2 text-2xl"></i>
+                        ${db.categories[key].title}
+                    </button>`;
+            }
+        }
+
+        function showTab(key) {
+            document.getElementById('navigationTabs').classList.add('hidden');
+            document.getElementById('contentHeader').classList.remove('hidden');
+            const container = document.getElementById('container'); container.innerHTML = "";
+            db.categories[key].items.forEach(item => {
+                container.innerHTML += `
+                    <div class="glass-card p-6 text-center border-green-600/20">
+                        <h4 class="font-bold text-white mb-2">${item.n}</h4>
+                        <p class="green-glow-text font-bold mb-4">${item.p > 0 ? item.p.toLocaleString() + ' SDG' : 'خِدْمَةٌ عِلَاجِيَّةٌ'}</p>
+                        <button class="btn-green w-full py-2 text-xs">طَلَبُ الْمُنْتَجِ</button>
+                    </div>`;
+            });
         }
 
         function openAdmin() { document.getElementById('adminPanel').style.display = 'block'; }
@@ -155,61 +176,72 @@
         function doLogin() {
             const e = document.getElementById('loginEmail').value;
             const p = document.getElementById('loginPass').value;
-            if(accounts[e] === p) {
+            const found = db.staff.find(s => s.email === e && s.pass === p);
+            if(found) {
                 document.getElementById('adminAuth').classList.add('hidden');
                 document.getElementById('adminDashboard').classList.remove('hidden');
-                loadItemsToEdit();
-                renderStaff();
+                renderAdminTools();
             } else { alert("خَطَأٌ فِي الْبَيَانَاتِ!"); }
         }
 
-        // تَعْدِيلُ الْأَسْعَارِ يَدَوِيّاً مِنَ الدَّاخِلِ
-        function loadItemsToEdit() {
-            const cat = document.getElementById('editCategory').value;
-            const list = document.getElementById('editList');
-            list.innerHTML = "";
-            data[cat].forEach((item, i) => {
-                list.innerHTML += `
-                    <div class="flex gap-2 items-center bg-black/40 p-2 rounded">
-                        <span class="text-xs flex-1">${item.n}</span>
-                        <input type="number" value="${item.p}" class="w-20 !mb-0 !p-1 text-xs" onchange="updatePrice('${cat}', ${i}, this.value)">
-                    </div>`;
-            });
+        function renderAdminTools() {
+            // رِحْمَةُ الْبُرُوفَايْلَاتِ
+            const grid = document.getElementById('staffGrid');
+            grid.innerHTML = db.staff.map((s, i) => `
+                <div onclick="editProfile(${i})" class="glass-card p-4 flex items-center gap-4 cursor-pointer hover:border-green-400 border border-transparent">
+                    <img src="${s.img}" class="profile-img">
+                    <div>
+                        <h4 class="font-bold text-white">${s.name}</h4>
+                        <p class="text-[10px] text-green-500">${s.role}</p>
+                        <p class="text-[9px] text-zinc-400">${s.bio}</p>
+                    </div>
+                </div>
+            `).join("");
+
+            // قَائِمَةُ الْأَقْسَامِ لِلْإِضَافَةِ
+            const sel = document.getElementById('targetCat');
+            sel.innerHTML = Object.keys(db.categories).map(k => `<option value="${k}">${db.categories[k].title}</option>`).join("");
         }
 
-        function updatePrice(cat, index, newPrice) {
-            data[cat][index].p = parseInt(newPrice);
-            alert("تَمَّ تَحْدِيثُ السِّعْرِ بِنَجَاحٍ ✅");
+        function editProfile(i) {
+            const s = db.staff[i];
+            document.getElementById('editStaffIndex').value = i;
+            document.getElementById('editName').value = s.name;
+            document.getElementById('editBio').value = s.bio;
+            document.getElementById('editPass').value = s.pass;
+            document.getElementById('editImg').value = s.img;
+            document.getElementById('profileModal').style.display = 'flex';
         }
 
-        // إِدَارَةُ الرُّتَبِ
-        function addStaff() {
-            const name = document.getElementById('newAdminName').value;
-            const role = document.getElementById('newAdminRole').value;
+        function saveProfile() {
+            const i = document.getElementById('editStaffIndex').value;
+            db.staff[i].name = document.getElementById('editName').value;
+            db.staff[i].bio = document.getElementById('editBio').value;
+            db.staff[i].pass = document.getElementById('editPass').value;
+            db.staff[i].img = document.getElementById('editImg').value;
+            document.getElementById('profileModal').style.display = 'none';
+            renderAdminTools();
+            alert("تَمَّ تَحْدِيثُ الْبُرُوفَايْل بِنَجَاحٍ ✅");
+        }
+
+        function addItem() {
+            const cat = document.getElementById('targetCat').value;
+            const name = document.getElementById('newItemName').value;
+            const price = document.getElementById('newItemPrice').value;
             if(!name) return;
-            staff.push({name, role});
-            renderStaff();
-            document.getElementById('newAdminName').value = "";
+            db.categories[cat].items.push({n: name, p: parseInt(price) || 0});
+            alert("تَمَّتِ الْإِضَافَةُ يَدَوِيّاً ✅");
+            renderNav();
         }
 
-        function renderStaff() {
-            const list = document.getElementById('staffList');
-            list.innerHTML = staff.map(s => `<div class='p-1 border-b border-green-900'>${s.name} <span class='badge badge-mod'>${s.role}</span></div>`).join("");
-        }
-
-        function showTab(t) {
-            document.getElementById('navigationTabs').classList.add('hidden');
-            document.getElementById('contentHeader').classList.remove('hidden');
-            const container = document.getElementById('container'); container.innerHTML = "";
-            
-            let items = (t === 'roqya') ? data.roqya.map(i => ({n: i, p: 0})) : data[t];
-            items.forEach(item => {
-                container.innerHTML += `<div class="glass-card p-6 text-center border-green-600/10 hover:border-green-500 duration-300">
-                    <h4 class="font-bold text-white mb-3">${item.n}</h4>
-                    <p class="green-glow-text font-bold mb-4">${item.p > 0 ? item.p.toLocaleString() + ' SDG' : 'خِدْمَةٌ عِلَاجِيَّةٌ'}</p>
-                    <button class="btn-green w-full py-2 text-[10px]">إِضَافَةُ لِلطَّلَبِ</button>
-                </div>`;
-            });
+        function addCategory() {
+            const name = document.getElementById('newCatName').value;
+            if(!name) return;
+            const key = "cat_" + Date.now();
+            db.categories[key] = { title: name, icon: "fa-box-open", items: [] };
+            alert("تَمَّ إِنْشَاءُ الْقِسْمِ الْجَدِيدِ ✅");
+            renderAdminTools();
+            renderNav();
         }
 
         function goBackHome() {
@@ -217,12 +249,6 @@
             document.getElementById('contentHeader').classList.add('hidden');
             document.getElementById('container').innerHTML = "";
         }
-
-        function sendProblem() {
-            const p = document.getElementById('userProblem').value;
-            window.open(`https://wa.me/249121494942?text=تشخيص: ${p}`);
-        }
-        function toggleCart() { window.open(`https://wa.me/249121494942?text=اريد طلب منتجات`); }
     </script>
 </body>
 </html>
