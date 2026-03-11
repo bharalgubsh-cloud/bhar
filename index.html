@@ -34,14 +34,14 @@
         <header class="mb-8">
             <i class="fas fa-mosque text-8xl text-green-500 mb-4"></i>
             <h1 class="text-5xl font-bold tracking-tighter">بَحْرُ الْغُبُشِ</h1>
-            <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
+            <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
         </header>
         <div class="glass-card p-10 w-full max-w-md shadow-2xl border-green-600">
             <h2 class="text-2xl mb-6 font-bold underline decoration-green-600">فَتْحُ الْمَوْقِعِ</h2>
-            <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ..." class="w-full p-4 rounded-xl mb-4 text-center">
+            <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ..." class="w-full p-4 rounded-xl mb-4 text-center">
             <button onclick="enterSite()" class="btn-green w-full py-4 text-xl">دُخُولُ الْمَنْظُومَةِ</button>
             <div class="mt-6 pt-4 border-t border-green-900/50">
-                <button onclick="adminAccess()" class="text-green-500 text-sm font-bold">🔐 بَوَّابَةُ الْإِدَارَةِ (الْمُدِيرِ وَالنَّائِبِ)</button>
+                <button onclick="adminAccess()" class="text-green-500 text-sm font-bold">🔐 بَوَّابَةُ الْإِدَارَةِ (الْمُدِيرِ وَالنَّائِبِ)</button>
             </div>
         </div>
     </div>
@@ -57,29 +57,29 @@
 
         <main class="max-w-5xl mx-auto p-4">
             <div class="glass-card p-6 mb-8 border-green-500 bg-green-950/20 shadow-lg">
-                <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-comment-dots"></i> احْكِ مُشْكِلَتَكَ لِلدُّكْتُورِ عَبْدَالصَّمَدِ:</h3>
+                <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-comment-dots"></i> احْكِ مُشْكِلَتَكَ لِلدُّكْتُورِ عَبْدَالصَّمَدِ:</h3>
                 <div class="flex flex-col md:flex-row gap-3">
                     <input type="text" id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ بِتَفْصِيلٍ هُنَا..." class="flex-1 p-4 rounded-xl">
-                    <button onclick="contactAdmin('تَشْخِيصُ حَالَةٍ')" class="btn-green px-10 py-4">ارْسِلْ لِلتَّشْخِيصِ</button>
+                    <button onclick="contactAdmin('تَشْخِيصُ حَالَةٍ')" class="btn-green px-10 py-4">ارْسِلْ لِلتَّشْخِيصِ</button>
                 </div>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
                 <button onclick="renderCategory('رقية')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-book-open text-3xl text-green-500 mb-2"></i>
-                    <p class="text-xs font-bold">الرُّقْيَةُ الشَّرْعِيَّةُ</p>
+                    <p class="text-xs font-bold">الرُّقْيَةُ الشَّرْعِيَّةُ</p>
                 </button>
                 <button onclick="renderCategory('اعشاب')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-leaf text-3xl text-green-500 mb-2"></i>
-                    <p class="text-xs font-bold">الْأَعْشَابُ الطَّبِيعِيَّةُ</p>
+                    <p class="text-xs font-bold">الْأَعْشَابُ الطَّبِيعِيَّةُ</p>
                 </button>
                 <button onclick="renderCategory('زيوت')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-flask text-3xl text-green-500 mb-2"></i>
-                    <p class="text-xs font-bold">الزُّيُوتُ الْمَرْقِيَّةُ</p>
+                    <p class="text-xs font-bold">الزُّيُوتُ الْمَرْقِيَّةُ</p>
                 </button>
                 <button onclick="renderCategory('عسل')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-honey-pot text-3xl text-green-500 mb-2"></i>
-                    <p class="text-xs font-bold">عَسَلُ النَّحْلِ</p>
+                    <p class="text-xs font-bold">عَسَلُ النَّحْلِ</p>
                 </button>
                 <button onclick="renderCategory('بخور')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-wind text-3xl text-green-500 mb-2"></i>
@@ -110,7 +110,7 @@
         
         <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950">
             <div class="bg-zinc-900 p-6 rounded-2xl border border-yellow-600 shadow-2xl">
-                <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
+                <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
                 <div class="space-y-3">
                     <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
                         <span>تَطْبِيقُ بَنْكِك:</span>
@@ -120,10 +120,10 @@
                         <span>تَطْبِيقُ فَوْرِي:</span>
                         <span class="text-xl font-bold text-white tracking-widest">51170108</span>
                     </div>
-                    <p class="text-xs text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                    <p class="text-xs text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
                 </div>
                 <div class="mt-4 p-3 bg-green-900/20 border border-green-900 rounded-lg text-[10px] text-green-400">
-                    * بَعْدَ التَّحْوِيلِ، ارْفَعْ صُورَةَ الْإِيصَالِ هُنَا لِيَتِمَّ التَّوَاصُلُ مَعَكَ فَوْراً.
+                    * بَعْدَ التَّحْوِيلِ، ارْفَعْ صُورَةَ الْإِيصَالِ هُنَا لِيَتِمَّ التَّوَاصُلُ مَعَكَ فَوْراً.
                 </div>
             </div>
         </div>
@@ -146,51 +146,52 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. نَسْأَلُ اللَّهَ الشِّفَاءَ لِكُلِّ مَرِيضٍ..
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. نَسْأَلُ اللَّهَ الشِّفَاءَ لِكُلِّ مَرِيضٍ..
         </div>
     </footer>
 
     <script>
         const menu = {
             'رقية': [
-                {n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:75000},
-                {n:'السِّحْرُ الْأَسْوَدُ', p:75000}, {n:'السِّحْرُ الْأَحْمَرُ', p:75000},
-                {n:'السِّحْرُ الْأَبْيَضُ', p:75000}, {n:'السِّحْرُ السُّفْلِيُّ', p:75000},
-                {n:'السِّحْرُ الْمَدْفُونُ', p:75000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:75000},
+                {n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:75000},
+                {n:'السِّحْرُ الْأَسْوَدُ', p:75000}, {n:'السِّحْرُ الْأَحْمَرُ', p:75000},
+                {n:'السِّحْرُ الْأَبْيَضُ', p:75000}, {n:'السِّحْرُ السُّفْلِيُّ', p:75000},
+                {n:'السِّحْرُ الْمَدْفُونُ', p:75000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:75000},
                 {n:'سِحْرُ الْبُطُونِ وَالْأَرْحَامِ', p:75000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابِ', p:75000},
-                {n:'سِحْرُ الْفِرَاقِ', p:75000}, {n:'سِحْرُ التَّبْوِيرِ', p:75000},
-                {n:'سِحْرُ تَشْوِيهِ الْجَمَالِ', p:75000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:75000},
-                {n:'الْجِنُّ الطَّيَّارُ', p:75000}, {n:'الْجِنُّ الْمَارِدُ', p:75000},
-                {n:'الرِّيحُ الْأَحْمَرُ', p:75000}, {n:'الْقَرِينُ', p:75000}
+                {n:'سِحْرُ الْفِرَاقِ', p:75000}, {n:'سِحْرُ التَّبْوِيرِ', p:75000},
+                {n:'سِحْرُ تَشْوِيهِ الْجَمَالِ', p:75000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:75000},
+                {n:'الْجِنُّ الطَّيَّارُ', p:75000}, {n:'الْجِنُّ الْمَارِدُ', p:75000},
+                {n:'الرِّيحُ الْأَحْمَرُ', p:75000}, {n:'الْقَرِينُ', p:75000}
             ],
             'اعشاب': [
-                {n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000},
-                {n:'السِّدْرُ الْمَسْحُونُ', p:5000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:10000},
-                {n:'الْمَحْرِيبُ', p:10000}, {n:'عِرْقُ النَّارِ', p:5000},
+                {n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000},
+                {n:'السِّدْرُ الْمَسْحُونُ', p:5000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:10000},
+                {n:'الْمَحْرِيبُ', p:10000}, {n:'عِرْقُ النَّارِ', p:5000},
                 {n:'الْحَرْجَلُ', p:5000}, {n:'الْحَنْظَلُ', p:10000},
-                {n:'عِرْقُ الْحَجَرِ', p:20000}, {n:'الصَّمْغُ السُّودَانِيُّ', p:20000},
-                {n:'عِرْقُ اللَّالُوبِ', p:7000}, {n:'عِرْقُ السُّوسِ', p:10000},
+                {n:'عِرْقُ الْحَجَرِ', p:20000}, {n:'الصَّمْغُ السُّودَانِيُّ', p:20000},
+                {n:'عِرْقُ اللَّالُوبِ', p:7000}, {n:'عِرْقُ السُّوسِ', p:10000},
                 {n:'الْمِرَايَةُ', p:5000}, {n:'الْغُبْيِشُ', p:5000},
-                {n:'عِرْقُ الدَّايُوتِ', p:5000}, {n:'التَّبَلْدِيُّ', p:10000},
+                {n:'عِرْقُ الدَّايُوتِ', p:5000}, {n:'التَّبَلْدِيُّ', p:10000},
                 {n:'الْكَرْكَدِيهُ', p:7000}, {n:'الْعَرْدِيبُ', p:10000}
             ],
             'زيوت': [
-                {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّمْسِمِ الْمَرْقِيُّ', p:17000},
-                {n:'زَيْتُ الْحَبَّةِ السَّوْدَاءِ', p:15000}, {n:'زَيْتُ الْخِرْوَعِ', p:10000},
-                {n:'زَيْتُ الْحِلْبَةِ', p:10000}, {n:'زَيْتُ النِّيمِ', p:10000},
-                {n:'زَيْتُ الْعُشَرِ', p:10000}, {n:'زَيْتُ السُّورِيبِ', p:10000},
+                {n:'الزَّيْتُ الْمُعْجِزَةُ الْمُسْتَخْلَصُ مِنْ مَجْمُوعَةِ أَعْشَابٍ', p:50000},
+                {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّمْسِمِ الْمَرْقِيُّ', p:17000},
+                {n:'زَيْتُ الْحَبَّةِ السَّوْدَاءِ', p:15000}, {n:'زَيْتُ الْخِرْوَعِ', p:10000},
+                {n:'زَيْتُ الْحِلْبَةِ', p:10000}, {n:'زَيْتُ النِّيمِ', p:10000},
+                {n:'زَيْتُ الْعُشَرِ', p:10000}, {n:'زَيْتُ السُّورِيبِ', p:10000},
                 {n:'زَيْتُ الْحَرَازِ', p:12000}, {n:'زَيْتُ نَبْتَةِ الْعَاطِرَةِ', p:10000},
-                {n:'زَيْتُ السِّدْرِ الْمَرْقِيُّ', p:15000}
+                {n:'زَيْتُ السِّدْرِ الْمَرْقِيُّ', p:15000}
             ],
             'عسل': [
-                {n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ (رَطْلٌ)', p:15000}, {n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000},
-                {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلْمَنَاعَةِ', p:150000}, {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلسِّلِّ وَالْأَمْرَاضِ الصَّدْرِيَّةِ', p:200000},
-                {n:'خَلْطَةُ الشِّفَاءِ مِنَ الْأَمْرَاضِ الْمُسْتَعْصِيَةِ', p:250000}
+                {n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ (رَطْلٌ)', p:15000}, {n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000},
+                {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلْمَنَاعَةِ', p:150000}, {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلسِّلِّ وَالْأَمْرَاضِ الصَّدْرِيَّةِ', p:200000},
+                {n:'خَلْطَةُ الشِّفَاءِ مِنَ الْأَمْرَاضِ الْمُسْتَعْصِيَةِ', p:250000}
             ],
             'بخور': [
-                {n:'صَمْغُ اللُّبَانِ الْمُجَهَّزُ', p:50000}, {n:'السَّنْدَرُوسُ', p:10000},
+                {n:'صَمْغُ اللُّبَانِ الْمُجَهَّزُ', p:50000}, {n:'السَّنْدَرُوسُ', p:10000},
                 {n:'الْمِسْكُ', p:10000}, {n:'الْفَاسُوخُ الْأَسْوَدُ', p:15000},
-                {n:'الْفَاسُوخُ الْأَبْيَضُ', p:20000}, {n:'الصَّنْدَلُ الْأَحْمَرُ', p:20000},
+                {n:'الْفَاسُوخُ الْأَبْيَضُ', p:20000}, {n:'الصَّنْدَلُ الْأَحْمَرُ', p:20000},
                 {n:'الْكُنْدُرُ', p:10000}, {n:'الْجَاوْلِي', p:10000},
                 {n:'الْعَدَنِي', p:10000}, {n:'الْكَدَادُ الْأَسْوَدُ', p:10000}
             ]
@@ -207,7 +208,7 @@
 
         function renderCategory(cat) {
             const grid = document.getElementById('itemsGrid');
-            const titles = {'رقية':'الرُّقْيَةُ الشَّرْعِيَّةُ', 'اعشاب':'الْأَعْشَابُ الطَّبِيعِيَّةُ', 'زيوت':'الزُّيُوتُ الْمَرْقِيَّةُ', 'عسل':'عَسَلُ النَّحْلِ', 'بخور':'بُخُورُ الْغُبُشِ'};
+            const titles = {'رقية':'الرُّقْيَةُ الشَّرْعِيَّةُ', 'اعشاب':'الْأَعْشَابُ الطَّبِيعِيَّةُ', 'زيوت':'الزُّيُوتُ الْمَرْقِيَّةُ', 'عسل':'عَسَلُ النَّحْلِ', 'بخور':'بُخُورُ الْغُبُشِ'};
             document.getElementById('catTitle').innerText = titles[cat];
             document.getElementById('productDisplay').classList.remove('hidden-section');
             grid.innerHTML = '';
@@ -229,26 +230,26 @@
             currentPrice = price;
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
-            document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
+            document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
         }
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
         function contactAdmin(type) {
             const msg = document.getElementById('problemInput').value;
-            const url = `https://wa.me/249121494942?text=${encodeURIComponent('التَّشْخِيصُ: ' + msg)}`;
+            const url = `https://wa.me/249121494942?text=${encodeURIComponent('التَّشْخِيصُ: ' + msg)}`;
             window.open(url, '_blank');
         }
 
         function finalWhatsApp() {
             const userMsg = document.getElementById('chatMsg').value;
-            const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*\n\nالْمُنْتَجُ: ${currentProduct}\nالسِّعْرُ: ${currentPrice.toLocaleString()} SDG\nالرِّسَالَةُ: ${userMsg}\n\n_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
+            const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*\n\nالْمُنْتَجُ: ${currentProduct}\nالسِّعْرُ: ${currentPrice.toLocaleString()} SDG\nالرِّسَالَةُ: ${userMsg}\n\n_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
             const url = `https://wa.me/249121494942?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank');
         }
 
         function adminAccess() {
-            alert("بَوَّابَةُ الْإِدَارَةِ مَحْمِيَّةٌ.. سَيَتِمُّ فَتْحُ لَوْحَةِ التَّحَكُّمِ الْمُسْتَقِلَّةِ بَعْدَ التَّأَكُّدِ مِنَ الْجِهَازِ.");
+            alert("بَوَّابَةُ الْإِدَارَةِ مَحْمِيَّةٌ.. سَيَتِمُّ فَتْحُ لَوْحَةِ التَّحَكُّمِ الْمُسْتَقِلَّةِ بَعْدَ التَّأَكُّدِ مِنَ الْجِهَازِ.");
         }
     </script>
 </body>
