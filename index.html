@@ -43,12 +43,12 @@
             <button onclick="enterSite()" class="btn-green w-full py-4 text-xl mb-4">دُخُولُ الْمَنْظُومَةِ</button>
             
             <div class="flex justify-center gap-4 mt-2">
-                <a href="https://wa.me/249121494942" target="_blank" class="social-link text-green-500 flex items-center gap-2 text-sm">
+                <button onclick="openWhatsAppDirect('مرحبا، أود الاستفسار عن خدماتكم')" class="social-link text-green-500 flex items-center gap-2 text-sm">
                     <i class="fab fa-whatsapp text-xl"></i> واتساب
-                </a>
-                <a href="https://www.facebook.com/share/18LKaXj4yw/" target="_blank" class="social-link text-blue-500 flex items-center gap-2 text-sm">
-                    <i class="fab fa-facebook text-xl"></i> فيسبوك
-                </a>
+                </button>
+                <button onclick="openMessengerDirect()" class="social-link text-blue-500 flex items-center gap-2 text-sm">
+                    <i class="fab fa-facebook-messenger text-xl"></i> مسنجر
+                </button>
             </div>
 
             <div class="mt-6 pt-4 border-t border-green-900/50">
@@ -64,7 +64,7 @@
                 <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
             <div class="flex gap-4">
-                <a href="https://wa.me/249121494942" target="_blank" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></a>
+                <button onclick="openWhatsAppDirect('مرحبا، أحتاج مساعدة في الموقع')" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></button>
                 <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-4 py-1 rounded-lg border border-red-800 text-xs">خُرُوج</button>
             </div>
         </nav>
@@ -74,7 +74,7 @@
                 <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-comment-dots"></i> احْكِ مُشْكِلَتَكَ لِلدُّكْتُورِ عَبْدَالصَّمَدِ:</h3>
                 <div class="flex flex-col md:flex-row gap-3">
                     <input type="text" id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ بِتَفْصِيلٍ هُنَا..." class="flex-1 p-4 rounded-xl">
-                    <button onclick="contactAdmin('تَشْخِيصُ حَالَةٍ')" class="btn-green px-10 py-4">ارْسِلْ لِلتَّشْخِيصِ</button>
+                    <button onclick="contactAdmin()" class="btn-green px-10 py-4">ارْسِلْ لِلتَّشْخِيصِ</button>
                 </div>
             </div>
 
@@ -118,8 +118,8 @@
                 </div>
             </div>
             <div class="flex gap-4 text-white text-xl">
-                <a href="https://wa.me/249121494942" target="_blank" class="text-white"><i class="fas fa-phone"></i></a>
-                <a href="https://www.facebook.com/share/18LKaXj4yw/" target="_blank" class="text-white"><i class="fab fa-facebook"></i></a>
+                <button onclick="openWhatsAppDirect('طلب مساعدة هاتفية بشأن ' + currentProduct)"><i class="fas fa-phone"></i></button>
+                <button onclick="openMessengerDirect()"><i class="fab fa-facebook-messenger"></i></button>
             </div>
         </div>
         
@@ -157,8 +157,7 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. 
-            💬 تواصل مباشر عبر الواتساب: 249121494942 | 🔵 تابعونا على فيسبوك: bahralghubush
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | 🔵 تابعونا على فيسبوك: bahralghubush
         </div>
     </footer>
 
@@ -212,6 +211,28 @@
         let currentProduct = "";
         let currentPrice = 0;
 
+        // وظائف التواصل المحسنة
+        function openWhatsAppDirect(text) {
+            const phone = "249121494942";
+            const encodedText = encodeURIComponent(text);
+            
+            // محاولة الفتح بالبروتوكول المباشر أولاً (للهواتف وتطبيق الكمبيوتر)
+            window.location.href = `whatsapp://send?phone=${phone}&text=${encodedText}`;
+
+            // رابط احتياطي للمتصفح إذا لم يفتح التطبيق خلال 500ms
+            setTimeout(() => {
+                if (document.hasFocus()) {
+                    window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
+                }
+            }, 500);
+        }
+
+        function openMessengerDirect() {
+            // رابط المسنجر المباشر (استبدل bahralghubush بالمعرف الصحيح إذا لزم الأمر)
+            const fbId = "bahralghubush"; 
+            window.open(`https://m.me/${fbId}`, '_blank');
+        }
+
         function enterSite() {
             if(!document.getElementById('userName').value) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
             document.getElementById('loginPage').classList.add('hidden-section');
@@ -247,17 +268,20 @@
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
-        function contactAdmin(type) {
+        function contactAdmin() {
             const msg = document.getElementById('problemInput').value;
-            const url = `https://wa.me/249121494942?text=${encodeURIComponent('التَّشْخِيصُ: ' + msg)}`;
-            window.open(url, '_blank');
+            const userName = document.getElementById('userName').value;
+            if(!msg) return alert("اكتب مشكلتك أولاً");
+            
+            const text = `*تَشْخِيصُ حَالَةٍ جَدِيدَةٍ*\n\nالاسم: ${userName}\nالمشكلة: ${msg}`;
+            openWhatsAppDirect(text);
         }
 
         function finalWhatsApp() {
             const userMsg = document.getElementById('chatMsg').value;
-            const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*\n\nالْمُنْتَجُ: ${currentProduct}\nالسِّعْرُ: ${currentPrice.toLocaleString()} SDG\nالرِّسَالَةُ: ${userMsg}\n\n_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
-            const url = `https://wa.me/249121494942?text=${encodeURIComponent(text)}`;
-            window.open(url, '_blank');
+            const userName = document.getElementById('userName').value;
+            const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*\n\nالاسم: ${userName}\nالْمُنْتَجُ: ${currentProduct}\nالسِّعْرُ: ${currentPrice.toLocaleString()} SDG\nالرِّسَالَةُ: ${userMsg}\n\n_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
+            openWhatsAppDirect(text);
         }
 
         function adminAccess() {
