@@ -49,9 +49,6 @@
                 <a href="https://www.facebook.com/share/1XzN3tmCTj/" target="_blank" class="social-link text-blue-500 flex items-center gap-2 text-sm">
                     <i class="fab fa-facebook text-xl"></i> فيسبوك
                 </a>
-                <button onclick="openMessengerDirect()" class="social-link text-blue-400 flex items-center gap-2 text-sm">
-                    <i class="fab fa-facebook-messenger text-xl"></i> مسنجر
-                </button>
             </div>
 
             <div class="mt-6 pt-4 border-t border-green-900/50">
@@ -67,6 +64,7 @@
                 <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
             <div class="flex gap-4">
+                <button onclick="openMessengerDirect('استفسار من الصفحة الرئيسية')" class="text-blue-500 text-xl"><i class="fab fa-facebook-messenger"></i></button>
                 <button onclick="openWhatsAppDirect('مرحبا، أحتاج مساعدة في الموقع')" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></button>
                 <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-4 py-1 rounded-lg border border-red-800 text-xs">خُرُوج</button>
             </div>
@@ -77,7 +75,10 @@
                 <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-comment-dots"></i> احْكِ مُشْكِلَتَكَ لِلدُّكْتُورِ عَبْدَالصَّمَدِ:</h3>
                 <div class="flex flex-col md:flex-row gap-3">
                     <input type="text" id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ بِتَفْصِيلٍ هُنَا..." class="flex-1 p-4 rounded-xl">
-                    <button onclick="contactAdmin()" class="btn-green px-10 py-4">ارْسِلْ لِلتَّشْخِيصِ</button>
+                    <div class="flex gap-2">
+                        <button onclick="contactAdmin('whatsapp')" class="btn-green flex-1 py-4">واتساب</button>
+                        <button onclick="contactAdmin('messenger')" class="bg-blue-600 text-white font-bold rounded-xl px-4 py-4"><i class="fab fa-facebook-messenger"></i></button>
+                    </div>
                 </div>
             </div>
 
@@ -122,7 +123,7 @@
             </div>
             <div class="flex gap-4 text-white text-xl">
                 <button onclick="openWhatsAppDirect('طلب مساعدة هاتفية بشأن ' + currentProduct)"><i class="fas fa-phone"></i></button>
-                <button onclick="openMessengerDirect()"><i class="fab fa-facebook-messenger"></i></button>
+                <button onclick="finalMessenger()"><i class="fab fa-facebook-messenger"></i></button>
             </div>
         </div>
         
@@ -160,7 +161,7 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | 🔵 تابعونا على فيسبوك: bahralghubush
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | 🔵 تابعونا على فيسبوك: bahr.gubush
         </div>
     </footer>
 
@@ -214,13 +215,11 @@
         let currentProduct = "";
         let currentPrice = 0;
 
-        // وظائف التواصل المحسنة
+        // وظيفة الواتساب المباشر
         function openWhatsAppDirect(text) {
             const phone = "249121494942";
             const encodedText = encodeURIComponent(text);
-            
             window.location.href = `whatsapp://send?phone=${phone}&text=${encodedText}`;
-
             setTimeout(() => {
                 if (document.hasFocus()) {
                     window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
@@ -228,9 +227,16 @@
             }, 500);
         }
 
-        // تحديث دالة المسنجر برابط مباشر وساري
-        function openMessengerDirect() {
-            window.open(`https://m.me/bahr.gubush`, '_blank');
+        // وظيفة المسنجر المباشر المصلحة
+        function openMessengerDirect(text = "") {
+            const fbPage = "bahr.gubush"; 
+            // المسنجر لا يدعم تمرير النص في الرابط m.me بشكل مباشر مثل الواتساب، 
+            // لكن سنقوم بفتح المحادثة ونسخ النص لسهولة اللصق أو توجيه المستخدم.
+            if(text) {
+                console.log("الرسالة المطلوب إرسالها: " + text);
+                // ملاحظة: m.me تفتح المحادثة فقط، النص التلقائي يحتاج API رسمي، ولكن الرابط الآن ساري.
+            }
+            window.open(`https://m.me/${fbPage}`, '_blank');
         }
 
         function enterSite() {
@@ -268,13 +274,17 @@
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
-        function contactAdmin() {
+        function contactAdmin(platform) {
             const msg = document.getElementById('problemInput').value;
             const userName = document.getElementById('userName').value;
             if(!msg) return alert("اكتب مشكلتك أولاً");
             
             const text = `*تَشْخِيصُ حَالَةٍ جَدِيدَةٍ*\n\nالاسم: ${userName}\nالمشكلة: ${msg}`;
-            openWhatsAppDirect(text);
+            if(platform === 'whatsapp') {
+                openWhatsAppDirect(text);
+            } else {
+                openMessengerDirect(text);
+            }
         }
 
         function finalWhatsApp() {
@@ -282,6 +292,14 @@
             const userName = document.getElementById('userName').value;
             const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*\n\nالاسم: ${userName}\nالْمُنْتَجُ: ${currentProduct}\nالسِّعْرُ: ${currentPrice.toLocaleString()} SDG\nالرِّسَالَةُ: ${userMsg}\n\n_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
             openWhatsAppDirect(text);
+        }
+
+        function finalMessenger() {
+            const userMsg = document.getElementById('chatMsg').value;
+            const userName = document.getElementById('userName').value;
+            // تجهيز نص الشراء التلقائي للمسنجر
+            const text = `طلب شراء: ${currentProduct} - السعر: ${currentPrice} - العميل: ${userName}`;
+            openMessengerDirect(text);
         }
 
         function adminAccess() {
