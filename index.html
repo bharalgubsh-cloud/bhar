@@ -46,9 +46,9 @@
                 <button onclick="openWhatsAppDirect('مرحبا، أود الاستفسار عن خدماتكم')" class="social-link text-green-500 flex items-center gap-2 text-sm">
                     <i class="fab fa-whatsapp text-xl"></i> واتساب
                 </button>
-                <button onclick="openMessengerDirect()" class="social-link text-blue-500 flex items-center gap-2 text-sm">
-                    <i class="fab fa-facebook-messenger text-xl"></i> مسنجر
-                </button>
+                <a href="https://www.facebook.com/share/1XzN3tmCTj/" target="_blank" class="social-link text-blue-500 flex items-center gap-2 text-sm">
+                    <i class="fab fa-facebook text-xl"></i> فيسبوك
+                </a>
             </div>
 
             <div class="mt-6 pt-4 border-t border-green-900/50">
@@ -211,15 +211,10 @@
         let currentProduct = "";
         let currentPrice = 0;
 
-        // وظائف التواصل المحسنة
         function openWhatsAppDirect(text) {
             const phone = "249121494942";
             const encodedText = encodeURIComponent(text);
-            
-            // محاولة الفتح بالبروتوكول المباشر أولاً (للهواتف وتطبيق الكمبيوتر)
             window.location.href = `whatsapp://send?phone=${phone}&text=${encodedText}`;
-
-            // رابط احتياطي للمتصفح إذا لم يفتح التطبيق خلال 500ms
             setTimeout(() => {
                 if (document.hasFocus()) {
                     window.open(`https://wa.me/${phone}?text=${encodedText}`, '_blank');
@@ -227,8 +222,9 @@
             }, 500);
         }
 
+        // دالة المسنجر المصلحة باستخدام m.me المباشر
         function openMessengerDirect() {
-            // رابط المسنجر المباشر (استبدل bahralghubush بالمعرف الصحيح إذا لزم الأمر)
+            // تم استخراج المعرف bahralghubush من الرابط الخاص بك
             const fbId = "bahralghubush"; 
             window.open(`https://m.me/${fbId}`, '_blank');
         }
@@ -272,7 +268,6 @@
             const msg = document.getElementById('problemInput').value;
             const userName = document.getElementById('userName').value;
             if(!msg) return alert("اكتب مشكلتك أولاً");
-            
             const text = `*تَشْخِيصُ حَالَةٍ جَدِيدَةٍ*\n\nالاسم: ${userName}\nالمشكلة: ${msg}`;
             openWhatsAppDirect(text);
         }
