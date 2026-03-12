@@ -37,10 +37,10 @@
         .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 14px; }
         
         /* تنسيق أرقام الحسابات المطلوب */
-        .account-box { background: #000; padding: 12px; border-radius: 10px; border: 1px solid #145a32; display: flex; justify-content: space-between; align-items: center; }
-        .account-label { font-size: 1.1rem; font-weight: bold; color: #ccc; } /* رقم حساب بنكك */
-        .account-number { font-size: 1.4rem; font-weight: bold; color: #fff; letter-spacing: 2px; } /* الأرقام أكبر بدرجتين */
-        
+        .account-label { font-size: 1.3rem; font-weight: bold; color: #f1c40f; }
+        .account-number { font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; color: #ffffff; }
+        .name-label { font-size: 1.4rem; font-weight: bold; color: #2ecc71; }
+
         #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
         .content-body { line-height: 2; text-align: justify; }
     </style>
@@ -66,7 +66,6 @@
             <h2 class="text-2xl mb-6 font-bold underline decoration-green-600">فَتْحُ الْمَوْقِعِ</h2>
             <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ..." class="w-full p-4 rounded-xl mb-4 text-center">
             <button onclick="enterSite()" class="btn-green w-full py-4 text-xl mb-4">دُخُولُ الْمَنْظُومَةِ</button>
-            
             <div class="flex justify-center gap-4 mt-2">
                 <button onclick="openWhatsAppDirect('مرحبا، أود الاستفسار عن خدماتكم')" class="text-green-500 flex items-center gap-2 text-sm">
                     <i class="fab fa-whatsapp text-xl"></i> واتساب
@@ -74,9 +73,6 @@
                 <a href="https://www.facebook.com/share/1XzN3tmCTj/" target="_blank" class="text-blue-500 flex items-center gap-2 text-sm">
                     <i class="fab fa-facebook text-xl"></i> فيسبوك
                 </a>
-            </div>
-            <div class="mt-6 pt-4 border-t border-green-900/50">
-                <button onclick="adminAccess()" class="text-green-500 text-sm font-bold">🔐 بَوَّابَةُ الْإِدَارَةِ</button>
             </div>
         </div>
     </div>
@@ -88,8 +84,8 @@
                 <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
             <div class="flex gap-4">
-                <button onclick="openMessengerDirect('استفسار عام')" class="text-blue-500 text-xl"><i class="fab fa-facebook-messenger"></i></button>
-                <button onclick="openWhatsAppDirect('مرحبا، أحتاج مساعدة')" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></button>
+                <button onclick="openMessengerDirect('استفسار من الصفحة الرئيسية')" class="text-blue-500 text-xl"><i class="fab fa-facebook-messenger"></i></button>
+                <button onclick="openWhatsAppDirect('مرحبا، أحتاج مساعدة في الموقع')" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></button>
                 <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-4 py-1 rounded-lg border border-red-800 text-xs">خُرُوج</button>
             </div>
         </nav>
@@ -139,28 +135,21 @@
                 <h2 id="catTitle" class="text-2xl font-bold mb-6 text-green-500 border-r-4 border-green-500 pr-4"></h2>
                 <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                 <section>
-                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ عِلْمِيَّةٌ:</h3>
-                    <div class="blog-card bg-[#051e05] border-r-4 border-green-500 p-4 mb-3 cursor-pointer" onclick="openArticle('bakhour')">
-                        <p class="font-bold text-sm text-green-400">بُخُورُ الْغُبُشِ: سِرُّ التَّطْهِيرِ</p>
-                        <p class="text-[11px] text-zinc-300">تَعَرَّفْ عَلَى كَيْفِيَّةِ تَطْهِيرِ الْمَنَازِلِ..</p>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2">مَقَالَاتٌ عِلْمِيَّةٌ:</h3>
+                    <div class="glass-card p-4 mb-4 cursor-pointer" onclick="openArticle('bakhour')">
+                        <p class="font-bold text-green-400">بُخُورُ الْغُبُشِ: سِرُّ التَّطْهِيرِ وَالْبَرَكَةِ</p>
                     </div>
-                    <div class="blog-card bg-[#051e05] border-r-4 border-green-500 p-4 mb-3 cursor-pointer" onclick="openArticle('sections')">
-                        <p class="font-bold text-sm text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ</p>
-                        <p class="text-[11px] text-zinc-300">تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ وَالْأَعْشَابِ..</p>
+                    <div class="glass-card p-4 mb-4 cursor-pointer" onclick="openArticle('sections')">
+                        <p class="font-bold text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ الشَّامِلِ</p>
                     </div>
                 </section>
                 <section>
-                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-heart"></i> أَدْعِيَةٌ تُلَامِسُ الرُّوحَ:</h3>
-                    <div class="blog-card bg-[#051e05] border-r-4 border-yellow-500 p-4 mb-3 cursor-pointer" onclick="openArticle('prayers')">
-                        <p class="font-bold text-sm text-yellow-500 italic">مُنَاجَاةُ التَّائِبِينَ</p>
-                        <p class="text-[11px] text-zinc-300">أَدْعِيَةٌ جَامِعَةٌ لِرَاحَةِ الْقَلْبِ..</p>
-                    </div>
-                    <div class="italic text-sm bg-zinc-900 p-4 rounded-xl border-r-4 border-yellow-600">
-                        "اللَّهُمَّ اجْعَلْ هَذَا الْمَوْقِعَ سَبَباً فِي شِفَاءِ كُلِّ مَرِيضٍ."
-                        <p class="text-left font-bold text-green-500 mt-2">آمِينَ</p>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2">أَدْعِيَةٌ تُلَامِسُ الرُّوح:</h3>
+                    <div class="glass-card p-4 cursor-pointer" onclick="openArticle('prayers')">
+                        <p class="font-bold text-yellow-500 italic">مُنَاجَاةُ الشِّفَاءِ</p>
                     </div>
                 </section>
             </div>
@@ -176,27 +165,24 @@
                     <p id="chatPrice" class="text-xs text-green-300"></p>
                 </div>
             </div>
-            <div class="flex gap-4 text-white text-xl">
-                <button onclick="finalWhatsApp()"><i class="fab fa-whatsapp"></i></button>
-                <button onclick="finalMessenger()"><i class="fab fa-facebook-messenger"></i></button>
-            </div>
+            <button onclick="finalMessenger()" class="text-white text-xl"><i class="fab fa-facebook-messenger"></i></button>
         </div>
         
         <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950">
             <div class="bg-zinc-900 p-6 rounded-2xl border border-yellow-600 shadow-2xl">
                 <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
                 <div class="space-y-4">
-                    <div class="account-box">
-                        <span class="account-label">رَقَمُ حِسَابِ بَنْكِكَ:</span>
+                    <div class="flex flex-col gap-1 bg-black p-3 rounded-lg border border-zinc-800">
+                        <span class="account-label">رَقْمُ حِسَابِ بَنْكِك:</span>
                         <span class="account-number">2985827</span>
                     </div>
-                    <div class="account-box">
-                        <span class="account-label">رَقَمُ حِسَابِ فَوْرِي:</span>
+                    <div class="flex flex-col gap-1 bg-black p-3 rounded-lg border border-zinc-800">
+                        <span class="account-label">رَقْمُ حِسَابِ فَوْرِي:</span>
                         <span class="account-number">51170108</span>
                     </div>
                     <div class="pt-4 border-t border-zinc-800 mt-2 text-center">
-                        <p class="text-sm text-zinc-400 mb-1">بِاسْمِ:</p>
-                        <p class="text-2xl font-bold text-green-500 drop-shadow-lg">عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                        <span class="name-label text-white">بِاسْمِ:</span><br>
+                        <p class="text-2xl font-bold text-green-500">عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
                     </div>
                 </div>
             </div>
@@ -214,20 +200,16 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | فيسبوك: bahr.gubush
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 واتساب: 249121494942 | فيسبوك: bahr.gubush
         </div>
     </footer>
 
     <script>
-        // دالة لجلب التاريخ والوقت الحالي بتنسيق عربي جميل
-        function getCurrentDateTime() {
-            const now = new Date();
-            const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-            const dayName = days[now.getDay()];
-            const date = now.toLocaleDateString('ar-EG');
-            const time = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
-            return `${dayName} | ${date} | ${time}`;
-        }
+        const contentData = {
+            'bakhour': { title: 'بُخُورُ الْغُبُشِ', body: '<p>يُعَدُّ مَزِيجاً نَادِراً لِتَفْكِيكِ عُقَدِ الْحَسَدِ وَطَرْدِ الْعَوَارِضِ.</p>' },
+            'sections': { title: 'دَلِيلُ الْأَقْسَامِ', body: '<p>تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ، الْأَعْشَابِ، الزُّيُوتِ، وَالْعَسَلِ.</p>' },
+            'prayers': { title: 'أَدْعِيَةُ الشِّفَاءِ', body: '<p>"اللَّهُمَّ اشْفِ كُلَّ جَسَدٍ أَنْهَكَهُ الْوَجَعُ."</p>' }
+        };
 
         const menu = {
             'رقية': [
@@ -235,24 +217,24 @@
                 {n:'السِّحْرُ الْأَسْوَدُ', p:100000}, {n:'السِّحْرُ الْأَحْمَرُ', p:100000},
                 {n:'السِّحْرُ الْأَبْيَضُ', p:100000}, {n:'السِّحْرُ السُّفْلِيُّ', p:100000},
                 {n:'السِّحْرُ الْمَدْفُونُ', p:100000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:100000},
-                {n:'سِحْرُ الْبُطُونِ', p:100000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابِ', p:100000},
+                {n:'سِحْرُ الْبُطُونِ', p:100000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابُ', p:100000},
                 {n:'سِحْرُ الْفِرَاقِ', p:100000}, {n:'سِحْرُ التَّبْوِيرِ', p:100000},
                 {n:'سِحْرُ تَشْوِيهِ الْجَمَالِ', p:100000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:100000},
                 {n:'الْجِنُّ الطَّيَّارُ', p:100000}, {n:'الْجِنُّ الْمَارِدُ', p:100000},
                 {n:'الرِّيحُ الْأَحْمَرُ', p:100000}, {n:'الْقَرِينُ', p:100000}
             ],
             'اعشاب': [
-                {n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000},
-                {n:'السِّدْرُ الْمَسْحُونُ', p:5000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:10000}
+                {n:'الْقُسْطُ الْهِنْدِيُّ', p:20000}, {n:'السَّنَامَكِي', p:20000},
+                {n:'السِّدْرُ الْمَسْحُونُ', p:20000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:20000}
             ],
             'زيوت': [
-                {n:'الزَّيْتُ الْمُعْجِزَةُ', p:50000}, {n:'زَيْتُ زَيْتُونِ مَرْقِيُّ', p:20000}
+                {n:'الزَّيْتُ الْمُعْجِزَةُ', p:50000}, {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:30000}
             ],
             'عسل': [
-                {n:'عَسَلُ نَحْلٍ أَصْلِيُّ', p:15000}, {n:'خَلْطَةُ الْمَنَاعَةِ', p:150000}
+                {n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ', p:15000}, {n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000}
             ],
             'بخور': [
-                {n:'صَمْغُ اللُّبَانِ', p:50000}, {n:'السَّنْدَرُوسُ', p:50000},
+                {n:'صَمْغُ اللُّبَانِ الْمُجَهَّزُ', p:50000}, {n:'السَّنْدَرُوسُ', p:50000},
                 {n:'الْمِسْكُ', p:50000}, {n:'الْفَاسُوخُ الْأَسْوَدُ', p:50000},
                 {n:'الْفَاسُوخُ الْأَبْيَضُ', p:50000}, {n:'الصَّنْدَلُ الْأَحْمَرُ', p:50000},
                 {n:'الْكُنْدُرُ', p:50000}, {n:'الْجَاوْلِي', p:50000},
@@ -262,16 +244,6 @@
 
         let currentProduct = "";
         let currentPrice = 0;
-
-        function openWhatsAppDirect(text) {
-            const phone = "249121494942";
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
-        }
-
-        function openMessengerDirect(text = "") {
-            // الآن المسنجر يستقبل النص بشكل صحيح
-            window.open(`https://m.me/bahr.gubush?text=${encodeURIComponent(text)}`, '_blank');
-        }
 
         function enterSite() {
             if(!document.getElementById('userName').value) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
@@ -307,32 +279,44 @@
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
-        function contactAdmin(platform) {
-            const msg = document.getElementById('problemInput').value;
-            const text = `تقرير حالة: ${msg}\nالاسم: ${document.getElementById('userName').value}\nالعمر: ${document.getElementById('userAge').value}\nالتوقيت: ${getCurrentDateTime()}`;
-            platform === 'whatsapp' ? openWhatsAppDirect(text) : openMessengerDirect(text);
+        function getFullText(msg = "") {
+            const user = document.getElementById('userName').value;
+            const now = new Date();
+            const dateTime = now.toLocaleDateString('ar-EG') + " | " + now.toLocaleTimeString('ar-EG');
+            return `طلب شراء جديد\n----\nالاسم: ${user}\nالمنتج: ${currentProduct}\nالسعر: ${currentPrice.toLocaleString()} SDG\nالتاريخ: ${dateTime}\nالرسالة: ${msg}\n----\nجاري رفع صورة الإيصال`;
         }
 
         function finalWhatsApp() {
-            const user = document.getElementById('userName').value;
             const msg = document.getElementById('chatMsg').value;
-            const dt = getCurrentDateTime();
-            const text = `طلب شراء جديد\n----\nالاسم: ${user}\nالمنتج: ${currentProduct}\nالسعر: ${currentPrice.toLocaleString()} SDG\nالرسالة: ${msg}\nالتاريخ: ${dt}\n----\nجاري رفع صورة الإيصال`;
-            openWhatsAppDirect(text);
+            const phone = "249121494942";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(getFullText(msg))}`, '_blank');
         }
 
         function finalMessenger() {
-            const user = document.getElementById('userName').value;
-            const dt = getCurrentDateTime();
-            // تم تعديل النص ليكون تلقائياً وبدون كلمة ارجو
-            const text = `طلب شراء جديد\nالاسم: ${user}\nالمنتج: ${currentProduct}\nالسعر: ${currentPrice.toLocaleString()} SDG\nالتاريخ: ${dt}\nجاري رفع صورة الإيصال`;
-            openMessengerDirect(text);
+            const msg = document.getElementById('chatMsg').value;
+            // استخدام رابط m.me مع المعطيات للسحب التلقائي
+            window.open(`https://m.me/bahr.gubush?text=${encodeURIComponent(getFullText(msg))}`, '_blank');
         }
 
-        function adminAccess() { alert("بوابة محمية للمدير فقط."); }
-        
-        // الدوال المساعدة للمقالات (باقي الكود كما هو)
-        function openArticle(key) { /* نفس محتوى النسخة السابقة */ }
+        function openWhatsAppDirect(text) {
+            window.open(`https://wa.me/249121494942?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function openMessengerDirect(text) {
+            window.open(`https://m.me/bahr.gubush?text=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        function contactAdmin(platform) {
+            const msg = document.getElementById('problemInput').value;
+            const text = `تقرير حالة: ${msg}\nالاسم: ${document.getElementById('userName').value}`;
+            platform === 'whatsapp' ? openWhatsAppDirect(text) : openMessengerDirect(text);
+        }
+
+        function openArticle(key) {
+            document.getElementById('modalTitle').innerText = contentData[key].title;
+            document.getElementById('modalBody').innerHTML = contentData[key].body;
+            document.getElementById('contentModal').style.display = 'block';
+        }
         function closeContent() { document.getElementById('contentModal').style.display = 'none'; }
     </script>
 </body>
