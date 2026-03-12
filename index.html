@@ -16,20 +16,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* تم تحديث رابط الخط وإضافة خاصية تحسين النص لمنع تقطع الشدة */
-        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@300;500;700&display=swap&subset=arabic');
-        
+        /* تم تغيير الخط إلى Amiri لضمان سلامة الحروف مع الشدة والتشكيل */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
         body { 
-            font-family: 'Changa', sans-serif; 
+            font-family: 'Amiri', serif; 
             background-color: #010a01; 
             color: #fff; 
             margin: 0; 
-            overflow-x: hidden;
-            /* السطر التالي يحل مشكلة تقطع الحروف مع الشدة */
-            text-rendering: optimizeLegibility;
-            font-feature-settings: "liga" 1;
+            overflow-x: hidden; 
+            font-size: 1.1rem; /* زيادة بسيطة في الحجم لأن خط أميري يظهر بشكل أفضل هكذا */
         }
-
+        
         .glass-card { background: rgba(5, 30, 5, 0.95); border: 1px solid #145a32; border-radius: 20px; transition: 0.3s; }
         .btn-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #000; font-weight: bold; border-radius: 12px; cursor: pointer; }
         .btn-green:hover { transform: scale(1.02); filter: brightness(1.1); }
@@ -40,7 +38,7 @@
 
         .hidden-section { display: none !important; }
         input, select, textarea { background: #000 !important; border: 1px solid #145a32 !important; color: white !important; outline: none; }
-        .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 12px; }
+        .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 14px; }
         .social-link { transition: 0.3s; }
         .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
         
