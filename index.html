@@ -16,16 +16,16 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* تم تغيير الخط إلى Amiri لضمان سلامة الحروف مع الشدة والتشكيل */
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-
+        /* استخدام خط Amiri لضمان سلامة الحروف مع الشدة والجمالية */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        
         body { 
             font-family: 'Amiri', serif; 
             background-color: #010a01; 
             color: #fff; 
             margin: 0; 
             overflow-x: hidden; 
-            font-size: 1.1rem; /* زيادة بسيطة في الحجم لأن خط أميري يظهر بشكل أفضل هكذا */
+            font-size: 1.15rem;
         }
         
         .glass-card { background: rgba(5, 30, 5, 0.95); border: 1px solid #145a32; border-radius: 20px; transition: 0.3s; }
@@ -42,20 +42,22 @@
         .social-link { transition: 0.3s; }
         .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
         
-        /* تحسينات المقالات */
         .blog-card { border-right: 4px solid #2ecc71; padding: 15px; background: #051e05; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
-        .blog-card:hover { background: #0a2e0a; transform: translateX(-5px); }
-        .article-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 20000; display: none; overflow-y: auto; padding: 20px; }
+        .blog-card:hover { background: #0a2e0a; transform: scale(1.02); }
+
+        /* نافذة المقالات */
+        #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
+        .content-body { line-height: 2; text-align: justify; }
     </style>
 </head>
 <body class="pb-24">
 
-    <div id="articleOverlay" class="article-overlay">
+    <div id="contentModal">
         <div class="max-w-3xl mx-auto bg-zinc-900 border border-green-600 rounded-3xl p-8 mt-10 relative shadow-2xl">
-            <button onclick="closeArticle()" class="absolute top-4 left-4 text-red-500 text-3xl">&times;</button>
-            <div id="articleContent" class="text-right leading-loose">
-                </div>
-            <button onclick="closeArticle()" class="btn-green w-full py-3 mt-8">عُودة للموقع</button>
+            <button onclick="closeContent()" class="absolute top-4 left-4 text-red-500 text-3xl">&times;</button>
+            <div id="modalTitle" class="text-3xl font-bold text-green-500 mb-6 border-b border-green-900 pb-4"></div>
+            <div id="modalBody" class="content-body text-zinc-100"></div>
+            <button onclick="closeContent()" class="btn-green w-full py-3 mt-8">إِغْلَاقُ النَّافِذَةِ</button>
         </div>
     </div>
 
@@ -78,6 +80,7 @@
                     <i class="fab fa-facebook text-xl"></i> فيسبوك
                 </a>
             </div>
+
             <div class="mt-6 pt-4 border-t border-green-900/50">
                 <button onclick="adminAccess()" class="text-green-500 text-sm font-bold">🔐 بَوَّابَةُ الْإِدَارَةِ (الْمُدِيرِ وَالنَّائِبِ)</button>
             </div>
@@ -98,6 +101,7 @@
         </nav>
 
         <main class="max-w-5xl mx-auto p-4">
+            
             <div class="glass-card p-6 mb-8 border-green-500 bg-green-950/20 shadow-lg">
                 <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-file-medical"></i> نَمُوذَجُ تَشْخِيصِ الْحَالَةِ (سِرِّيٌّ لِلدُّكْتُورِ):</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
@@ -145,33 +149,30 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                 <section>
-                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ عِلْمِيَّةٌ وَتَعْرِيفِيَّةٌ:</h3>
-                    
-                    <div class="blog-card" onclick="showArticle('bakhour')">
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ عِلْمِيَّةٌ:</h3>
+                    <div class="blog-card" onclick="openArticle('bakhour')">
                         <p class="font-bold text-sm text-green-400">بُخُورُ الْغُبُشِ: سِرُّ التَّطْهِيرِ وَالْبَرَكَةِ</p>
-                        <p class="text-[11px] text-zinc-300 mt-1">تَعَرَّفْ عَلَى كَيْفِيَّةِ تَطْهِيرِ الْمَنَازِلِ وَأَمَاكِنِ الْعَمَلِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ..</p>
-                        <p class="text-[10px] text-zinc-500 mt-2">بِقَلَمِ: د. عَبْدَالصَّمَد</p>
+                        <p class="text-[11px] text-zinc-300">تَعَرَّفْ عَلَى كَيْفِيَّةِ تَطْهِيرِ الْمَنَازِلِ وَالْأَجْسَادِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ..</p>
+                        <p class="text-[10px] text-zinc-500 mt-1">بِقَلَمِ: د. عَبْدَالصَّمَد</p>
                     </div>
-
-                    <div class="blog-card" onclick="showArticle('sections')">
+                    <div class="blog-card" onclick="openArticle('sections')">
                         <p class="font-bold text-sm text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ</p>
-                        <p class="text-[11px] text-zinc-300 mt-1">تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ، الْأَعْشَابِ، الزُّيُوتِ، وَالْعَسَلِ وَكَيْفِيَّةِ الِاسْتِفَادَةِ مِنْهَا..</p>
+                        <p class="text-[11px] text-zinc-300">تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ، الْأَعْشَابِ، الزُّيُوتِ، وَالْعَسَلِ وَفَوَائِدِهَا..</p>
                     </div>
                 </section>
-
                 <section>
-                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-heart"></i> أَدْعِيَةٌ تُلَامِسُ الرُّوحَ:</h3>
-                    <div class="blog-card" onclick="showArticle('prayers')">
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-heart"></i> أَدْعِيَةٌ وَأَذْكارٌ تُلَامِسُ الرُّوحَ:</h3>
+                    <div class="blog-card" onclick="openArticle('prayers')">
                         <p class="font-bold text-sm text-yellow-500 italic">مُنَاجَاةُ التَّائِبِينَ وَطَلَبُ الشِّفَاءِ</p>
-                        <p class="text-[11px] text-zinc-300 mt-1">أَدْعِيَةٌ جَامِعَةٌ لِرَاحَةِ الْقَلْبِ وَتَفْرِيجِ الْكَرْبِ وَدَفْعِ الْبَلَاءِ..</p>
+                        <p class="text-[11px] text-zinc-300">أَدْعِيَةٌ جَامِعَةٌ لِرَاحَةِ الْقَلْبِ وَتَفْرِيجِ الْكَرْبِ وَدَفْعِ الْبَلَاءِ..</p>
                     </div>
-                    
                     <div class="italic text-sm bg-zinc-900 p-4 rounded-xl border-r-4 border-yellow-600">
                         "اللَّهُمَّ اجْعَلْ هَذَا الْمَوْقِعَ سَبَباً فِي شِفَاءِ كُلِّ مَرِيضٍ وَرَاحَةِ كُلِّ مَهْمُومٍ."
                         <p class="text-left font-bold text-green-500 mt-2">آمِينَ</p>
                     </div>
                 </section>
             </div>
+
         </main>
     </div>
 
@@ -189,20 +190,28 @@
                 <button onclick="finalMessenger()"><i class="fab fa-facebook-messenger"></i></button>
             </div>
         </div>
+        
         <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950">
             <div class="bg-zinc-900 p-6 rounded-2xl border border-yellow-600 shadow-2xl">
-                <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ:</p>
+                <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
                 <div class="space-y-3 text-sm">
-                    <p>بَنْكِك: 2985827</p>
-                    <p>فَوْرِي: 51170108</p>
-                    <p class="text-[10px] text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد</p>
+                    <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
+                        <span>تَطْبِيقُ بَنْكِك:</span>
+                        <span class="font-bold text-white tracking-widest">2985827</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
+                        <span>تَطْبِيقُ فَوْرِي:</span>
+                        <span class="font-bold text-white tracking-widest">51170108</span>
+                    </div>
+                    <p class="text-[10px] text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
                 </div>
             </div>
         </div>
-        <div class="p-4 bg-zinc-900 flex flex-col gap-3">
+
+        <div class="p-4 bg-zinc-900 flex flex-col gap-3 border-t border-zinc-800">
             <div class="flex items-center gap-3">
-                <input type="text" id="chatMsg" placeholder="رسالتك..." class="flex-1 p-4 rounded-full text-sm">
-                <button onclick="finalWhatsApp()" class="bg-green-600 w-14 h-14 rounded-full flex items-center justify-center">
+                <input type="text" id="chatMsg" placeholder="أُكْتُبْ رِسَالَتَكَ..." class="flex-1 p-4 rounded-full text-sm">
+                <button onclick="finalWhatsApp()" class="bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
                     <i class="fab fa-whatsapp text-black text-3xl"></i>
                 </button>
             </div>
@@ -211,56 +220,108 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 واتساب: 249121494942
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | فيسبوك: bahr.gubush
         </div>
     </footer>
 
     <script>
+        // المحتوى المكتوب بعناية فائقة
+        const contentData = {
+            'bakhour': {
+                title: 'بُخُورُ الْغُبُشِ: عِلْمُ التَّطْهِيرِ وَسِرُّ الْبَرَكَةِ',
+                body: `
+                    <p>يُعَدُّ <strong>بُخُورُ الْغُبُشِ</strong> مَزِيجاً نَادِراً وَمُبَارَكاً، تَمَّ اسْتِخْلَاصُهُ مِنْ أَجْوَدِ خَيْرَاتِ الْأَرْضِ السُّودَانِيَّةِ لِيَكُونَ سِلَاحاً فَعَّالاً فِي مَعْرِكَةِ التَّطْهِيرِ الرُّوحِيِّ.</p>
+                    <h4 class="text-green-400 mt-4">1. تَطْهِيرُ الْأَجْسَادِ:</h4>
+                    <p>يُسَاعِدُ اسْتِنْشَاقُ رَائِحَتِهِ الزَّكِيَّةِ فِي تَفْكِيكِ عُقَدِ الْحَسَدِ وَطَرْدِ الْعَوَارِضِ الَّتِي تُثْقِلُ الْكَاهِلَ، مِمَّا يُعِيدُ لِلْجَسَدِ نَشَاطَهُ وَحَيَوِيَّتَهُ الْمَفْقُودَةَ.</p>
+                    <h4 class="text-green-400 mt-4">2. تَطْهِيرُ الْمَنَازِلِ:</h4>
+                    <p>يَعْمَلُ دُخَانُ الْبُخُورِ عَلَى تَعْقِيمِ زَوَايَا الْمَنْزِلِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ وَالْمَشَاعِرِ الْمُتَوَتِّرَةِ، وَيَبْعَثُ فِي النُّفُوسِ طُمَأْنِينَةً لَا مَثِيلَ لَهَا، وَيُطْرَدُ بِهِ الشَّيَاطِينُ وَيُقَرِّبُ الْمَلَائِكَةَ بِإِذْنِ اللَّهِ.</p>
+                    <h4 class="text-green-400 mt-4">3. أَمَاكِنُ الْعَمَلِ وَالتِّجَارَةِ:</h4>
+                    <p>يُنْصَحُ بِهِ لِأَصْحَابِ الْأَعْمَالِ لِجَلْبِ الْبَرَكَةِ وَدَفْعِ عَيْنِ الْحُسَّادِ، حَيْثُ يَخْلُقُ بِيئَةً إِيجَابِيَّةً تُسَاعِدُ عَلَى الرِّزْقِ وَالتَّوْفِيقِ.</p>
+                `
+            },
+            'sections': {
+                title: 'دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ الشَّامِلِ',
+                body: `
+                    <ul class="space-y-4">
+                        <li><strong class="text-green-400">الرُّقْيَةُ الشَّرْعِيَّةُ:</strong> هِيَ الْحِصْنُ الْحَصِينُ وَالْعِلَاجُ الرَّبَّانِيُّ بِالْقُرْآنِ وَالسُّنَّةِ لِكُلِّ مَنْ يُعَانِي مِنَ السِّحْرِ، الْمَسِّ، أَوِ الْعَيْنِ.</li>
+                        <li><strong class="text-green-400">الْأَعْشَابُ الطَّبِيعِيَّةُ:</strong> جَمَعْنَا لَكُمْ خُلَاصَةَ الطِّبِّ الْبَدِيلِ السُّودَانِيِّ، أَعْشَابٌ بِكْرٌ لَمْ تَمَسَّهَا الْكِيمَاوِيَّاتُ، لِعِلَاجِ الْأَمْرَاضِ الْعُضْوِيَّةِ وَتَقْوِيَةِ الْمَنَاعَةِ.</li>
+                        <li><strong class="text-green-400">الزُّيُوتُ الْمَرْقِيَّةُ:</strong> زُيُوتٌ نَقِيَّةٌ قُرِئَتْ عَلَيْهَا آيَاتُ الشِّفَاءِ، تُسْتَخْدَمُ لِلدَّهْنِ وَالْمَسَاجِ لِتَسْكِينِ الْآلَامِ وَطَرْدِ الْأَرْوَاحِ الْخَبِيثَةِ مِنَ الْجَسَدِ.</li>
+                        <li><strong class="text-green-400">عَسَلُ النَّحْلِ:</strong> "فِيهِ شِفَاءٌ لِلنَّاسِ"؛ نُقَدِّمُ أَنْوَاعاً نَادِرَةً مِنَ الْعَسَلِ الْمَمْزُوجِ بِأَعْشَابٍ خَاصَّةٍ لِعِلَاجِ حَالَاتِ السِّلِّ وَالْعُقْمِ وَضَعْفِ الْبِنْيَةِ.</li>
+                    </ul>
+                `
+            },
+            'prayers': {
+                title: 'مُنَاجَاةُ الرُّوحِ وَأَدْعِيَةُ الشِّفَاءِ',
+                body: `
+                    <div class="text-center italic space-y-4">
+                        <p class="text-xl">"إِلَهِي.. يَا مَنْ بِيَدِهِ خَزَائِنُ السَّمَاوَاتِ وَالْأَرْضِ، أَسْأَلُكَ بِاسْمِكَ الْأَعْظَمِ أَنْ تَشْفِيَ كُلَّ جَسَدٍ أَنْهَكَهُ الْوَجَعُ، وَتُطَهِّرَ كُلَّ رُوحٍ أَثْقَلَتْهَا الْهُمُومُ."</p>
+                        <p>---</p>
+                        <p>"اللَّهُمَّ بَارِكْ لَنَا فِي أَرْزَاقِنَا، وَاحْفَظْ مَنَازِلَنَا مِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ."</p>
+                        <p>---</p>
+                        <p>"يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ نَسْتَغِيثُ، أَصْلِحْ لَنَا شَأْنَنَا كُلَّهُ، وَلَا تَكِلْنَا إِلَى أَنْفُسِنَا طَرْفَةَ عَيْنٍ، وَاجْعَلْ لَنَا مِنْ لَدُنْكَ سُلْطَاناً نَصِيراً."</p>
+                        <p class="mt-6 font-bold text-yellow-500">نَصِيحَةُ الشَّيْخِ: حَافِظُوا عَلَى أَذْكَارِ الصَّبَاحِ وَالْمَسَاءِ، فَهِيَ الدِّرْعُ الَّذِي لَا يُخْتَرَقُ.</p>
+                    </div>
+                `
+            }
+        };
+
+        function openArticle(key) {
+            const data = contentData[key];
+            document.getElementById('modalTitle').innerText = data.title;
+            document.getElementById('modalBody').innerHTML = data.body;
+            document.getElementById('contentModal').style.display = 'block';
+        }
+
+        function closeContent() {
+            document.getElementById('contentModal').style.display = 'none';
+        }
+
+        // الحفاظ على قائمة المنتجات كاملة كما هي
         const menu = {
-            'رقية': [{n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْأَسْوَدُ', p:75000}, {n:'سِحْرُ الْفِرَاقِ', p:75000}],
-            'اعشاب': [{n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000}, {n:'عِرْقُ الْحَجَرِ', p:20000}],
-            'زيوت': [{n:'الزَّيْتُ الْمُعْجِزَةُ', p:50000}, {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}],
-            'عسل': [{n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ', p:15000}, {n:'خَلْطَةُ الشِّفَاءِ', p:250000}],
-            'بخور': [{n:'بُخُورُ الْغُبُشِ الْمُجَهَّزُ', p:50000}, {n:'الْمِسْكُ', p:10000}]
+            'رقية': [
+                {n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:75000},
+                {n:'السِّحْرُ الْأَسْوَدُ', p:75000}, {n:'السِّحْرُ الْأَحْمَرُ', p:75000},
+                {n:'السِّحْرُ الْأَبْيَضُ', p:75000}, {n:'السِّحْرُ السُّفْلِيُّ', p:75000},
+                {n:'السِّحْرُ الْمَدْفُونُ', p:75000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:75000},
+                {n:'سِحْرُ الْبُطُونِ وَالْأَرْحَامِ', p:75000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابِ', p:75000},
+                {n:'سِحْرُ الْفِرَاقِ', p:75000}, {n:'سِحْرُ التَّبْوِيرِ', p:75000},
+                {n:'سِحْرُ تَشْوِيهِ الْجَمَالِ', p:75000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:75000},
+                {n:'الْجِنُّ الطَّيَّارُ', p:75000}, {n:'الْجِنُّ الْمَارِدُ', p:75000},
+                {n:'الرِّيحُ الْأَحْمَرُ', p:75000}, {n:'الْقَرِينُ', p:75000}
+            ],
+            'اعشاب': [
+                {n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000},
+                {n:'السِّدْرُ الْمَسْحُونُ', p:5000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:10000},
+                {n:'الْمَحْرِيبُ', p:10000}, {n:'عِرْقُ النَّارِ', p:5000},
+                {n:'الْحَرْجَلُ', p:5000}, {n:'الْحَنْظَلُ', p:10000},
+                {n:'عِرْقُ الْحَجَرِ', p:20000}, {n:'الصَّمْغُ السُّودَانِيُّ', p:20000},
+                {n:'عِرْقُ اللَّالُوبِ', p:7000}, {n:'عِرْقُ السُّوسِ', p:10000},
+                {n:'الْمِرَايَةُ', p:5000}, {n:'الْغُبْيِشُ', p:5000},
+                {n:'عِرْقُ الدَّايُوتِ', p:5000}, {n:'التَّبَلْدِيُّ', p:10000},
+                {n:'الْكَرْكَدِيهُ', p:7000}, {n:'الْعَرْدِيبُ', p:10000}
+            ],
+            'زيوت': [
+                {n:'الزَّيْتُ الْمُعْجِزَةُ الْمُسْتَخْلَصُ مِنْ مَجْمُوعَةِ أَعْشَابٍ', p:50000},
+                {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّمْسِمِ الْمَرْقِيُّ', p:17000},
+                {n:'زَيْتُ الْحَبَّةِ السَّوْدَاءِ', p:15000}, {n:'زَيْتُ الْخِرْوَعِ', p:10000},
+                {n:'زَيْتُ الْحِلْبَةِ', p:10000}, {n:'زَيْتُ النِّيمِ', p:10000},
+                {n:'زَيْتُ الْعُشَرِ', p:10000}, {n:'زَيْتُ السُّورِيبِ', p:10000},
+                {n:'زَيْتُ الْحَرَازِ', p:12000}, {n:'زَيْتُ نَبْتَةِ الْعَاطِرَةِ', p:10000},
+                {n:'زَيْتُ السِّدْرِ الْمَرْقِيُّ', p:15000}
+            ],
+            'عسل': [
+                {n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ (رَطْلٌ)', p:15000}, {n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000},
+                {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلْمَنَاعَةِ', p:150000}, {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِالسِّلِّ وَالْأَمْرَاضِ الصَّدْرِيَّةِ', p:200000},
+                {n:'خَلْطَةُ الشِّفَاءِ مِنَ الْأَمْرَاضِ الْمُسْتَعْصِيَةِ', p:250000}
+            ],
+            'بخور': [
+                {n:'صَمْغُ اللُّبَانِ الْمُجَهَّزُ', p:50000}, {n:'السَّنْدَرُوسُ', p:10000},
+                {n:'الْمِسْكُ', p:10000}, {n:'الْفَاسُوخُ الْأَسْوَدُ', p:15000},
+                {n:'الْفَاسُوخُ الْأَبْيَضُ', p:20000}, {n:'الصَّنْدَلُ الْأَحْمَرُ', p:20000},
+                {n:'الْكُنْدُرُ', p:10000}, {n:'الْجَاوْلِي', p:10000},
+                {n:'الْعَدَنِي', p:10000}, {n:'الْكَدَادُ الْأَسْوَدُ', p:10000}
+            ]
         };
-
-        const articles = {
-            'bakhour': `
-                <h2 class="text-2xl font-bold text-green-500 mb-4 border-b pb-2">بُخُورُ الْغُبُشِ: تَطْهِيرُ الْجَسَدِ وَالْمَكَانِ</h2>
-                <p class="mb-4">يُعَدُّ بُخُورُ الْغُبُشِ مَزِيجاً نَادِراً مِنَ الْأَعْشَابِ السُّودَانِيَّةِ وَالْمَوَادِّ الطَّبِيعِيَّةِ الَّتِي تَمَّ اخْتِيَارُهَا بِعِنَايَةٍ لِتَحْقِيقِ التَّوَازُنِ الرُّوحِيِّ.</p>
-                <h3 class="font-bold text-green-400 mt-4">1. تَطْهِيرُ الْمَنَازِلِ:</h3>
-                <p>يُسَاعِدُ دُخَانُ هَذَا الْبُخُورِ فِي طَرْدِ النَّحْسِ وَالطَّاقَاتِ السَّلْبِيَّةِ الْمُتَرَاكِمَةِ، وَيُضْفِي سَكِينَةً نَفْسِيَّةً عَلَى أَهْلِ الْبَيْتِ.</p>
-                <h3 class="font-bold text-green-400 mt-4">2. أَمَاكِنُ الْعَمَلِ:</h3>
-                <p>يُنْصَحُ بِهِ لِفَتْحِ أَبْوَابِ الرِّزْقِ وَدَفْعِ الْعَيْنِ وَالْحَسَدِ عَنِ التِّجَارَةِ، مِمَّا يَخْلُقُ بِيئَةً إِيجَابِيَّةً لِلْإِنْتَاجِ.</p>
-                <h3 class="font-bold text-green-400 mt-4">3. تَطْهِيرُ الْجَسَدِ:</h3>
-                <p>يُسْتَخْدَمُ كَجُزْءٍ مِنَ الْعِلَاجِ التَّكْمِيلِيِّ لِلتَّخَلُّصِ مِنَ الثِّقَلِ النَّفْسِيِّ وَالْكَسَلِ النَّاتِجِ عَنِ الْعَوَارِضِ الرُّوحَانِيَّةِ.</p>
-            `,
-            'sections': `
-                <h2 class="text-2xl font-bold text-green-500 mb-4 border-b pb-2">دَلِيلُ الْخِدْمَاتِ وَالْأَقْسَامِ</h2>
-                <ul class="space-y-4">
-                    <li><strong class="text-green-400">الرُّقْيَةُ الشَّرْعِيَّةُ:</strong> عِلَاجٌ بِالْقُرْآنِ وَالسُّنَّةِ لِحَالَاتِ الْمَسِّ وَالسِّحْرِ وَالْعَيْنِ بِطُرُقٍ شَرْعِيَّةٍ صَحِيحَةٍ.</li>
-                    <li><strong class="text-green-400">الْأَعْشَابُ الطَّبِيعِيَّةُ:</strong> كُنُوزُ الْأَرْضِ السُّودَانِيَّةِ الْمُجَرَّبَةُ لِتَقْوِيَةِ الْمَنَاعَةِ وَعِلَاجِ الْأَمْرَاضِ الْعُضْوِيَّةِ.</li>
-                    <li><strong class="text-green-400">الزُّيُوتُ الْمَرْقِيَّةُ:</strong> خُلَاصَاتٌ زَيْتِيَّةٌ قُرِئَ عَلَيْهَا لِتَكُونَ بَلْسَماً لِلْأَوْجَاعِ وَالْآلَامِ.</li>
-                    <li><strong class="text-green-400">عَسَلُ النَّحْلِ:</strong> شِفَاءٌ لِلنَّاسِ، نُقَدِّمُهُ بِأَنْقَى صُوَرِهِ مَعَ خَلْطَاتٍ خَاصَّةٍ لِلتَّعَافِي.</li>
-                </ul>
-            `,
-            'prayers': `
-                <h2 class="text-2xl font-bold text-yellow-500 mb-4 border-b pb-2 text-center">دُعَاءُ الشِّفَاءِ وَرَاحَةِ الْبَالِ</h2>
-                <p class="text-xl italic text-center leading-relaxed">
-                    "إِلَهِي.. يَا مَنْ بِيَدِهِ خَزَائِنُ السَّمَاوَاتِ وَالْأَرْضِ، أَسْأَلُكَ بِاسْمِكَ الْأَعْظَمِ أَنْ تَشْفِيَ كُلَّ جَسَدٍ أَنْهَكَهُ الْوَجَعُ، وَتُطَهِّرَ كُلَّ رُوحٍ أَثْقَلَتْهَا الْهُمُومُ. اللَّهُمَّ اجْعَلْ لَنَا مِنْ كُلِّ ضِيقٍ مَخْرَجاً، وَمِنْ كُلِّ بَلَاءٍ عَافِيَةً. يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ نَسْتَغِيثُ، أَصْلِحْ لَنَا شَأْنَنَا كُلَّهُ وَلَا تَكِلْنَا إِلَى أَنْفُسِنَا طَرْفَةَ عَيْنٍ."
-                </p>
-                <div class="mt-6 text-center text-green-500 font-bold">بَحْرُ الْغُبُشِ - مَعَكُمْ نَحْوَ حَيَاةٍ مُطْمَئِنَّةٍ</div>
-            `
-        };
-
-        function showArticle(key) {
-            document.getElementById('articleContent').innerHTML = articles[key];
-            document.getElementById('articleOverlay').style.display = 'block';
-        }
-
-        function closeArticle() {
-            document.getElementById('articleOverlay').style.display = 'none';
-        }
 
         let currentProduct = "";
         let currentPrice = 0;
@@ -282,7 +343,8 @@
 
         function renderCategory(cat) {
             const grid = document.getElementById('itemsGrid');
-            document.getElementById('catTitle').innerText = cat;
+            const titles = {'رقية':'الرُّقْيَةُ الشَّرْعِيَّةُ', 'اعشاب':'الْأَعْشَابُ الطَّبِيعِيَّةُ', 'زيوت':'الزُّيُوتُ الْمَرْقِيَّةُ', 'عسل':'عَسَلُ النَّحْلِ', 'بخور':'بُخُورُ الْغُبُشِ'};
+            document.getElementById('catTitle').innerText = titles[cat];
             document.getElementById('productDisplay').classList.remove('hidden-section');
             grid.innerHTML = '';
             menu[cat].forEach(item => {
@@ -302,14 +364,14 @@
             currentProduct = name; currentPrice = price;
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
-            document.getElementById('chatPrice').innerText = price.toLocaleString() + " SDG";
+            document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
         }
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
         function contactAdmin(platform) {
             const msg = document.getElementById('problemInput').value;
-            const text = `تقرير حالة: ${msg}\nالاسم: ${document.getElementById('userName').value}`;
+            const text = `تقرير حالة: ${msg}\nالاسم: ${document.getElementById('userName').value}\nالعمر: ${document.getElementById('userAge').value}`;
             platform === 'whatsapp' ? openWhatsAppDirect(text) : openMessengerDirect(text);
         }
 
