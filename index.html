@@ -6,11 +6,17 @@
     
     <title>موقع بحر الغُبُش | الرقية الشرعية والعلاج الروحاني والطب البديل</title>
     <meta name="description" content="الموقع الرسمي للشيخ عبداللطيف عبدالواحد والدكتور عبدالصمد عبدالواحد. متخصصون في الرقية الشرعية، علاج العين والحسد، بخور الغبش السوداني، والأعشاب الطبية.">
+    <meta name="keywords" content="بحر الغبش, رقية شرعية السودان, علاج السحر, بخور الغبش, الدكتور عبدالصمد عبدالواحد, الشيخ عبداللطيف, طب بديل سوداني, علاج الحسد">
+    <meta name="author" content="د. عبدالصمد عبدالواحد">
+    
+    <meta property="og:title" content="موقع بحر الغُبُش للرقية والطب البديل">
+    <meta property="og:description" content="تواصل مباشر مع الشيخ عبداللطيف والدكتور عبدالصمد للعلاج الروحاني.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
+        /* استخدام خط Amiri لضمان سلامة الحروف مع الشدة والجمالية */
         @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
         
         body { 
@@ -19,207 +25,194 @@
             color: #fff; 
             margin: 0; 
             overflow-x: hidden; 
-            font-size: 1.1rem; /* حجم خط مريح للموبايل */
+            font-size: 1.15rem;
         }
         
-        /* تحسينات الموبايل */
-        .glass-card { 
-            background: rgba(5, 30, 5, 0.95); 
-            border: 1px solid #145a32; 
-            border-radius: 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .btn-green { 
-            background: linear-gradient(135deg, #2ecc71, #27ae60); 
-            color: #000; 
-            font-weight: bold; 
-            border-radius: 12px; 
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* تذييل متحرك سريع الاستجابة */
-        .marquee-footer { 
-            position: fixed; 
-            bottom: 0; 
-            width: 100%; 
-            background: #000; 
-            border-top: 2px solid #2ecc71; 
-            overflow: hidden; 
-            padding: 10px 0; 
-            z-index: 9999; 
-        }
-        .marquee-content { 
-            display: inline-block; 
-            white-space: nowrap; 
-            animation: scroll-ltr 30s linear infinite; 
-            color: #f1c40f; 
-            font-weight: bold; 
-        }
+        .glass-card { background: rgba(5, 30, 5, 0.95); border: 1px solid #145a32; border-radius: 20px; transition: 0.3s; }
+        .btn-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #000; font-weight: bold; border-radius: 12px; cursor: pointer; }
+        .btn-green:hover { transform: scale(1.02); filter: brightness(1.1); }
+        
+        .marquee-footer { position: fixed; bottom: 0; width: 100%; background: #000; border-top: 2px solid #2ecc71; overflow: hidden; padding: 12px 0; z-index: 9999; }
+        .marquee-content { display: inline-block; white-space: nowrap; animation: scroll-ltr 60s linear infinite; color: #f1c40f; font-weight: bold; font-size: 1.1rem; }
         @keyframes scroll-ltr { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
         .hidden-section { display: none !important; }
+        input, select, textarea { background: #000 !important; border: 1px solid #145a32 !important; color: white !important; outline: none; }
+        .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 14px; }
+        .social-link { transition: 0.3s; }
+        .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
+        
+        .blog-card { border-right: 4px solid #2ecc71; padding: 15px; background: #051e05; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: 0.3s; }
+        .blog-card:hover { background: #0a2e0a; transform: scale(1.02); }
 
-        /* تنسيق خاص للمقالات لتناسب الشاشات الصغيرة */
-        #contentModal { 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.95); 
-            z-index: 30000; 
-            overflow-y: auto; 
-            display: none; 
-            padding: 15px; 
-        }
-
-        .blog-card { 
-            border-right: 4px solid #2ecc71; 
-            padding: 15px; 
-            background: #051e05; 
-            border-radius: 10px; 
-            margin-bottom: 12px;
-            cursor: pointer;
-        }
-
-        input, select, textarea { 
-            background: #000 !important; 
-            border: 1px solid #145a32 !important; 
-            color: white !important; 
-            width: 100%;
-        }
+        /* نافذة المقالات */
+        #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
+        .content-body { line-height: 2; text-align: justify; }
     </style>
 </head>
 <body class="pb-24">
 
     <div id="contentModal">
-        <div class="max-w-2xl mx-auto bg-zinc-900 border border-green-600 rounded-2xl p-6 mt-6 relative">
-            <button onclick="closeContent()" class="absolute top-2 left-4 text-red-500 text-4xl">&times;</button>
-            <div id="modalTitle" class="text-2xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2 mt-4"></div>
-            <div id="modalBody" class="leading-relaxed text-zinc-100 text-justify"></div>
-            <button onclick="closeContent()" class="btn-green w-full py-4 mt-6">إِغْلَاقُ النَّافِذَةِ</button>
+        <div class="max-w-3xl mx-auto bg-zinc-900 border border-green-600 rounded-3xl p-8 mt-10 relative shadow-2xl">
+            <button onclick="closeContent()" class="absolute top-4 left-4 text-red-500 text-3xl">&times;</button>
+            <div id="modalTitle" class="text-3xl font-bold text-green-500 mb-6 border-b border-green-900 pb-4"></div>
+            <div id="modalBody" class="content-body text-zinc-100"></div>
+            <button onclick="closeContent()" class="btn-green w-full py-3 mt-8">إِغْلَاقُ النَّافِذَةِ</button>
         </div>
     </div>
 
     <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
-        <header class="mb-6">
-            <i class="fas fa-mosque text-7xl text-green-500 mb-4"></i>
-            <h1 class="text-4xl font-bold">بَحْرُ الْغُبُشِ</h1>
-            <p class="text-green-400 mt-2 text-sm">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
+        <header class="mb-8">
+            <i class="fas fa-mosque text-8xl text-green-500 mb-4"></i>
+            <h1 class="text-5xl font-bold tracking-tighter">بَحْرُ الْغُبُشِ</h1>
+            <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
         </header>
-        <div class="glass-card p-8 w-full max-w-sm">
-            <h2 class="text-xl mb-6 font-bold">تَسْجِيلُ الدُّخُولِ</h2>
-            <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ هُنَا..." class="p-4 rounded-xl mb-4 text-center">
-            <button onclick="enterSite()" class="btn-green w-full py-4 text-lg mb-4">دُخُولُ الْمَنْظُومَةِ</button>
+        <div class="glass-card p-10 w-full max-w-md shadow-2xl border-green-600">
+            <h2 class="text-2xl mb-6 font-bold underline decoration-green-600">فَتْحُ الْمَوْقِعِ</h2>
+            <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ..." class="w-full p-4 rounded-xl mb-4 text-center">
+            <button onclick="enterSite()" class="btn-green w-full py-4 text-xl mb-4">دُخُولُ الْمَنْظُومَةِ</button>
             
-            <div class="flex justify-around mt-2">
-                <button onclick="openWhatsAppDirect('مرحبا، أود الاستفسار')" class="text-green-500 text-sm"><i class="fab fa-whatsapp text-2xl"></i><br>واتساب</button>
-                <a href="https://www.facebook.com/share/1XzN3tmCTj/" target="_blank" class="text-blue-500 text-sm"><i class="fab fa-facebook text-2xl"></i><br>فيسبوك</a>
+            <div class="flex justify-center gap-4 mt-2">
+                <button onclick="openWhatsAppDirect('مرحبا، أود الاستفسار عن خدماتكم')" class="social-link text-green-500 flex items-center gap-2 text-sm">
+                    <i class="fab fa-whatsapp text-xl"></i> واتساب
+                </button>
+                <a href="https://www.facebook.com/share/1XzN3tmCTj/" target="_blank" class="social-link text-blue-500 flex items-center gap-2 text-sm">
+                    <i class="fab fa-facebook text-xl"></i> فيسبوك
+                </a>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-green-900/50">
+                <button onclick="adminAccess()" class="text-green-500 text-sm font-bold">🔐 بَوَّابَةُ الْإِدَارَةِ (الْمُدِيرِ وَالنَّائِبِ)</button>
             </div>
         </div>
     </div>
 
-    <div id="mainDashboard" class="hidden-section">
-        <nav class="p-4 border-b border-green-900 flex justify-between items-center bg-black/90 sticky top-0 z-50">
-            <span class="font-bold text-lg"><i class="fas fa-mosque text-green-500"></i> بَحْرُ الْغُبُشِ</span>
-            <div class="flex gap-3">
-                <button onclick="openWhatsAppDirect('استفسار عاجل')" class="text-green-500 text-2xl"><i class="fab fa-whatsapp"></i></button>
-                <button onclick="location.reload()" class="text-red-500 border border-red-900 px-3 py-1 rounded-lg text-xs">خروج</button>
+    <div id="mainDashboard" class="hidden-section min-h-screen">
+        <nav class="p-4 border-b border-green-900 flex justify-between items-center bg-black/80 sticky top-0 z-50">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-mosque text-green-500 text-2xl"></i>
+                <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="openMessengerDirect('استفسار من الصفحة الرئيسية')" class="text-blue-500 text-xl"><i class="fab fa-facebook-messenger"></i></button>
+                <button onclick="openWhatsAppDirect('مرحبا، أحتاج مساعدة في الموقع')" class="text-green-500 text-xl"><i class="fab fa-whatsapp"></i></button>
+                <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-4 py-1 rounded-lg border border-red-800 text-xs">خُرُوج</button>
             </div>
         </nav>
 
-        <main class="p-4 max-w-4xl mx-auto">
-            <div class="glass-card p-5 mb-8 border-green-500">
-                <h3 class="text-md mb-4 font-bold text-green-400"><i class="fas fa-file-medical"></i> نَمُوذَجُ تَشْخِيصِ الْحَالَةِ (سِرِّي):</h3>
-                <div class="grid grid-cols-2 gap-2 mb-3">
-                    <input type="number" id="userAge" placeholder="العمر" class="p-3 rounded-lg">
-                    <select id="userStatus" class="p-3 rounded-lg">
-                        <option value="">الحالة..</option>
-                        <option value="اعزب">أعزب</option>
-                        <option value="متزوج">متزوج</option>
+        <main class="max-w-5xl mx-auto p-4">
+            
+            <div class="glass-card p-6 mb-8 border-green-500 bg-green-950/20 shadow-lg">
+                <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-file-medical"></i> نَمُوذَجُ تَشْخِيصِ الْحَالَةِ (سِرِّيٌّ لِلدُّكْتُورِ):</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                    <input type="number" id="userAge" placeholder="الْعُمْرُ.." class="p-3 rounded-xl">
+                    <select id="userStatus" class="p-3 rounded-xl">
+                        <option value="">الْحَالَةُ الِاجْتِمَاعِيَّةُ..</option>
+                        <option value="اعزب">أَعْزَبُ / عزباء</option>
+                        <option value="متزوج">مُتَزَوِّجٌ / متزوجة</option>
                     </select>
                 </div>
-                <textarea id="problemInput" placeholder="اشرح حالتك هنا بالتفصيل (أعراض، أحلام)..." class="p-4 rounded-lg h-24 mb-3"></textarea>
-                <button onclick="contactAdmin('whatsapp')" class="btn-green w-full py-4">إرسال التقرير للدكتور</button>
+                <textarea id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ (أعراض، أحلام، آلام) بِتَفْصِيلٍ هُنَا..." class="w-full p-4 rounded-xl mb-3 h-24"></textarea>
+                <div class="flex gap-2">
+                    <button onclick="contactAdmin('whatsapp')" class="btn-green flex-1 py-4">إِرْسَالُ التَّقْرِيرِ (واتساب)</button>
+                    <button onclick="contactAdmin('messenger')" class="bg-blue-600 text-white font-bold rounded-xl px-6 py-4"><i class="fab fa-facebook-messenger"></i></button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3 mb-8">
-                <button onclick="renderCategory('رقية')" class="glass-card p-4 text-center">
-                    <i class="fas fa-book-open text-2xl text-green-500 mb-2"></i>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10 text-center">
+                <button onclick="renderCategory('رقية')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-book-open text-3xl text-green-500 mb-2"></i>
                     <p class="text-xs font-bold">الرُّقْيَةُ الشَّرْعِيَّةُ</p>
                 </button>
-                <button onclick="renderCategory('اعشاب')" class="glass-card p-4 text-center">
-                    <i class="fas fa-leaf text-2xl text-green-500 mb-2"></i>
+                <button onclick="renderCategory('اعشاب')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-leaf text-3xl text-green-500 mb-2"></i>
                     <p class="text-xs font-bold">الْأَعْشَابُ الطَّبِيعِيَّةُ</p>
                 </button>
-                <button onclick="renderCategory('زيوت')" class="glass-card p-4 text-center">
-                    <i class="fas fa-flask text-2xl text-green-500 mb-2"></i>
+                <button onclick="renderCategory('زيوت')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-flask text-3xl text-green-500 mb-2"></i>
                     <p class="text-xs font-bold">الزُّيُوتُ الْمَرْقِيَّةُ</p>
                 </button>
-                <button onclick="renderCategory('عسل')" class="glass-card p-4 text-center">
-                    <i class="fas fa-honey-pot text-2xl text-green-500 mb-2"></i>
+                <button onclick="renderCategory('عسل')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-honey-pot text-3xl text-green-500 mb-2"></i>
                     <p class="text-xs font-bold">عَسَلُ النَّحْلِ</p>
                 </button>
-                <button onclick="renderCategory('بخور')" class="glass-card p-4 text-center col-span-2">
-                    <i class="fas fa-wind text-2xl text-green-500 mb-2"></i>
-                    <p class="text-xs font-bold">بُخُورُ الْغُبُشِ السُّودَانِي</p>
+                <button onclick="renderCategory('بخور')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-wind text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold">بُخُورُ الْغُبُشِ</p>
                 </button>
             </div>
 
-            <div id="productDisplay" class="hidden-section mb-10">
-                <h2 id="catTitle" class="text-xl font-bold mb-4 text-green-500 border-r-4 border-green-500 pr-3"></h2>
-                <div id="itemsGrid" class="space-y-3"></div>
+            <div id="productDisplay" class="hidden-section pb-10">
+                <h2 id="catTitle" class="text-2xl font-bold mb-6 text-green-500 border-r-4 border-green-500 pr-4"></h2>
+                <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
 
-            <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
                 <section>
-                    <h3 class="text-lg font-bold text-green-500 mb-3"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ عِلْمِيَّةٌ:</h3>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ عِلْمِيَّةٌ:</h3>
                     <div class="blog-card" onclick="openArticle('bakhour')">
-                        <p class="font-bold text-green-400">سِرُّ بُخُورُ الْغُبُشِ</p>
-                        <p class="text-xs text-zinc-400">كيفية تطهير المنازل والأجسام..</p>
+                        <p class="font-bold text-sm text-green-400">بُخُورُ الْغُبُشِ: سِرُّ التَّطْهِيرِ وَالْبَرَكَةِ</p>
+                        <p class="text-[11px] text-zinc-300">تَعَرَّفْ عَلَى كَيْفِيَّةِ تَطْهِيرِ الْمَنَازِلِ وَالْأَجْسَادِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ..</p>
+                        <p class="text-[10px] text-zinc-500 mt-1">بِقَلَمِ: د. عَبْدَالصَّمَد</p>
                     </div>
                     <div class="blog-card" onclick="openArticle('sections')">
-                        <p class="font-bold text-green-400">دَلِيلُ أَقْسَامِ الْمَوْقِعِ</p>
-                        <p class="text-xs text-zinc-400">تعرف على فوائد كل قسم بالتفصيل..</p>
+                        <p class="font-bold text-sm text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ</p>
+                        <p class="text-[11px] text-zinc-300">تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ، الْأَعْشَابِ، الزُّيُوتِ، وَالْعَسَلِ وَفَوَائِدِهَا..</p>
                     </div>
                 </section>
-
                 <section>
-                    <h3 class="text-lg font-bold text-yellow-500 mb-3"><i class="fas fa-heart"></i> أَدْعِيَةٌ مُخْتَارَةٌ:</h3>
-                    <div class="blog-card border-yellow-600" onclick="openArticle('prayers')">
-                        <p class="font-bold text-yellow-500">مُنَاجَاةُ طَلَبِ الشِّفَاءِ</p>
-                        <p class="text-xs text-zinc-400">أدعية جامعة لراحة القلب ودفع البلاء..</p>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-heart"></i> أَدْعِيَةٌ وَأَذْكارٌ تُلَامِسُ الرُّوحَ:</h3>
+                    <div class="blog-card" onclick="openArticle('prayers')">
+                        <p class="font-bold text-sm text-yellow-500 italic">مُنَاجَاةُ التَّائِبِينَ وَطَلَبُ الشِّفَاءِ</p>
+                        <p class="text-[11px] text-zinc-300">أَدْعِيَةٌ جَامِعَةٌ لِرَاحَةِ الْقَلْبِ وَتَفْرِيجِ الْكَرْبِ وَدَفْعِ الْبَلَاءِ..</p>
+                    </div>
+                    <div class="italic text-sm bg-zinc-900 p-4 rounded-xl border-r-4 border-yellow-600">
+                        "اللَّهُمَّ اجْعَلْ هَذَا الْمَوْقِعَ سَبَباً فِي شِفَاءِ كُلِّ مَرِيضٍ وَرَاحَةِ كُلِّ مَهْمُومٍ."
+                        <p class="text-left font-bold text-green-500 mt-2">آمِينَ</p>
                     </div>
                 </section>
             </div>
+
         </main>
     </div>
 
-    <div id="chatModal" class="fixed inset-0 bg-black z-[40000] hidden-section flex flex-col">
-        <div class="p-4 bg-green-900 flex justify-between items-center">
-            <button onclick="closeChat()" class="text-white text-2xl"><i class="fas fa-arrow-right"></i></button>
-            <div class="text-center">
-                <p id="chatProduct" class="font-bold text-sm"></p>
-                <p id="chatPrice" class="text-xs text-green-300"></p>
+    <div id="chatModal" class="fixed inset-0 bg-black z-[10000] hidden-section flex flex-col">
+        <div class="p-4 bg-green-900 flex justify-between items-center shadow-xl">
+            <div class="flex items-center gap-3">
+                <button onclick="closeChat()" class="text-white text-2xl"><i class="fas fa-arrow-right"></i></button>
+                <div>
+                    <p id="chatProduct" class="font-bold text-sm"></p>
+                    <p id="chatPrice" class="text-xs text-green-300"></p>
+                </div>
             </div>
-            <i class="fas fa-shopping-cart text-white"></i>
+            <div class="flex gap-4 text-white text-xl">
+                <button onclick="openWhatsAppDirect('طلب مساعدة هاتفية بشأن ' + currentProduct)"><i class="fas fa-phone"></i></button>
+                <button onclick="finalMessenger()"><i class="fab fa-facebook-messenger"></i></button>
+            </div>
         </div>
         
-        <div class="flex-1 overflow-y-auto p-4 bg-zinc-950">
-            <div class="bg-zinc-900 p-4 rounded-xl border border-yellow-600 mb-4">
-                <p class="text-yellow-500 font-bold mb-2">بَيَانَاتُ التَّحْوِيلِ:</p>
-                <p class="text-sm">بَنْكِك: <span class="text-white font-bold">2985827</span></p>
-                <p class="text-sm">فَوْرِي: <span class="text-white font-bold">51170108</span></p>
-                <p class="text-[10px] mt-2 text-zinc-400 text-center">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+        <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950">
+            <div class="bg-zinc-900 p-6 rounded-2xl border border-yellow-600 shadow-2xl">
+                <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
+                        <span>تَطْبِيقُ بَنْكِك:</span>
+                        <span class="font-bold text-white tracking-widest">2985827</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
+                        <span>تَطْبِيقُ فَوْرِي:</span>
+                        <span class="font-bold text-white tracking-widest">51170108</span>
+                    </div>
+                    <p class="text-[10px] text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                </div>
             </div>
         </div>
 
-        <div class="p-4 bg-zinc-900 border-t border-zinc-800">
-            <div class="flex gap-2">
-                <input type="text" id="chatMsg" placeholder="اكتب رسالتك هنا..." class="flex-1 p-3 rounded-full">
-                <button onclick="finalWhatsApp()" class="bg-green-600 w-12 h-12 rounded-full flex items-center justify-center">
-                    <i class="fab fa-whatsapp text-2xl text-black"></i>
+        <div class="p-4 bg-zinc-900 flex flex-col gap-3 border-t border-zinc-800">
+            <div class="flex items-center gap-3">
+                <input type="text" id="chatMsg" placeholder="أُكْتُبْ رِسَالَتَكَ..." class="flex-1 p-4 rounded-full text-sm">
+                <button onclick="finalWhatsApp()" class="bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
+                    <i class="fab fa-whatsapp text-black text-3xl"></i>
                 </button>
             </div>
         </div>
@@ -227,60 +220,50 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً بِكُمْ فِي بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. تواصل عبر الواتساب: 249121494942 
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | فيسبوك: bahr.gubush
         </div>
     </footer>
 
     <script>
-        // المحتوى كما هو مطلوب تماماً
+        // المحتوى المكتوب بعناية فائقة
         const contentData = {
             'bakhour': {
-                title: 'بُخُورُ الْغُبُشِ: سِرُّ التَّطْهِيرِ',
-                body: `<p>يُعَدُّ <strong>بُخُورُ الْغُبُشِ</strong> مَزِيجاً نَادِراً لِتَطْهِيرِ الْأَجْسَادِ وَالْمَنَازِلِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ وَعُقَدِ الْحَسَدِ.</p>`
+                title: 'بُخُورُ الْغُبُشِ: عِلْمُ التَّطْهِيرِ وَسِرُّ الْبَرَكَةِ',
+                body: `
+                    <p>يُعَدُّ <strong>بُخُورُ الْغُبُشِ</strong> مَزِيجاً نَادِراً وَمُبَارَكاً، تَمَّ اسْتِخْلَاصُهُ مِنْ أَجْوَدِ خَيْرَاتِ الْأَرْضِ السُّودَانِيَّةِ لِيَكُونَ سِلَاحاً فَعَّالاً فِي مَعْرِكَةِ التَّطْهِيرِ الرُّوحِيِّ.</p>
+                    <h4 class="text-green-400 mt-4">1. تَطْهِيرُ الْأَجْسَادِ:</h4>
+                    <p>يُسَاعِدُ اسْتِنْشَاقُ رَائِحَتِهِ الزَّكِيَّةِ فِي تَفْكِيكِ عُقَدِ الْحَسَدِ وَطَرْدِ الْعَوَارِضِ الَّتِي تُثْقِلُ الْكَاهِلَ، مِمَّا يُعِيدُ لِلْجَسَدِ نَشَاطَهُ وَحَيَوِيَّتَهُ الْمَفْقُودَةَ.</p>
+                    <h4 class="text-green-400 mt-4">2. تَطْهِيرُ الْمَنَازِلِ:</h4>
+                    <p>يَعْمَلُ دُخَانُ الْبُخُورِ عَلَى تَعْقِيمِ زَوَايَا الْمَنْزِلِ مِنَ الطَّاقَاتِ السَّلْبِيَّةِ وَالْمَشَاعِرِ الْمُتَوَتِّرَةِ، وَيَبْعَثُ فِي النُّفُوسِ طُمَأْنِينَةً لَا مَثِيلَ لَهَا، وَيُطْرَدُ بِهِ الشَّيَاطِينُ وَيُقَرِّبُ الْمَلَائِكَةَ بِإِذْنِ اللَّهِ.</p>
+                    <h4 class="text-green-400 mt-4">3. أَمَاكِنُ الْعَمَلِ وَالتِّجَارَةِ:</h4>
+                    <p>يُنْصَحُ بِهِ لِأَصْحَابِ الْأَعْمَالِ لِجَلْبِ الْبَرَكَةِ وَدَفْعِ عَيْنِ الْحُسَّادِ، حَيْثُ يَخْلُقُ بِيئَةً إِيجَابِيَّةً تُسَاعِدُ عَلَى الرِّزْقِ وَالتَّوْفِيقِ.</p>
+                `
             },
             'sections': {
-                title: 'دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ',
-                body: `<ul class="space-y-2"><li><strong>الرقية:</strong> علاج السحر والمس.</li><li><strong>الأعشاب:</strong> طب سوداني أصيل.</li><li><strong>الزيوت:</strong> مقروء عليها آيات الشفاء.</li></ul>`
+                title: 'دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ الشَّامِلِ',
+                body: `
+                    <ul class="space-y-4">
+                        <li><strong class="text-green-400">الرُّقْيَةُ الشَّرْعِيَّةُ:</strong> هِيَ الْحِصْنُ الْحَصِينُ وَالْعِلَاجُ الرَّبَّانِيُّ بِالْقُرْآنِ وَالسُّنَّةِ لِكُلِّ مَنْ يُعَانِي مِنَ السِّحْرِ، الْمَسِّ، أَوِ الْعَيْنِ.</li>
+                        <li><strong class="text-green-400">الْأَعْشَابُ الطَّبِيعِيَّةُ:</strong> جَمَعْنَا لَكُمْ خُلَاصَةَ الطِّبِّ الْبَدِيلِ السُّودَانِيِّ، أَعْشَابٌ بِكْرٌ لَمْ تَمَسَّهَا الْكِيمَاوِيَّاتُ، لِعِلَاجِ الْأَمْرَاضِ الْعُضْوِيَّةِ وَتَقْوِيَةِ الْمَنَاعَةِ.</li>
+                        <li><strong class="text-green-400">الزُّيُوتُ الْمَرْقِيَّةُ:</strong> زُيُوتٌ نَقِيَّةٌ قُرِئَتْ عَلَيْهَا آيَاتُ الشِّفَاءِ، تُسْتَخْدَمُ لِلدَّهْنِ وَالْمَسَاجِ لِتَسْكِينِ الْآلَامِ وَطَرْدِ الْأَرْوَاحِ الْخَبِيثَةِ مِنَ الْجَسَدِ.</li>
+                        <li><strong class="text-green-400">عَسَلُ النَّحْلِ:</strong> "فِيهِ شِفَاءٌ لِلنَّاسِ"؛ نُقَدِّمُ أَنْوَاعاً نَادِرَةً مِنَ الْعَسَلِ الْمَمْزُوجِ بِأَعْشَابٍ خَاصَّةٍ لِعِلَاجِ حَالَاتِ السِّلِّ وَالْعُقْمِ وَضَعْفِ الْبِنْيَةِ.</li>
+                    </ul>
+                `
             },
             'prayers': {
-                title: 'أَدْعِيَةُ الشِّفَاءِ وَالْمُنَاجَاةِ',
-                body: `<div class="italic text-center font-bold text-lg"><p>"اللَّهُمَّ اشْفِ كُلَّ جَسَدٍ أَنْهَكَهُ الْوَجَعُ"</p><p>"يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ نَسْتَغِيثُ"</p></div>`
+                title: 'مُنَاجَاةُ الرُّوحِ وَأَدْعِيَةُ الشِّفَاءِ',
+                body: `
+                    <div class="text-center italic space-y-4">
+                        <p class="text-xl">"إِلَهِي.. يَا مَنْ بِيَدِهِ خَزَائِنُ السَّمَاوَاتِ وَالْأَرْضِ، أَسْأَلُكَ بِاسْمِكَ الْأَعْظَمِ أَنْ تَشْفِيَ كُلَّ جَسَدٍ أَنْهَكَهُ الْوَجَعُ، وَتُطَهِّرَ كُلَّ رُوحٍ أَثْقَلَتْهَا الْهُمُومُ."</p>
+                        <p>---</p>
+                        <p>"اللَّهُمَّ بَارِكْ لَنَا فِي أَرْزَاقِنَا، وَاحْفَظْ مَنَازِلَنَا مِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ."</p>
+                        <p>---</p>
+                        <p>"يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ نَسْتَغِيثُ، أَصْلِحْ لَنَا شَأْنَنَا كُلَّهُ، وَلَا تَكِلْنَا إِلَى أَنْفُسِنَا طَرْفَةَ عَيْنٍ، وَاجْعَلْ لَنَا مِنْ لَدُنْكَ سُلْطَاناً نَصِيراً."</p>
+                        <p class="mt-6 font-bold text-yellow-500">نَصِيحَةُ الشَّيْخِ: حَافِظُوا عَلَى أَذْكَارِ الصَّبَاحِ وَالْمَسَاءِ، فَهِيَ الدِّرْعُ الَّذِي لَا يُخْتَرَقُ.</p>
+                    </div>
+                `
             }
         };
-
-        const menu = {
-            'رقية': [{n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْمَأْكُولُ', p:75000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:75000}, {n:'الرِّيحُ الْأَحْمَرُ', p:75000}, {n:'سِحْرُ الْفِرَاقِ', p:75000}],
-            'اعشاب': [{n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000}, {n:'الصَّمْغُ السُّودَانِيُّ', p:20000}, {n:'الْحَرْجَلُ', p:5000}],
-            'زيوت': [{n:'الزَّيْتُ الْمُعْجِزَةُ', p:50000}, {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّدْرِ', p:15000}],
-            'عسل': [{n:'عَسَلُ نَحْلٍ رَطْلٌ', p:15000}, {n:'خَلْطَةُ الْمَنَاعَةِ', p:150000}, {n:'خَلْطَةُ الشِّفَاءِ', p:250000}],
-            'بخور': [{n:'صَمْغُ اللُّبَانِ', p:50000}, {n:'الْمِسْكُ الأصلي', p:10000}, {n:'الْفَاسُوخُ الْأَسْوَدُ', p:15000}]
-        };
-
-        let currentProduct = "";
-
-        function enterSite() {
-            if(!document.getElementById('userName').value) return alert("يرجى كتابة اسمك");
-            document.getElementById('loginPage').classList.add('hidden-section');
-            document.getElementById('mainDashboard').classList.remove('hidden-section');
-        }
-
-        function renderCategory(cat) {
-            const grid = document.getElementById('itemsGrid');
-            document.getElementById('catTitle').innerText = cat === 'بخور' ? 'بُخُورُ الْغُبُشِ' : cat;
-            document.getElementById('productDisplay').classList.remove('hidden-section');
-            grid.innerHTML = '';
-            menu[cat].forEach(item => {
-                grid.innerHTML += `
-                    <div class="glass-card p-4 flex justify-between items-center">
-                        <div>
-                            <p class="font-bold text-sm text-white">${item.n}</p>
-                            <span class="text-green-400 text-xs">${item.p.toLocaleString()} SDG</span>
-                        </div>
-                        <button onclick="openChat('${item.n}', ${item.p})" class="btn-green px-4 py-2 text-xs">شراء</button>
-                    </div>`;
-            });
-            grid.scrollIntoView({behavior: 'smooth'});
-        }
 
         function openArticle(key) {
             const data = contentData[key];
@@ -289,30 +272,119 @@
             document.getElementById('contentModal').style.display = 'block';
         }
 
-        function closeContent() { document.getElementById('contentModal').style.display = 'none'; }
-        
-        function openChat(name, price) {
-            currentProduct = name;
-            document.getElementById('chatModal').classList.remove('hidden-section');
-            document.getElementById('chatProduct').innerText = name;
-            document.getElementById('chatPrice').innerText = "السعر: " + price.toLocaleString() + " SDG";
+        function closeContent() {
+            document.getElementById('contentModal').style.display = 'none';
         }
-        function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
+
+        // الحفاظ على قائمة المنتجات كاملة كما هي
+        const menu = {
+            'رقية': [
+                {n:'الْعَيْنُ وَالْحَسَدُ', p:75000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:75000},
+                {n:'السِّحْرُ الْأَسْوَدُ', p:75000}, {n:'السِّحْرُ الْأَحْمَرُ', p:75000},
+                {n:'السِّحْرُ الْأَبْيَضُ', p:75000}, {n:'السِّحْرُ السُّفْلِيُّ', p:75000},
+                {n:'السِّحْرُ الْمَدْفُونُ', p:75000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:75000},
+                {n:'سِحْرُ الْبُطُونِ وَالْأَرْحَامِ', p:75000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابِ', p:75000},
+                {n:'سِحْرُ الْفِرَاقِ', p:75000}, {n:'سِحْرُ التَّبْوِيرِ', p:75000},
+                {n:'سِحْرُ تَشْوِيهِ الْجَمَالِ', p:75000}, {n:'الْمَسُّ الشَّيْطَانِيُّ', p:75000},
+                {n:'الْجِنُّ الطَّيَّارُ', p:75000}, {n:'الْجِنُّ الْمَارِدُ', p:75000},
+                {n:'الرِّيحُ الْأَحْمَرُ', p:75000}, {n:'الْقَرِينُ', p:75000}
+            ],
+            'اعشاب': [
+                {n:'الْقُسْطُ الْهِنْدِيُّ', p:10000}, {n:'السَّنَامَكِي', p:5000},
+                {n:'السِّدْرُ الْمَسْحُونُ', p:5000}, {n:'الْقَرَضُ الْمَسْحُونُ', p:10000},
+                {n:'الْمَحْرِيبُ', p:10000}, {n:'عِرْقُ النَّارِ', p:5000},
+                {n:'الْحَرْجَلُ', p:5000}, {n:'الْحَنْظَلُ', p:10000},
+                {n:'عِرْقُ الْحَجَرِ', p:20000}, {n:'الصَّمْغُ السُّودَانِيُّ', p:20000},
+                {n:'عِرْقُ اللَّالُوبِ', p:7000}, {n:'عِرْقُ السُّوسِ', p:10000},
+                {n:'الْمِرَايَةُ', p:5000}, {n:'الْغُبْيِشُ', p:5000},
+                {n:'عِرْقُ الدَّايُوتِ', p:5000}, {n:'التَّبَلْدِيُّ', p:10000},
+                {n:'الْكَرْكَدِيهُ', p:7000}, {n:'الْعَرْدِيبُ', p:10000}
+            ],
+            'زيوت': [
+                {n:'الزَّيْتُ الْمُعْجِزَةُ الْمُسْتَخْلَصُ مِنْ مَجْمُوعَةِ أَعْشَابٍ', p:50000},
+                {n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّمْسِمِ الْمَرْقِيُّ', p:17000},
+                {n:'زَيْتُ الْحَبَّةِ السَّوْدَاءِ', p:15000}, {n:'زَيْتُ الْخِرْوَعِ', p:10000},
+                {n:'زَيْتُ الْحِلْبَةِ', p:10000}, {n:'زَيْتُ النِّيمِ', p:10000},
+                {n:'زَيْتُ الْعُشَرِ', p:10000}, {n:'زَيْتُ السُّورِيبِ', p:10000},
+                {n:'زَيْتُ الْحَرَازِ', p:12000}, {n:'زَيْتُ نَبْتَةِ الْعَاطِرَةِ', p:10000},
+                {n:'زَيْتُ السِّدْرِ الْمَرْقِيُّ', p:15000}
+            ],
+            'عسل': [
+                {n:'عَسَلُ النَّحْلِ الْأَصْلِيُّ (رَطْلٌ)', p:15000}, {n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000},
+                {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِلْمَنَاعَةِ', p:150000}, {n:'خَلْطَةُ عَسَلِ النَّحْلِ لِالسِّلِّ وَالْأَمْرَاضِ الصَّدْرِيَّةِ', p:200000},
+                {n:'خَلْطَةُ الشِّفَاءِ مِنَ الْأَمْرَاضِ الْمُسْتَعْصِيَةِ', p:250000}
+            ],
+            'بخور': [
+                {n:'صَمْغُ اللُّبَانِ الْمُجَهَّزُ', p:50000}, {n:'السَّنْدَرُوسُ', p:10000},
+                {n:'الْمِسْكُ', p:10000}, {n:'الْفَاسُوخُ الْأَسْوَدُ', p:15000},
+                {n:'الْفَاسُوخُ الْأَبْيَضُ', p:20000}, {n:'الصَّنْدَلُ الْأَحْمَرُ', p:20000},
+                {n:'الْكُنْدُرُ', p:10000}, {n:'الْجَاوْلِي', p:10000},
+                {n:'الْعَدَنِي', p:10000}, {n:'الْكَدَادُ الْأَسْوَدُ', p:10000}
+            ]
+        };
+
+        let currentProduct = "";
+        let currentPrice = 0;
 
         function openWhatsAppDirect(text) {
-            window.open(`https://wa.me/249121494942?text=${encodeURIComponent(text)}`, '_blank');
+            const phone = "249121494942";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
         }
+
+        function openMessengerDirect(text = "") {
+            window.open(`https://m.me/bahr.gubush`, '_blank');
+        }
+
+        function enterSite() {
+            if(!document.getElementById('userName').value) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
+            document.getElementById('loginPage').classList.add('hidden-section');
+            document.getElementById('mainDashboard').classList.remove('hidden-section');
+        }
+
+        function renderCategory(cat) {
+            const grid = document.getElementById('itemsGrid');
+            const titles = {'رقية':'الرُّقْيَةُ الشَّرْعِيَّةُ', 'اعشاب':'الْأَعْشَابُ الطَّبِيعِيَّةُ', 'زيوت':'الزُّيُوتُ الْمَرْقِيَّةُ', 'عسل':'عَسَلُ النَّحْلِ', 'بخور':'بُخُورُ الْغُبُشِ'};
+            document.getElementById('catTitle').innerText = titles[cat];
+            document.getElementById('productDisplay').classList.remove('hidden-section');
+            grid.innerHTML = '';
+            menu[cat].forEach(item => {
+                grid.innerHTML += `
+                    <div class="glass-card p-5 flex justify-between items-center shadow-md">
+                        <div class="flex-1">
+                            <p class="font-bold text-sm text-white">${item.n}</p>
+                            <span class="badge-price">${item.p.toLocaleString()} SDG</span>
+                        </div>
+                        <button onclick="openChat('${item.n}', ${item.p})" class="btn-green px-4 py-2 text-[10px]">شِرَاءٌ وَدَرْدَشَةٌ</button>
+                    </div>`;
+            });
+            window.scrollTo({top: 400, behavior: 'smooth'});
+        }
+
+        function openChat(name, price) {
+            currentProduct = name; currentPrice = price;
+            document.getElementById('chatModal').classList.remove('hidden-section');
+            document.getElementById('chatProduct').innerText = name;
+            document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
+        }
+
+        function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
         function contactAdmin(platform) {
             const msg = document.getElementById('problemInput').value;
-            const text = `تقرير حالة:\nالاسم: ${document.getElementById('userName').value}\nالعمر: ${document.getElementById('userAge').value}\nالمشكلة: ${msg}`;
-            openWhatsAppDirect(text);
+            const text = `تقرير حالة: ${msg}\nالاسم: ${document.getElementById('userName').value}\nالعمر: ${document.getElementById('userAge').value}`;
+            platform === 'whatsapp' ? openWhatsAppDirect(text) : openMessengerDirect(text);
         }
 
         function finalWhatsApp() {
             const text = `طلب شراء: ${currentProduct}\nالرسالة: ${document.getElementById('chatMsg').value}`;
             openWhatsAppDirect(text);
         }
+
+        function finalMessenger() {
+            openMessengerDirect(`أود شراء ${currentProduct}`);
+        }
+
+        function adminAccess() { alert("بوابة محمية."); }
     </script>
 </body>
 </html>
