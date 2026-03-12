@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>موقع بحر الغُبُش | الرقية الشرعية والعلاج الروحاني والطب البديل</title>
-    <meta name="description" content="الموقع الرسمي للشيخ عبداللطيف عبدالواحد والدكتور عبدالصمد عبدالواحد لعلاج السحر والمس والعين بالرقية الشرعية والأعشاب الطبيعية والزيوت المرقية وبخور الغُبُش.">
-    <meta name="keywords" content="بحر الغبش, رقية شرعية, علاج السحر, بنكك, فوري, أعشاب سودانية, زيت زيتون مرقي, بخور الغبش">
+    <meta name="description" content="الموقع الرسمي للشيخ عبداللطيف عبدالواحد والدكتور عبدالصمد عبدالواحد. متخصصون في الرقية الشرعية، علاج العين والحسد، بخور الغبش السوداني، والأعشاب الطبية.">
+    <meta name="keywords" content="بحر الغبش, رقية شرعية السودان, علاج السحر, بخور الغبش, الدكتور عبدالصمد عبدالواحد, الشيخ عبداللطيف, طب بديل سوداني, علاج الحسد">
+    <meta name="author" content="د. عبدالصمد عبدالواحد">
+    
+    <meta property="og:title" content="موقع بحر الغُبُش للرقية والطب البديل">
+    <meta property="og:description" content="تواصل مباشر مع الشيخ عبداللطيف والدكتور عبدالصمد للعلاج الروحاني.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -23,10 +27,13 @@
         @keyframes scroll-ltr { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
         .hidden-section { display: none !important; }
-        input, select { background: #000 !important; border: 1px solid #145a32 !important; color: white !important; outline: none; }
+        input, select, textarea { background: #000 !important; border: 1px solid #145a32 !important; color: white !important; outline: none; }
         .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 12px; }
         .social-link { transition: 0.3s; }
         .social-link:hover { opacity: 0.8; transform: translateY(-2px); }
+        
+        /* تحسينات إضافية للأقسام الجديدة */
+        .blog-card { border-right: 4px solid #2ecc71; padding-right: 15px; background: #051e05; border-radius: 10px; margin-bottom: 10px; }
     </style>
 </head>
 <body class="pb-24">
@@ -71,18 +78,25 @@
         </nav>
 
         <main class="max-w-5xl mx-auto p-4">
+            
             <div class="glass-card p-6 mb-8 border-green-500 bg-green-950/20 shadow-lg">
-                <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-comment-dots"></i> احْكِ مُشْكِلَتَكَ لِلدُّكْتُورِ عَبْدَالصَّمَدِ:</h3>
-                <div class="flex flex-col md:flex-row gap-3">
-                    <input type="text" id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ بِتَفْصِيلٍ هُنَا..." class="flex-1 p-4 rounded-xl">
-                    <div class="flex gap-2">
-                        <button onclick="contactAdmin('whatsapp')" class="btn-green flex-1 py-4">واتساب</button>
-                        <button onclick="contactAdmin('messenger')" class="bg-blue-600 text-white font-bold rounded-xl px-4 py-4"><i class="fab fa-facebook-messenger"></i></button>
-                    </div>
+                <h3 class="text-lg mb-3 font-bold text-green-400"><i class="fas fa-file-medical"></i> نَمُوذَجُ تَشْخِيصِ الْحَالَةِ (سِرِّيٌّ لِلدُّكْتُورِ):</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                    <input type="number" id="userAge" placeholder="الْعُمْرُ.." class="p-3 rounded-xl">
+                    <select id="userStatus" class="p-3 rounded-xl">
+                        <option value="">الْحَالَةُ الِاجْتِمَاعِيَّةُ..</option>
+                        <option value="اعزب">أَعْزَبُ / عزباء</option>
+                        <option value="متزوج">مُتَزَوِّجٌ / متزوجة</option>
+                    </select>
+                </div>
+                <textarea id="problemInput" placeholder="اُكْتُبْ مَا تُعَانِي مِنْهُ (أعراض، أحلام، آلام) بِتَفْصِيلٍ هُنَا..." class="w-full p-4 rounded-xl mb-3 h-24"></textarea>
+                <div class="flex gap-2">
+                    <button onclick="contactAdmin('whatsapp')" class="btn-green flex-1 py-4">إِرْسَالُ التَّقْرِيرِ (واتساب)</button>
+                    <button onclick="contactAdmin('messenger')" class="bg-blue-600 text-white font-bold rounded-xl px-6 py-4"><i class="fab fa-facebook-messenger"></i></button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10 text-center">
                 <button onclick="renderCategory('رقية')" class="glass-card p-6 hover:bg-green-900/30">
                     <i class="fas fa-book-open text-3xl text-green-500 mb-2"></i>
                     <p class="text-xs font-bold">الرُّقْيَةُ الشَّرْعِيَّةُ</p>
@@ -105,10 +119,32 @@
                 </button>
             </div>
 
-            <div id="productDisplay" class="hidden-section pb-20">
+            <div id="productDisplay" class="hidden-section pb-10">
                 <h2 id="catTitle" class="text-2xl font-bold mb-6 text-green-500 border-r-4 border-green-500 pr-4"></h2>
                 <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+                <section>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-feather-alt"></i> مَقَالَاتٌ وَأَذْكَارٌ:</h3>
+                    <div class="blog-card">
+                        <p class="font-bold text-sm">فَوَائِدُ بُخُورِ الْغُبُشِ فِي طَرْدِ الطَّاقَةِ السَّلْبِيَّةِ</p>
+                        <p class="text-[10px] text-zinc-400">نُشِرَ بِوَاسِطَةِ: د. عَبْدَالصَّمَد</p>
+                    </div>
+                    <div class="blog-card">
+                        <p class="font-bold text-sm">أَذْكَارُ الصَّبَاحِ وَالْمَسَاءِ لِلْحِصْنِ الْحَصِينِ</p>
+                        <p class="text-[10px] text-zinc-400">نُشِرَ بِوَاسِطَةِ: الشَّيْخِ عَبْدَاللَّطِيفِ</p>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-xl font-bold text-green-500 mb-4 border-b border-green-900 pb-2"><i class="fas fa-star"></i> قَالُوا عَنْ بَحْرِ الْغُبُشِ:</h3>
+                    <div class="italic text-sm bg-zinc-900 p-4 rounded-xl border-r-4 border-yellow-600">
+                        "بِفَضْلِ اللَّهِ ثُمَّ الرُّقْيَةِ وَبُخُورِ الْغُبُشِ، تَحَسَّنَتْ حَالَتِي كَثِيراً بَعْدَ مُعَانَاةٍ طَوِيلَةٍ مَعَ الْحَسَدِ."
+                        <p class="text-left font-bold text-green-500 mt-2">- أَبُو مُحَمَّد</p>
+                    </div>
+                </section>
+            </div>
+
         </main>
     </div>
 
@@ -130,16 +166,16 @@
         <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-zinc-950">
             <div class="bg-zinc-900 p-6 rounded-2xl border border-yellow-600 shadow-2xl">
                 <p class="text-yellow-500 font-bold mb-4 underline">بَيَانَاتُ التَّحْوِيلِ لِتَأْكِيدِ الطَّلَبِ:</p>
-                <div class="space-y-3">
+                <div class="space-y-3 text-sm">
                     <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
                         <span>تَطْبِيقُ بَنْكِك:</span>
-                        <span class="text-xl font-bold text-white tracking-widest">2985827</span>
+                        <span class="font-bold text-white tracking-widest">2985827</span>
                     </div>
                     <div class="flex justify-between items-center bg-black p-3 rounded-lg border border-zinc-800">
                         <span>تَطْبِيقُ فَوْرِي:</span>
-                        <span class="text-xl font-bold text-white tracking-widest">51170108</span>
+                        <span class="font-bold text-white tracking-widest">51170108</span>
                     </div>
-                    <p class="text-xs text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
+                    <p class="text-[10px] text-center text-zinc-400">بِاسْمِ: عَبْدَالصَّمَد عَبْدَالْوَاحِد مُحَمَّد الطَّاهِر</p>
                 </div>
                 <div class="mt-4 p-3 bg-green-900/20 border border-green-900 rounded-lg text-[10px] text-green-400">
                     * بَعْدَ التَّحْوِيلِ، ارْفَعْ صُورَةَ الْإِيصَالِ هُنَا لِيَتِمَّ التَّوَاصُلُ مَعَكَ فَوْراً.
@@ -152,7 +188,7 @@
                 <label for="receiptImg" class="bg-zinc-800 p-4 rounded-full cursor-pointer text-zinc-400"><i class="fas fa-image"></i></label>
                 <input type="file" id="receiptImg" class="hidden">
                 <input type="text" id="chatMsg" placeholder="أُكْتُبْ رِسَالَتَكَ..." class="flex-1 p-4 rounded-full text-sm">
-                <button onclick="finalWhatsApp()" class="bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-500 transition">
+                <button onclick="finalWhatsApp()" class="bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
                     <i class="fab fa-whatsapp text-black text-3xl"></i>
                 </button>
             </div>
@@ -161,7 +197,7 @@
 
     <footer class="marquee-footer">
         <div class="marquee-content">
-            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ لِلْعِلَاجِ الرُّوحَانِيِّ.. (وَإِذَا مَرِضْتُ فَهُوَ يَشْفِينِ).. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ عَبْدَالْوَاحِدِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ عَبْدَالْوَاحِدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | 🔵 تابعونا على فيسبوك: bahr.gubush
+            أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. تَحْتَ إِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ.. 💬 تواصل مباشر عبر الواتساب: 249121494942 | فيسبوك: bahr.gubush
         </div>
     </footer>
 
@@ -215,7 +251,6 @@
         let currentProduct = "";
         let currentPrice = 0;
 
-        // وظيفة الواتساب المباشر
         function openWhatsAppDirect(text) {
             const phone = "249121494942";
             const encodedText = encodeURIComponent(text);
@@ -227,15 +262,8 @@
             }, 500);
         }
 
-        // وظيفة المسنجر المباشر المصلحة
         function openMessengerDirect(text = "") {
             const fbPage = "bahr.gubush"; 
-            // المسنجر لا يدعم تمرير النص في الرابط m.me بشكل مباشر مثل الواتساب، 
-            // لكن سنقوم بفتح المحادثة ونسخ النص لسهولة اللصق أو توجيه المستخدم.
-            if(text) {
-                console.log("الرسالة المطلوب إرسالها: " + text);
-                // ملاحظة: m.me تفتح المحادثة فقط، النص التلقائي يحتاج API رسمي، ولكن الرابط الآن ساري.
-            }
             window.open(`https://m.me/${fbPage}`, '_blank');
         }
 
@@ -274,12 +302,17 @@
 
         function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
 
+        // إرسال الاستشارة المطورة (توصية جمناي)
         function contactAdmin(platform) {
             const msg = document.getElementById('problemInput').value;
             const userName = document.getElementById('userName').value;
+            const age = document.getElementById('userAge').value;
+            const status = document.getElementById('userStatus').value;
+
             if(!msg) return alert("اكتب مشكلتك أولاً");
             
-            const text = `*تَشْخِيصُ حَالَةٍ جَدِيدَةٍ*\n\nالاسم: ${userName}\nالمشكلة: ${msg}`;
+            const text = `*تَقْرِيرُ حَالَةٍ جَدِيدَةٍ (سِرِّي)*\n\nالاسم: ${userName}\nالعمر: ${age}\nالحالة: ${status}\n\n*الْمُشْكِلَةُ بَتَفْصِيلٍ:*\n${msg}`;
+            
             if(platform === 'whatsapp') {
                 openWhatsAppDirect(text);
             } else {
@@ -295,10 +328,8 @@
         }
 
         function finalMessenger() {
-            const userMsg = document.getElementById('chatMsg').value;
             const userName = document.getElementById('userName').value;
-            // تجهيز نص الشراء التلقائي للمسنجر
-            const text = `طلب شراء: ${currentProduct} - السعر: ${currentPrice} - العميل: ${userName}`;
+            const text = `طلب شراء: ${currentProduct} - العميل: ${userName}`;
             openMessengerDirect(text);
         }
 
