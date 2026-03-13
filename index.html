@@ -376,18 +376,19 @@
         }
 
         function finalWhatsApp() {
-            // كود سحب الوقت والتاريخ واليوم تلقائياً
             const now = new Date();
             const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
             const dayName = days[now.getDay()];
             const dateStr = now.toLocaleDateString('ar-EG');
             const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            
+            // سحب الاسم الذي أدخله المستخدم عند الدخول
+            const userNameInSite = document.getElementById('userName').value || "عبدالصمد";
             const userNote = document.getElementById('chatMsg').value || "لا توجد ملاحظات إضافية";
 
-            // إنشاء نص الرسالة المطلوب
             const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*
 
-الاسم: عبدالصمد 
+الاسم: ${userNameInSite} 
 الْمُنْتَجُ: ${currentProduct}
 السِّعْرُ: ${currentPrice.toLocaleString()} SDG
 اليوم: ${dayName}
@@ -397,6 +398,7 @@
 
 _جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
 
+            // فتح واتساب مباشرة بالرسالة
             openWhatsAppDirect(text);
         }
 
