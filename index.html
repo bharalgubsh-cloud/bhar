@@ -156,7 +156,7 @@
                         <p class="text-[10px] text-zinc-500 mt-1">بِقَلَمِ: د. عَبْدَالصَّمَد</p>
                     </div>
                     <div class="blog-card" onclick="openArticle('sections')">
-                        <p class="font-bold text-sm text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ</p>
+                        <p class="font-bold text-sm text-green-400">دَلِيلُ أَقْسَامِ بَحْرِ الْغُبُشِ الشَّامِلِ</p>
                         <p class="text-[11px] text-zinc-300">تَعْرِيفَاتٌ دَقِيقَةٌ لِلرُّقْيَةِ، الْأَعْشَابِ، الزُّيُوتِ، وَالْعَسَلِ وَفَوَائِدِهَا..</p>
                     </div>
                 </section>
@@ -376,7 +376,27 @@
         }
 
         function finalWhatsApp() {
-            const text = `طلب شراء: ${currentProduct}\nالرسالة: ${document.getElementById('chatMsg').value}`;
+            // كود سحب الوقت والتاريخ واليوم تلقائياً
+            const now = new Date();
+            const days = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            const dayName = days[now.getDay()];
+            const dateStr = now.toLocaleDateString('ar-EG');
+            const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+            const userNote = document.getElementById('chatMsg').value || "لا توجد ملاحظات إضافية";
+
+            // إنشاء نص الرسالة المطلوب
+            const text = `*طَلَبُ شِرَاءٍ جَدِيدٍ*
+
+الاسم: عبدالصمد 
+الْمُنْتَجُ: ${currentProduct}
+السِّعْرُ: ${currentPrice.toLocaleString()} SDG
+اليوم: ${dayName}
+التاريخ: ${dateStr}
+الزمن: ${timeStr}
+الرِّسَالَةُ: ${userNote}
+
+_جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
+
             openWhatsAppDirect(text);
         }
 
@@ -388,4 +408,3 @@
     </script>
 </body>
 </html>
-
