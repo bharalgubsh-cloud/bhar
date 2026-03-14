@@ -3,131 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بحر الغُبُش | مركز التحكم الموحد</title>
+    <title>موقع بحر الغُبُش | الرقية والطب البديل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background: #010a01; color: #fff; overflow-x: hidden; }
-        .admin-panel { background: rgba(10, 35, 10, 0.98); border: 2px solid #145a32; border-radius: 25px; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
-        .visitor-btn { background: #22c55e; color: #000; font-weight: bold; padding: 4px 12px; border-radius: 8px; font-size: 10px; cursor: pointer; transition: 0.3s; }
-        .notification-badge { background: #ef4444; color: #fff; padding: 2px 8px; border-radius: 10px; font-size: 12px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .input-gold { background: #000 !important; border: 1px solid #d4af37 !important; color: #d4af37 !important; text-align: center; border-radius: 10px; width: 100%; font-weight: bold; }
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+        body { font-family: 'Amiri', serif; background-color: #010a01; color: #fff; margin: 0; overflow-x: hidden; font-size: 1.15rem; }
+        .glass-card { background: rgba(5, 30, 5, 0.95); border: 1px solid #145a32; border-radius: 20px; transition: 0.3s; }
+        .btn-green { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #000; font-weight: bold; border-radius: 12px; cursor: pointer; }
+        .btn-green:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .marquee-footer { position: fixed; bottom: 0; width: 100%; background: #000; border-top: 2px solid #2ecc71; overflow: hidden; padding: 12px 0; z-index: 9999; }
+        .marquee-content { display: inline-block; white-space: nowrap; animation: scroll-ltr 60s linear infinite; color: #f1c40f; font-weight: bold; font-size: 1.1rem; }
+        @keyframes scroll-ltr { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .hidden-section { display: none !important; }
+        input, select, textarea { background: #000 !important; border: 1px solid #145a32 !important; color: white !important; outline: none; }
+        .badge-price { background: #145a32; color: #2ecc71; padding: 2px 8px; border-radius: 5px; font-size: 14px; }
     </style>
 </head>
-<body class="p-2 md:p-6">
+<body class="pb-24">
 
-    <div id="gate" class="fixed inset-0 bg-black z-[1000] flex items-center justify-center p-4">
-        <div class="admin-panel w-full max-w-md p-10 text-center border-green-500">
-            <h2 class="text-2xl font-bold mb-8 text-green-500 italic">بحر الغُبُش | الإدارة العليا</h2>
-            <input type="password" id="pass" placeholder="كلمة المرور الإدارية" class="input-gold p-4 mb-6">
-            <button onclick="enterSystem()" class="w-full bg-green-600 text-black py-4 rounded-xl font-black hover:bg-green-400 transition">دخول الغرفة المركزية</button>
+    <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
+        <header class="mb-8">
+            <i class="fas fa-mosque text-8xl text-green-500 mb-4"></i>
+            <h1 class="text-5xl font-bold">بَحْرُ الْغُبُشِ</h1>
+            <p class="text-green-400 mt-2 italic font-bold">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
+        </header>
+        <div class="glass-card p-10 w-full max-w-md shadow-2xl border-green-600">
+            <input type="text" id="userName" placeholder="اُكْتُبِ اسْمَكَ لِلدُّخُولِ..." class="w-full p-4 rounded-xl mb-4 text-center text-xl">
+            <button onclick="enterSite()" class="btn-green w-full py-4 text-2xl">دُخُولُ الْمَنْظُومَةِ</button>
         </div>
     </div>
 
-    <div id="mainDashboard" style="display:none;">
-        <header class="flex justify-between items-center mb-6 border-b border-green-900 pb-4">
-            <div>
-                <h1 class="text-2xl font-bold text-green-500 italic">بَحْرُ الْغُبُشِ <span class="text-xs font-light text-zinc-500 mr-2">| نظام الإدارة الموحد</span></h1>
-                <p class="text-[10px] text-zinc-400 font-bold mt-1">مدير النظام: الشيخ عبداللطيف عبدالواحد</p>
+    <div id="mainDashboard" class="hidden-section min-h-screen">
+        <nav class="p-4 border-b border-green-900 flex justify-between items-center bg-black/80 sticky top-0 z-50">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-mosque text-green-500 text-2xl"></i>
+                <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
-            <div id="liveAlert" class="hidden"><span class="notification-badge">طلب جديد الآن!</span></div>
-        </header>
+            <button onclick="location.reload()" class="bg-red-900/20 text-red-500 px-4 py-1 rounded-lg border border-red-800 text-xs">خُرُوج</button>
+        </nav>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <div class="admin-panel p-4 text-center border-blue-900">
-                <p class="text-[10px] text-blue-400 mb-2 font-bold uppercase">طلبات اليوم</p>
-                <p id="orderCount" class="text-3xl font-bold">24</p>
-            </div>
-            <div class="admin-panel p-4 text-center border-yellow-900">
-                <p class="text-[10px] text-yellow-400 mb-2 font-bold uppercase">إخطارات معلقة</p>
-                <p id="pendingAlerts" class="text-3xl font-bold text-yellow-500">7</p>
-            </div>
-            <div class="admin-panel p-4 text-center border-cyan-900">
-                <p class="text-[10px] text-cyan-400 mb-2 font-bold uppercase">الزوار حالياً</p>
-                <p class="text-3xl font-bold">12</p>
-            </div>
-            <div class="admin-panel p-4 text-center border-green-900">
-                <p class="text-[10px] text-green-400 mb-2 font-bold uppercase">رصيد اليوم</p>
-                <p class="text-3xl font-bold">1.2M <span class="text-xs">SDG</span></p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2 admin-panel p-6 border-green-800">
-                <h3 class="text-lg font-bold mb-6 text-green-400 flex items-center">
-                    <i class="fas fa-link ml-3"></i> ربط أزرار قسم الرقية (الجسم الواحد)
-                </h3>
-                
-                <div class="space-y-4 overflow-y-auto max-h-[400px] pr-2">
-                    <div class="flex items-center justify-between bg-black/50 p-4 rounded-xl border border-zinc-800">
-                        <span class="text-xs font-bold">سحر الأرحام / السحر الأسود</span>
-                        <div class="flex gap-4">
-                            <input type="text" value="75,000" class="input-gold w-24 text-xs p-1">
-                            <button onclick="simulateOrder('سحر الأرحام')" class="visitor-btn">اختبار الربط</button>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between bg-black/50 p-4 rounded-xl border border-zinc-800">
-                        <span class="text-xs font-bold">العين والحسد</span>
-                        <div class="flex gap-4">
-                            <input type="text" value="75,000" class="input-gold w-24 text-xs p-1">
-                            <button onclick="simulateOrder('العين والحسد')" class="visitor-btn">اختبار الربط</button>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between bg-black/50 p-4 rounded-xl border border-zinc-800">
-                        <span class="text-xs font-bold">سحر الفتور والخمول</span>
-                        <div class="flex gap-4">
-                            <input type="text" value="75,000" class="input-gold w-24 text-xs p-1">
-                            <button onclick="simulateOrder('سحر الفتور')" class="visitor-btn">اختبار الربط</button>
-                        </div>
-                    </div>
-                </div>
-
-                <button onclick="finalSync()" class="w-full bg-green-600 text-black py-5 mt-8 rounded-2xl font-black text-xl hover:shadow-[0_0_30px_#22c55e] transition-all">
-                    تحديث ومزامنة كافة أزرار الموقع الآن
+        <main class="max-w-5xl mx-auto p-4">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-10 text-center mt-10">
+                <button onclick="renderCategory('رقية')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-book-open text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold uppercase">الرُّقْيَةُ الشَّرْعِيَّةُ</p>
+                </button>
+                <button onclick="renderCategory('اعشاب')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-leaf text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold uppercase">الْأَعْشَابُ</p>
+                </button>
+                <button onclick="renderCategory('زيوت')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-flask text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold uppercase">الزُّيُوتُ</p>
+                </button>
+                <button onclick="renderCategory('عسل')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-honey-pot text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold uppercase">عَسَلُ النَّحْلِ</p>
+                </button>
+                <button onclick="renderCategory('بخور')" class="glass-card p-6 hover:bg-green-900/30">
+                    <i class="fas fa-wind text-3xl text-green-500 mb-2"></i>
+                    <p class="text-xs font-bold uppercase">بُخُورُ الْغُبُشِ</p>
                 </button>
             </div>
 
-            <div class="admin-panel p-6 border-red-900 bg-red-950/10">
-                <h3 class="text-red-500 font-bold mb-6 text-sm italic">غرفة الاستقبال الحية</h3>
-                <div id="chatBox" class="bg-black/80 h-64 rounded-2xl border border-red-900 p-4 overflow-y-auto mb-4 text-[10px] space-y-2">
-                    <p class="text-zinc-500 italic">بانتظار تفاعل الزوار من الموقع العام...</p>
+            <div id="productDisplay" class="hidden-section pb-20">
+                <h2 id="catTitle" class="text-2xl font-bold mb-6 text-green-500 border-r-4 border-green-500 pr-4 italic"></h2>
+                <div id="itemsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+            </div>
+        </main>
+    </div>
+
+    <div id="chatModal" class="fixed inset-0 bg-black z-[10000] hidden-section flex flex-col">
+        <div class="p-4 bg-green-900 flex justify-between items-center">
+            <button onclick="document.getElementById('chatModal').classList.add('hidden-section')" class="text-white text-2xl"><i class="fas fa-arrow-right"></i></button>
+            <div class="text-center">
+                <p id="chatProduct" class="font-bold text-lg text-white"></p>
+                <p id="chatPrice" class="text-xs text-green-200"></p>
+            </div>
+            <div></div>
+        </div>
+        <div class="flex-1 p-6 bg-zinc-950 flex flex-col items-center justify-center text-center">
+            <div class="bg-zinc-900 p-8 rounded-3xl border border-yellow-600 shadow-2xl max-w-sm w-full">
+                <p class="text-yellow-500 font-bold mb-6 text-xl underline">تَأْكِيدُ الطَّلَبِ وَالتَّحْوِيلِ:</p>
+                <p class="text-zinc-400 text-sm mb-4">يُرْجَى تَصْوِيرُ إِشْعَارِ التَّحْوِيلِ وَإِرْسَالُهُ لِلشَّيْخِ عَبْدَاللَّطِيفِ</p>
+                <div class="space-y-4 text-lg">
+                    <div class="bg-black p-4 rounded-xl border border-zinc-800">
+                        <span class="text-zinc-500 text-xs block">تَطْبِيقُ بَنْكِك:</span>
+                        <span class="font-bold text-white">2985827</span>
+                    </div>
                 </div>
-                <button onclick="alert('جاري فتح قناة التواصل المباشر...')" class="w-full py-4 bg-red-900/40 text-red-500 rounded-xl font-bold text-xs hover:bg-red-600 hover:text-white transition">الرد على محادثات الزوار</button>
+                <button onclick="sendToWhatsApp()" class="btn-green w-full py-4 mt-8 text-xl">
+                    تَوَاصَلْ الآن (واتساب) <i class="fab fa-whatsapp"></i>
+                </button>
             </div>
         </div>
     </div>
 
+    <footer class="marquee-footer">
+        <div class="marquee-content">أَهْلاً وَسَهْلاً بِكُمْ فِي مَوْقِعِ بَحْرِ الْغُبُشِ.. 💬 تواصل مباشر: 249121494942</div>
+    </footer>
+
     <script>
-        function enterSystem() {
-            if(document.getElementById('pass').value === 'flor19935') {
-                document.getElementById('gate').style.display = 'none';
-                document.getElementById('mainDashboard').style.display = 'block';
-            } else { alert("عذراً، كلمة المرور الإدارية خاطئة"); }
+        const bahrChannel = new BroadcastChannel('bahr_network');
+        let currentProduct = "";
+        let currentPrice = "";
+
+        const menu = {
+            'رقية': [{n:'الْعَيْنُ وَالْحَسَدُ', p:100000}, {n:'السِّحْرُ الْمَأْكُولُ', p:100000}, {n:'سِحْرُ الْأَرْحَامِ', p:100000}],
+            'اعشاب': [{n:'الْقُسْطُ الْهِنْدِيُّ', p:50000}, {n:'السِّدْرُ الْمَسْحُونُ', p:50000}],
+            'زيوت': [{n:'زَيْتُ الزَّيْتُونِ الْمَرْقِيُّ', p:20000}, {n:'زَيْتُ السِّمْسِمِ الْمَرْقِيُّ', p:17000}],
+            'عسل': [{n:'عَسَلُ النَّحْلِ الْمَرْقِيُّ', p:20000}, {n:'خَلْطَةُ الشِّفَاءِ', p:250000}],
+            'بخور': [{n:'بُخُورُ الْغُبُشِ (خَاص)', p:50000}, {n:'الْمِسْكُ الْأَصْلِيُّ', p:50000}]
+        };
+
+        function enterSite() {
+            if(!document.getElementById('userName').value) return alert("يُرْجَى إِدْخَالُ الِاسْمِ لِتَقْدِيمِ الْخِدْمَةِ");
+            document.getElementById('loginPage').classList.add('hidden-section');
+            document.getElementById('mainDashboard').classList.remove('hidden-section');
         }
 
-        // دالة استقبال الطلب من الزائر (جسم واحد)
-        function simulateOrder(service) {
-            const chat = document.getElementById('chatBox');
-            const alertBox = document.getElementById('liveAlert');
-            const pending = document.getElementById('pendingAlerts');
-            
-            // تحديث الإحصائيات فورياً
-            alertBox.classList.remove('hidden');
-            pending.innerText = parseInt(pending.innerText) + 1;
-            
-            // إضافة الطلب لغرفة الإدارة
-            const msg = document.createElement('p');
-            msg.className = "p-2 bg-green-900/20 border-r-2 border-green-500 text-green-400 mb-2 animate-bounce";
-            msg.innerText = "🚨 تنبيه: زائر يطلب [" + service + "] الآن من الموقع العام.";
-            chat.prepend(msg);
-            
-            alert("وصل طلب جديد لـ " + service + " إلى غرفة الإدارة بنجاح!");
+        function renderCategory(cat) {
+            const grid = document.getElementById('itemsGrid');
+            document.getElementById('catTitle').innerText = cat;
+            document.getElementById('productDisplay').classList.remove('hidden-section');
+            grid.innerHTML = '';
+            menu[cat].forEach(item => {
+                grid.innerHTML += `
+                    <div class="glass-card p-6 flex flex-col justify-between">
+                        <h4 class="font-bold text-lg mb-2 text-green-400">${item.n}</h4>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="badge-price">${item.p.toLocaleString()} SDG</span>
+                            <button onclick="placeOrder('${item.n}', '${item.p.toLocaleString()} SDG')" class="btn-green px-4 py-2 text-sm">شِرَاء وَدَرْدَشَة</button>
+                        </div>
+                    </div>
+                `;
+            });
+            window.scrollTo({top: document.getElementById('productDisplay').offsetTop - 100, behavior: 'smooth'});
         }
 
-        function finalSync() {
-            alert("تم ربط كافة أزرار 'شراء ودردشة' في قسم الرقية الشرعية. أي ضغطة من الزائر ستظهر لك في غرفة الاستقبال فوراً يا شيخ عبداللطيف.");
+        function placeOrder(name, price) {
+            currentProduct = name;
+            currentPrice = price;
+            const user = document.getElementById('userName').value;
+
+            // إرسال الإشارة فوراً لغرفة الإدارة
+            bahrChannel.postMessage({
+                type: 'CUSTOMER_ORDER',
+                service: name,
+                price: price,
+                user: user
+            });
+
+            // فتح نافذة الدفع للزائر
+            document.getElementById('chatProduct').innerText = name;
+            document.getElementById('chatPrice').innerText = "السعر: " + price;
+            document.getElementById('chatModal').classList.remove('hidden-section');
+        }
+
+        function sendToWhatsApp() {
+            const user = document.getElementById('userName').value;
+            const text = `السلام عليكم يا شيخ عبداللطيف، أنا ${user}. أرغب في طلب ${currentProduct} بسعر ${currentPrice}.`;
+            window.open(`https://wa.me/249121494942?text=${encodeURIComponent(text)}`, '_blank');
         }
     </script>
 </body>
