@@ -225,7 +225,14 @@
     </footer>
 
     <script>
-        // المحتوى المكتوب بعناية فائقة
+        // --- كود الرادار (العين) لربط الإدارة بالزوار ---
+        const bahrRadar = new BroadcastChannel('bahr_network');
+        
+        function reportToAdmin(type, data) {
+            bahrRadar.postMessage({ type, ...data });
+        }
+        // ----------------------------------------------
+
         const contentData = {
             'bakhour': {
                 title: 'بُخُورُ الْغُبُشِ: عِلْمُ التَّطْهِيرِ وَسِرُّ الْبَرَكَةِ',
@@ -276,7 +283,6 @@
             document.getElementById('contentModal').style.display = 'none';
         }
 
-        // الحفاظ على قائمة المنتجات كاملة كما هي
         const menu = {
             'رقية': [
                 {n:'الْعَيْنُ وَالْحَسَدُ', p:100000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:100000},
@@ -336,7 +342,12 @@
         }
 
         function enterSite() {
-            if(!document.getElementById('userName').value) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
+            const name = document.getElementById('userName').value;
+            if(!name) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
+            
+            // --- تبليغ الإدارة بدخول الزائر ---
+            reportToAdmin('VISITOR_ONLINE', { user: name });
+            
             document.getElementById('loginPage').classList.add('hidden-section');
             document.getElementById('mainDashboard').classList.remove('hidden-section');
         }
@@ -362,6 +373,13 @@
 
         function openChat(name, price) {
             currentProduct = name; currentPrice = price;
+            
+            // --- تبليغ الإدارة باهتمام الزائر بمنتج معين ---
+            reportToAdmin('CUSTOMER_ORDER', { 
+                service: name, 
+                user: document.getElementById('userName').value || "زائر" 
+            });
+
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
             document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
@@ -382,7 +400,6 @@
             const dateStr = now.toLocaleDateString('ar-EG');
             const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
             
-            // سحب الاسم الذي أدخله المستخدم عند الدخول
             const userNameInSite = document.getElementById('userName').value || "عبدالصمد";
             const userNote = document.getElementById('chatMsg').value || "لا توجد ملاحظات إضافية";
 
@@ -398,7 +415,6 @@
 
 _جَارِي رَفْعُ صُورَةِ الْإِيصَالِ..._`;
 
-            // فتح واتساب مباشرة بالرسالة
             openWhatsAppDirect(text);
         }
 
