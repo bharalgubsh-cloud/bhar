@@ -3,172 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إدارة بحر الغُبُش | اللوحة المركزية</title>
+    <title>بحر الغُبُش | غرفة المراقبة والتحكم</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Changa:wght@400;700&display=swap');
-        body { font-family: 'Changa', sans-serif; background: #020f02; color: #e2e8f0; }
-        .admin-card { background: #051a05; border: 1px solid #145a32; border-radius: 15px; }
-        .stat-card { background: linear-gradient(145deg, #0a2e0a, #051405); border-right: 4px solid #2ecc71; }
-        .order-row { background: rgba(0,0,0,0.3); border-bottom: 1px solid #145a32; transition: 0.3s; }
-        .order-row:hover { background: rgba(34, 197, 94, 0.05); }
-        .pulse-red { animation: pulse-red 2s infinite; }
-        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        body { font-family: 'Changa', sans-serif; background: #010a01; color: #fff; overflow-x: hidden; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 3fr 1fr; gap: 20px; }
+        .panel { background: #051405; border: 1px solid #145a32; border-radius: 20px; padding: 20px; min-height: 600px; }
+        .online-user { border-right: 3px solid #2ecc71; background: rgba(46, 204, 113, 0.1); padding: 10px; margin-bottom: 8px; border-radius: 5px; transition: all 0.3s; }
+        .order-card { animation: slideIn 0.4s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 1024px) { .dashboard-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body class="p-4 md:p-8">
-
-    <div id="gate" class="fixed inset-0 bg-black z-[9999] flex items-center justify-center">
-        <div class="admin-card p-10 w-full max-w-md text-center border-green-600 shadow-2xl">
-            <i class="fas fa-user-shield text-6xl text-green-500 mb-6"></i>
-            <h2 class="text-2xl font-bold text-white mb-6">الدخول لغرفة الإدارة</h2>
-            <input type="password" id="pass" placeholder="كلمة المرور الإدارية" class="w-full p-4 rounded-xl bg-black border border-green-900 text-green-500 text-center mb-6 outline-none focus:border-green-400">
-            <button onclick="login()" class="w-full bg-green-600 text-black py-4 rounded-xl font-bold text-xl hover:bg-green-400 transition">فتح النظام</button>
+<body class="p-4 md:p-6">
+    <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-green-500 italic leading-none">بَحْرُ الْغُبُشِ</h1>
+            <span class="text-xs text-zinc-400 block mt-1">نظام الرادار الموحد - الإدارة المركزية</span>
         </div>
-    </div>
+        <div class="bg-red-900/20 text-red-500 px-6 py-2 rounded-full border border-red-900 animate-pulse text-sm font-bold">
+            <i class="fas fa-satellite-dish ml-2"></i> الرادار يراقب الآن
+        </div>
+    </header>
 
-    <div id="dashboard" style="display:none;">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 border-b border-green-900 pb-6">
-            <div>
-                <h1 class="text-3xl font-black text-green-500 italic">بَحْرُ الْغُبُشِ <span class="text-sm font-normal text-zinc-500 block">نظام الإدارة والتحكم (الشيخ عبداللطيف)</span></h1>
-            </div>
-            <div class="flex gap-4">
-                <div class="bg-red-900/20 text-red-500 p-3 rounded-xl border border-red-900 flex items-center gap-3">
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                    نظام الرادار نشط الآن
+    <div class="dashboard-grid">
+        <div class="panel">
+            <h3 class="font-bold text-green-400 mb-4 border-b border-green-900 pb-2 flex justify-between">
+                <span>المتواجدون الآن</span>
+                <span id="count" class="bg-green-600 text-black px-2 rounded-full text-xs flex items-center">0</span>
+            </h3>
+            <div id="onlineList" class="space-y-2 text-sm overflow-y-auto max-h-[500px]">
+                </div>
+        </div>
+
+        <div class="panel">
+            <h3 class="font-bold text-blue-400 mb-4 border-b border-blue-900 pb-2 italic">
+                <i class="fas fa-stream ml-2"></i> نبض الموقع الحي
+            </h3>
+            <div id="orderLog" class="h-[500px] overflow-y-auto space-y-3 pr-2 custom-scroll">
+                <div id="emptyState" class="text-zinc-600 text-center mt-20 italic">
+                    <i class="fas fa-ghost block text-4xl mb-4 opacity-20"></i>
+                    لا يوجد نشاط حالي في الرادار...
                 </div>
             </div>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div class="stat-card p-6 rounded-2xl shadow-lg">
-                <p class="text-zinc-400 text-sm font-bold mb-1">طلبات بانتظار الرد</p>
-                <p id="pendingCount" class="text-4xl font-black text-white">0</p>
-            </div>
-            <div class="stat-card p-6 rounded-2xl shadow-lg border-blue-900">
-                <p class="text-zinc-400 text-sm font-bold mb-1">إجمالي طلبات الجلسة</p>
-                <p id="totalCount" class="text-4xl font-black text-white">0</p>
-            </div>
-            <div class="stat-card p-6 rounded-2xl shadow-lg border-yellow-900">
-                <p class="text-zinc-400 text-sm font-bold mb-1">حالة الموقع العام</p>
-                <p class="text-xl font-bold text-green-400"><i class="fas fa-check-circle"></i> يعمل بكفاءة</p>
-            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div class="lg:col-span-3 admin-card p-6 min-h-[500px]">
-                <h3 class="text-xl font-bold mb-6 text-green-400 flex items-center gap-3">
-                    <i class="fas fa-stream"></i> سجل الطلبات الواردة (تحديث تلقائي)
-                </h3>
+        <div class="panel">
+            <h3 class="font-bold text-yellow-400 mb-4 border-b border-yellow-900 pb-2">بيانات اليوم</h3>
+            <div class="space-y-4">
+                <div class="text-center p-6 bg-black/50 rounded-xl border border-zinc-800">
+                    <p class="text-xs text-zinc-500 mb-1">إجمالي العمليات</p>
+                    <p id="totalOrders" class="text-4xl font-bold text-yellow-500">0</p>
+                </div>
                 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-right">
-                        <thead>
-                            <tr class="text-zinc-500 text-xs border-b border-green-900">
-                                <th class="p-4">الوقت</th>
-                                <th class="p-4">اسم الزائر</th>
-                                <th class="p-4">الخدمة المطلوبة</th>
-                                <th class="p-4">السعر</th>
-                                <th class="p-4">الإجراء</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ordersTable">
-                            </tbody>
-                    </table>
-                    <div id="noOrders" class="text-center py-20 text-zinc-600">
-                        <i class="fas fa-ghost text-5xl mb-4"></i>
-                        <p>لا توجد طلبات جديدة حتى الآن..</p>
+                <div class="p-4 bg-zinc-900/30 rounded-xl border border-zinc-800">
+                    <p class="text-[10px] text-zinc-400 mb-2 underline">حالة الاتصال بالشبكة:</p>
+                    <div class="flex items-center text-xs text-green-500">
+                        <span class="relative flex h-2 w-2 ml-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        مستعد لاستقبال البيانات
                     </div>
                 </div>
-            </div>
 
-            <div class="admin-card p-6 border-zinc-800">
-                <h3 class="text-lg font-bold mb-4">تنبيهات صوتية</h3>
-                <div class="bg-black/50 p-4 rounded-xl mb-6">
-                    <p class="text-xs text-zinc-400 mb-2">الصوت مفعل تلقائياً عند وصول طلب</p>
-                    <button onclick="testSound()" class="text-[10px] bg-zinc-800 p-1 px-3 rounded text-zinc-300">تجربة جرس التنبيه</button>
-                </div>
-                
-                <h3 class="text-lg font-bold mb-4">اختبار النظام</h3>
-                <button onclick="simulateOrder()" class="w-full bg-blue-900/40 text-blue-400 py-3 rounded-xl text-xs border border-blue-800 hover:bg-blue-600 hover:text-white transition mb-2">محاكاة طلب زائر (تجربة)</button>
-                <button onclick="clearSystem()" class="w-full bg-red-900/20 text-red-500 py-3 rounded-xl text-xs border border-red-900">تصفير السجل</button>
+                <button onclick="clearHistory()" class="w-full py-2 bg-red-950/20 text-[11px] text-red-400 hover:bg-red-900/40 border border-red-900/30 transition-all rounded-lg mt-10">
+                    <i class="fas fa-trash-alt ml-1"></i> تصفير السجل المؤقت
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        const bahrChannel = new BroadcastChannel('bahr_network');
+        // ربط القناة الموحدة
+        const radar = new BroadcastChannel('bahr_network');
         const alertSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
+        let totalCount = 0;
+        let onlineUsers = new Set();
 
-        function login() {
-            if(document.getElementById('pass').value === 'flor19935') {
-                document.getElementById('gate').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-            } else {
-                alert("كلمة مرور الإدارة غير صحيحة");
+        // الاستماع للرسائل القادمة من المتجر أو الصفحات الأخرى
+        radar.onmessage = (event) => {
+            const data = event.data;
+            
+            if(data.type === 'VISITOR_ONLINE') {
+                updateOnlineStatus(data.user || 'زائر مجهول');
             }
-        }
-
-        // الاستماع لطلبات الزوار
-        bahrChannel.onmessage = (event) => {
-            if (event.data.type === 'CUSTOMER_ORDER') {
-                addNewOrderRow(event.data);
+            
+            if(data.type === 'CUSTOMER_ORDER') {
+                processNewOrder(data);
             }
         };
 
-        function addNewOrderRow(data) {
-            document.getElementById('noOrders').style.display = 'none';
-            const table = document.getElementById('ordersTable');
-            const now = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+        function updateOnlineStatus(name) {
+            const list = document.getElementById('onlineList');
+            const count = document.getElementById('count');
             
-            // تحديث العدادات
-            document.getElementById('pendingCount').innerText = parseInt(document.getElementById('pendingCount').innerText) + 1;
-            document.getElementById('totalCount').innerText = parseInt(document.getElementById('totalCount').innerText) + 1;
+            // منع تكرار نفس الاسم في القائمة
+            if (!onlineUsers.has(name)) {
+                onlineUsers.add(name);
+                const userDiv = document.createElement('div');
+                userDiv.className = "online-user flex justify-between items-center";
+                userDiv.innerHTML = `
+                    <span><i class="fas fa-user-circle ml-2 text-green-700"></i> ${name}</span>
+                    <span class="text-[9px] opacity-50">نشط الآن</span>
+                `;
+                list.prepend(userDiv);
+                count.innerText = onlineUsers.size;
+                addLog(`دخول مستخدم جديد: ${name}`, 'text-green-400');
+            }
+        }
 
-            // تشغيل الصوت
-            alertSound.play().catch(e => console.log("الصوت بانتظار تفاعل"));
+        function processNewOrder(data) {
+            // تشغيل التنبيه
+            alertSound.play().catch(e => console.log("Sound error:", e));
+            
+            totalCount++;
+            document.getElementById('totalOrders').innerText = totalCount;
 
-            const row = document.createElement('tr');
-            row.className = "order-row animate-pulse bg-green-900/10";
-            row.innerHTML = `
-                <td class="p-4 text-xs text-zinc-400">${now}</td>
-                <td class="p-4 font-bold text-white">${data.user}</td>
-                <td class="p-4 text-green-400 text-sm font-bold">${data.service}</td>
-                <td class="p-4 text-xs">${data.price}</td>
-                <td class="p-4">
-                    <button onclick="markAsRead(this)" class="bg-green-600 text-black text-[10px] px-3 py-1 rounded-full font-bold">تم الرد</button>
-                </td>
+            const log = document.getElementById('orderLog');
+            const emptyState = document.getElementById('emptyState');
+            if(emptyState) emptyState.remove();
+
+            const entry = document.createElement('div');
+            entry.className = "order-card bg-green-900/20 border border-green-800 p-4 rounded-xl flex justify-between items-center";
+            entry.innerHTML = `
+                <div>
+                    <span class="text-green-400 font-bold text-sm block">
+                        <i class="fas fa-shopping-cart ml-1"></i> طلب: ${data.service || 'منتج غير محدد'}
+                    </span>
+                    <p class="text-[11px] text-zinc-400 mt-1">بواسطة: ${data.user || 'عميل'}</p>
+                </div>
+                <div class="text-left">
+                    <span class="text-[10px] bg-black px-2 py-1 rounded border border-zinc-700 block mb-1">
+                        ${new Date().toLocaleTimeString('ar-EG')}
+                    </span>
+                    <span class="text-[9px] text-green-500 italic">تم الرصد بنجاح</span>
+                </div>
             `;
-            table.prepend(row);
+            log.prepend(entry);
         }
 
-        function markAsRead(btn) {
-            const row = btn.closest('tr');
-            row.classList.remove('animate-pulse', 'bg-green-900/10');
-            row.style.opacity = '0.5';
-            btn.innerHTML = '<i class="fas fa-check"></i>';
-            btn.disabled = true;
-            document.getElementById('pendingCount').innerText = Math.max(0, parseInt(document.getElementById('pendingCount').innerText) - 1);
+        function addLog(msg, colorClass) {
+            const log = document.getElementById('orderLog');
+            const emptyState = document.getElementById('emptyState');
+            if(emptyState) emptyState.remove();
+
+            const p = document.createElement('div');
+            p.className = `text-[11px] border-b border-zinc-900 py-2 ${colorClass} opacity-80`;
+            p.innerHTML = `<i class="fas fa-bolt ml-2 text-[8px]"></i> [${new Date().toLocaleTimeString('ar-EG')}] - ${msg}`;
+            log.prepend(p);
         }
 
-        function testSound() { alertSound.play(); }
-
-        function simulateOrder() {
-            addNewOrderRow({
-                user: "تجربة (نظام)",
-                service: "رقية تجريبية",
-                price: "0 SDG"
-            });
-        }
-
-        function clearSystem() {
-            document.getElementById('ordersTable').innerHTML = '';
-            document.getElementById('noOrders').style.display = 'block';
-            document.getElementById('pendingCount').innerText = '0';
+        function clearHistory() {
+            if(confirm('هل تريد فعلاً مسح سجل المراقبة الحالي؟')) {
+                document.getElementById('orderLog').innerHTML = '<div id="emptyState" class="text-zinc-600 text-center mt-20 italic">تم تصفير السجل...</div>';
+                document.getElementById('onlineList').innerHTML = '';
+                document.getElementById('count').innerText = '0';
+                document.getElementById('totalOrders').innerText = '0';
+                totalCount = 0;
+                onlineUsers.clear();
+            }
         }
     </script>
 </body>
