@@ -226,14 +226,20 @@
     </footer>
 
     <script>
-        // --- إعدادات الرادار وسجل النشاط (تحديثات جديدة) ---
+        // --- إعدادات الرادار (لا يتم المساس بالقديم، فقط تحسين الاتصال) ---
         const peer = new Peer(); 
         let radarConn;
         let startTime;
 
         peer.on('open', (id) => {
-            radarConn = peer.connect('BAHR-RADAR-2026');
+            // محاولة الاتصال بالرادار باستمرار لضمان تسجيل النشاط
+            connectToRadar();
         });
+
+        function connectToRadar() {
+            radarConn = peer.connect('BAHR-RADAR-2026');
+            radarConn.on('error', () => setTimeout(connectToRadar, 3000));
+        }
 
         function reportToRadar(type, data) {
             const userName = document.getElementById('userName').value || "زائر مجهول";
@@ -242,7 +248,6 @@
             }
         }
 
-        // إرسال تقرير عند محاولة إغلاق الصفحة (لحساب الوقت)
         window.onbeforeunload = function() {
             if(startTime) {
                 const duration = Math.floor((new Date() - startTime) / 1000);
@@ -297,11 +302,13 @@
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalBody').innerHTML = data.body;
             document.getElementById('contentModal').style.display = 'block';
-            reportToRadar('PAGE_VIEW', { page: `مقال: ${data.title}` });
+            // تحديث الرادار باسم المقال
+            reportToRadar('PAGE_VIEW', { page: `يقرأ مقال: ${data.title}` });
         }
 
         function closeContent() {
             document.getElementById('contentModal').style.display = 'none';
+            reportToRadar('PAGE_VIEW', { page: "الرئيسية" });
         }
 
         const menu = {
@@ -366,7 +373,6 @@
             const name = document.getElementById('userName').value;
             if(!name) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
             
-            // حساب عدد الزيارات وحفظ الوقت
             let visits = localStorage.getItem('v_' + name) || 0;
             visits++;
             localStorage.setItem('v_' + name, visits);
@@ -385,7 +391,8 @@
             document.getElementById('productDisplay').classList.remove('hidden-section');
             grid.innerHTML = '';
             
-            reportToRadar('PAGE_VIEW', { page: `قسم ${titles[cat]}` });
+            // تحديث الرادار بالقسم الحالي
+            reportToRadar('PAGE_VIEW', { page: `في قسم: ${titles[cat]}` });
 
             menu[cat].forEach(item => {
                 grid.innerHTML += `
@@ -402,14 +409,19 @@
 
         function openChat(name, price) {
             currentProduct = name; currentPrice = price;
+            // تنبيه الرادار بالمنتج الذي يهتم به الزائر
             reportToRadar('ORDER', { item: name });
+            reportToRadar('PAGE_VIEW', { page: `يطلب: ${name}` });
 
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
             document.getElementById('chatPrice').innerText = "السِّعْرُ: " + price.toLocaleString() + " SDG";
         }
 
-        function closeChat() { document.getElementById('chatModal').classList.add('hidden-section'); }
+        function closeChat() { 
+            document.getElementById('chatModal').classList.add('hidden-section'); 
+            reportToRadar('PAGE_VIEW', { page: "تصفح عام" });
+        }
 
         function contactAdmin(platform) {
             const msg = document.getElementById('problemInput').value;
