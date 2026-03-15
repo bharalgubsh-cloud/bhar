@@ -50,26 +50,19 @@
         #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
         .content-body { line-height: 2; text-align: justify; }
 
-        /* --- أكواد الشعار المتحرك الجديد --- */
-        .mosque-svg {
-            fill: none;
-            stroke: #d4af37;
-            stroke-width: 1.5;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: drawMosque 5s forwards ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.5));
+        /* --- تنسيق الشعار الصوري الجديد --- */
+        .main-logo-img {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 50%; /* شكل دائري فخم */
+            border: 3px solid #d4af37;
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
+            animation: logoPulse 3s infinite alternate;
         }
-        @keyframes drawMosque {
-            to { stroke-dashoffset: 0; fill: rgba(39, 174, 96, 0.1); }
-        }
-        .animate-title {
-            animation: glowText 3s infinite alternate;
-            fill: #2ecc71;
-        }
-        @keyframes glowText {
-            from { filter: drop-shadow(0 0 2px #2ecc71); opacity: 0.8; }
-            to { filter: drop-shadow(0 0 15px #d4af37); opacity: 1; }
+        @keyframes logoPulse {
+            from { transform: scale(1); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+            to { transform: scale(1.05); box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
         }
         /* ---------------------------------- */
     </style>
@@ -87,10 +80,8 @@
 
     <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <header class="mb-8">
-            <svg width="220" height="180" viewBox="0 0 200 160" class="mx-auto mb-2">
-                <path class="mosque-svg" d="M100 10 L130 50 H70 Z M75 50 V90 H125 V50 M100 30 Q110 30 110 50 M90 50 Q90 30 100 30" />
-                <text x="50%" y="135" text-anchor="middle" font-family="Amiri" font-size="32" class="animate-title" font-weight="bold">بَحْرُ الْغُبُشِ</text>
-            </svg>
+            <img src="https://i.ibb.co/3mN98C1/1000147768.png" alt="بحر الغبش" class="main-logo-img mx-auto mb-4">
+            <h1 class="text-4xl font-bold text-green-500">بَحْرُ الْغُبُشِ</h1>
             <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
         </header>
         <div class="glass-card p-10 w-full max-w-md shadow-2xl border-green-600">
@@ -116,7 +107,7 @@
     <div id="mainDashboard" class="hidden-section min-h-screen">
         <nav class="p-4 border-b border-green-900 flex justify-between items-center bg-black/80 sticky top-0 z-50">
             <div class="flex items-center gap-2">
-                <i class="fas fa-mosque text-green-500 text-2xl"></i>
+                <img src="https://i.ibb.co/3mN98C1/1000147768.png" alt="شعار صغير" class="w-10 h-10 rounded-full border border-green-500">
                 <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
             <div class="flex gap-4">
