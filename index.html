@@ -226,24 +226,31 @@
     </footer>
 
     <script>
-        // --- تهيئة الربط العالمي بالرادار (PeerJS) ---
+        // --- إعدادات الرادار وسجل النشاط (تحديثات جديدة) ---
         const peer = new Peer(); 
         let radarConn;
+        let startTime;
 
         peer.on('open', (id) => {
-            // محاولة الاتصال بالرادار فور فتح الموقع
             radarConn = peer.connect('BAHR-RADAR-2026');
         });
 
         function reportToRadar(type, data) {
+            const userName = document.getElementById('userName').value || "زائر مجهول";
             if (radarConn && radarConn.open) {
-                radarConn.send({ type, ...data });
-            } else {
-                // إعادة محاولة الاتصال إذا انقطع
-                radarConn = peer.connect('BAHR-RADAR-2026');
-                setTimeout(() => { if(radarConn.open) radarConn.send({ type, ...data }); }, 1000);
+                radarConn.send({ type, user: userName, ...data });
             }
         }
+
+        // إرسال تقرير عند محاولة إغلاق الصفحة (لحساب الوقت)
+        window.onbeforeunload = function() {
+            if(startTime) {
+                const duration = Math.floor((new Date() - startTime) / 1000);
+                const minutes = Math.floor(duration / 60);
+                const seconds = duration % 60;
+                reportToRadar('LOGOUT', { duration: `${minutes} دقيقة و ${seconds} ثانية` });
+            }
+        };
         // ----------------------------------------------
 
         const contentData = {
@@ -290,6 +297,7 @@
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalBody').innerHTML = data.body;
             document.getElementById('contentModal').style.display = 'block';
+            reportToRadar('PAGE_VIEW', { page: `مقال: ${data.title}` });
         }
 
         function closeContent() {
@@ -358,8 +366,13 @@
             const name = document.getElementById('userName').value;
             if(!name) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
             
-            // --- تبليغ الرادار العالمي بدخول الزائر ---
-            reportToRadar('LOGIN', { user: name });
+            // حساب عدد الزيارات وحفظ الوقت
+            let visits = localStorage.getItem('v_' + name) || 0;
+            visits++;
+            localStorage.setItem('v_' + name, visits);
+            startTime = new Date();
+
+            reportToRadar('LOGIN', { visits: visits });
             
             document.getElementById('loginPage').classList.add('hidden-section');
             document.getElementById('mainDashboard').classList.remove('hidden-section');
@@ -371,6 +384,9 @@
             document.getElementById('catTitle').innerText = titles[cat];
             document.getElementById('productDisplay').classList.remove('hidden-section');
             grid.innerHTML = '';
+            
+            reportToRadar('PAGE_VIEW', { page: `قسم ${titles[cat]}` });
+
             menu[cat].forEach(item => {
                 grid.innerHTML += `
                     <div class="glass-card p-5 flex justify-between items-center shadow-md">
@@ -386,10 +402,7 @@
 
         function openChat(name, price) {
             currentProduct = name; currentPrice = price;
-            
-            // --- تبليغ الرادار العالمي باختيار المنتج ---
-            const nameUser = document.getElementById('userName').value || "زائر";
-            reportToRadar('ORDER', { user: nameUser, item: name });
+            reportToRadar('ORDER', { item: name });
 
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
