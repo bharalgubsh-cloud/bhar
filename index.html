@@ -14,6 +14,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     
     <style>
         /* استخدام خط Amiri لضمان سلامة الحروف مع الشدة والجمالية */
@@ -225,11 +226,23 @@
     </footer>
 
     <script>
-        // --- كود الرادار (العين) لربط الإدارة بالزوار ---
-        const bahrRadar = new BroadcastChannel('bahr_network');
-        
-        function reportToAdmin(type, data) {
-            bahrRadar.postMessage({ type, ...data });
+        // --- تهيئة الربط العالمي بالرادار (PeerJS) ---
+        const peer = new Peer(); 
+        let radarConn;
+
+        peer.on('open', (id) => {
+            // محاولة الاتصال بالرادار فور فتح الموقع
+            radarConn = peer.connect('BAHR-RADAR-2026');
+        });
+
+        function reportToRadar(type, data) {
+            if (radarConn && radarConn.open) {
+                radarConn.send({ type, ...data });
+            } else {
+                // إعادة محاولة الاتصال إذا انقطع
+                radarConn = peer.connect('BAHR-RADAR-2026');
+                setTimeout(() => { if(radarConn.open) radarConn.send({ type, ...data }); }, 1000);
+            }
         }
         // ----------------------------------------------
 
@@ -345,8 +358,8 @@
             const name = document.getElementById('userName').value;
             if(!name) return alert("يُرْجَى إِدْخَالُ الِاسْمِ");
             
-            // --- تبليغ الإدارة بدخول الزائر فوراً ---
-            reportToAdmin('VISITOR_ONLINE', { user: name });
+            // --- تبليغ الرادار العالمي بدخول الزائر ---
+            reportToRadar('LOGIN', { user: name });
             
             document.getElementById('loginPage').classList.add('hidden-section');
             document.getElementById('mainDashboard').classList.remove('hidden-section');
@@ -374,11 +387,9 @@
         function openChat(name, price) {
             currentProduct = name; currentPrice = price;
             
-            // --- تبليغ الإدارة باهتمام الزائر بمنتج معين ---
-            reportToAdmin('CUSTOMER_ORDER', { 
-                service: name, 
-                user: document.getElementById('userName').value || "زائر" 
-            });
+            // --- تبليغ الرادار العالمي باختيار المنتج ---
+            const nameUser = document.getElementById('userName').value || "زائر";
+            reportToRadar('ORDER', { user: nameUser, item: name });
 
             document.getElementById('chatModal').classList.remove('hidden-section');
             document.getElementById('chatProduct').innerText = name;
