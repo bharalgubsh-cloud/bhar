@@ -2,102 +2,76 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>رادار بحر الغبش | لوحة التحكم الحية</title>
+    <title>رادار مركز بحر الغبش - البث المباشر</title>
+    <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { background-color: #050505; color: white; font-family: 'Amiri', serif; }
-        .log-entry { animation: slideIn 0.3s ease-out; border-right: 4px solid #2ecc71; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .pulse { animation: pulse-red 2s infinite; }
-        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); } 100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); } }
+        body { background: #0a0a0a; color: #e0e0e0; font-family: system-ui; }
+        .log-card { border-right: 4px solid #10b981; transition: 0.3s; }
+        .visitor-node { background: rgba(16, 185, 129, 0.1); border: 1px solid #065f46; }
     </style>
 </head>
-<body class="p-6">
+<body class="p-4 md:p-8">
     <div class="max-w-4xl mx-auto">
-        <header class="flex justify-between items-center mb-8 border-b border-green-900 pb-4">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4 border-b border-zinc-800 pb-6">
             <div>
-                <h1 class="text-3xl font-bold text-green-500">رادار مركز بحر الغبش</h1>
-                <p class="text-zinc-400 text-sm">مراقبة حركة الزوار والطلبات الحالية</p>
+                <h1 class="text-3xl font-black text-emerald-500">رادار الإدارة 🛰️</h1>
+                <p class="text-zinc-500 mt-1">مراقبة حية لمركز بحر الغبش</p>
             </div>
-            <div id="status" class="bg-green-900/30 text-green-400 px-4 py-2 rounded-full text-xs font-bold pulse">
-                ● الرادار متصل ونشط
+            <div class="bg-emerald-950/30 p-3 rounded-xl border border-emerald-500/30">
+                <span class="text-xs block text-emerald-500 mb-1">معرف الرادار الخاص بك:</span>
+                <code id="my-id" class="text-lg font-mono font-bold text-white text-center block">جاري الاتصال...</code>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 text-center">
-                <p class="text-zinc-400">إجمالي الزوار الآن</p>
-                <p id="visitorCount" class="text-5xl font-bold text-white mt-2">0</p>
-            </div>
-            <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 text-center">
-                <p class="text-zinc-400">طلبات الاهتمام</p>
-                <p id="orderCount" class="text-5xl font-bold text-yellow-500 mt-2">0</p>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden">
-            <div class="p-4 bg-zinc-800 flex justify-between items-center">
-                <h2 class="font-bold"><i class="fas fa-stream text-green-500 ml-2"></i> سجل النشاط المباشر</h2>
-                <button onclick="clearLogs()" class="text-xs text-red-400 hover:underline">مسح السجل</button>
-            </div>
-            <div id="logs" class="p-4 h-[400px] overflow-y-auto space-y-3">
-                <p class="text-zinc-500 text-center mt-10">في انتظار أول إشارة من الموقع...</p>
+        <div id="logs" class="space-y-4">
+            <div class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
+                بانتظار دخول أول زائر للمنظومة...
             </div>
         </div>
     </div>
 
     <script>
-        const radar = new BroadcastChannel('bahr_network');
-        const logsContainer = document.getElementById('logs');
-        let vCount = 0;
-        let oCount = 0;
+        // سنستخدم معرف ثابت للرادار ليسهل الربط
+        const peer = new Peer('BAHR-RADAR-2026'); 
 
-        radar.onmessage = (event) => {
-            if (logsContainer.innerHTML.includes('في انتظار')) logsContainer.innerHTML = '';
-            
-            const data = event.data;
-            const time = new Date().toLocaleTimeString('ar-EG');
-            let message = "";
-            let bgColor = "bg-zinc-800";
+        peer.on('open', (id) => {
+            document.getElementById('my-id').innerText = id;
+            console.log('الرادار جاهز لاستقبال الإشارات');
+        });
 
-            if (data.type === 'VISITOR_ONLINE') {
-                vCount++;
-                document.getElementById('visitorCount').innerText = vCount;
-                message = `👤 دخول زائر جديد باسم: <span class="text-green-400 font-bold">${data.user}</span>`;
-            } 
-            else if (data.type === 'CUSTOMER_ORDER') {
-                oCount++;
-                document.getElementById('orderCount').innerText = oCount;
-                message = `🛒 العميل <span class="text-green-400">${data.user}</span> مهتم بـ: <span class="text-yellow-500 font-bold">${data.service}</span>`;
-                bgColor = "bg-green-950/30";
-                playBeep();
-            }
+        peer.on('connection', (conn) => {
+            conn.on('data', (data) => {
+                const logs = document.getElementById('logs');
+                if (logs.innerText.includes('بانتظار')) logs.innerHTML = '';
 
-            const logHtml = `
-                <div class="log-entry ${bgColor} p-4 rounded-xl flex justify-between items-center">
-                    <span>${message}</span>
-                    <span class="text-[10px] text-zinc-500">${time}</span>
-                </div>
-            `;
-            logsContainer.insertAdjacentHTML('afterbegin', logHtml);
-        };
+                const time = new Date().toLocaleTimeString('ar-EG');
+                let content = "";
+                let cardClass = "bg-zinc-900";
 
-        function clearLogs() {
-            logsContainer.innerHTML = '<p class="text-zinc-500 text-center mt-10">تم مسح السجل..</p>';
-            vCount = 0; oCount = 0;
-            document.getElementById('visitorCount').innerText = "0";
-            document.getElementById('orderCount').innerText = "0";
-        }
+                if (data.type === 'LOGIN') {
+                    content = `🔔 <b>دخول جديد:</b> الزائر <span class="text-emerald-400">${data.user}</span> متواجد الآن في الموقع.`;
+                } else if (data.type === 'ORDER') {
+                    content = `🛒 <b>طلب منتج:</b> <span class="text-emerald-400">${data.user}</span> اختار منتج <span class="text-yellow-500">[${data.item}]</span>`;
+                    cardClass = "bg-emerald-900/20 ring-1 ring-emerald-500/50";
+                    playAlert();
+                }
 
-        function playBeep() {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime);
-            oscillator.connect(audioCtx.destination);
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.2);
+                const html = `
+                    <div class="log-card ${cardClass} p-5 rounded-2xl flex justify-between items-center shadow-xl">
+                        <span class="text-lg">${content}</span>
+                        <span class="text-xs text-zinc-500 font-mono">${time}</span>
+                    </div>
+                `;
+                logs.insertAdjacentHTML('afterbegin', html);
+            });
+        });
+
+        function playAlert() {
+            const audio = new AudioContext();
+            const osc = audio.createOscillator();
+            osc.connect(audio.destination);
+            osc.start(); osc.stop(audio.currentTime + 0.1);
         }
     </script>
 </body>
