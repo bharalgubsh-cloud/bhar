@@ -6,65 +6,77 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* التعديل الجديد للألوان: مظهر ليلي فخم */
-        body { background: #0a0a0c; color: #e4e4e7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .log-card { border-right: 4px solid #f59e0b; animation: slideIn 0.3s ease-out; background: #16161e; }
-        .visitor-row:hover { background: rgba(245, 158, 11, 0.05); }
-        .custom-scroll::-webkit-scrollbar { width: 5px; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
+        /* التعديل الجديد: ألوان فاتحة واحترافية (Modern Light Theme) */
+        body { background: #f8fafc; color: #1e293b; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* تصميم بطاقات السجل */
+        .log-card { 
+            border-right: 4px solid #3b82f6; 
+            animation: slideIn 0.3s ease-out; 
+            background: #ffffff; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+        
+        .visitor-row:hover { background: rgba(59, 130, 246, 0.05); }
+        
+        /* تخصيص السكرول بار */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
     </style>
 </head>
 <body class="p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-zinc-800 pb-6">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-slate-200 pb-6">
             <div>
-                <h1 class="text-3xl font-black text-amber-500 tracking-tight">رادار الإدارة 🛰️</h1>
-                <p class="text-zinc-500 mt-1">مركز بحر الغبش | نظام الرصد المباشر</p>
+                <h1 class="text-3xl font-black text-blue-600 tracking-tight">رادار الإدارة 🛰️</h1>
+                <p class="text-slate-500 mt-1 font-medium">مركز بحر الغبش | نظام الرصد المباشر</p>
             </div>
             <div class="flex gap-4 items-center">
-                <button onclick="clearLogs()" class="bg-red-950/20 hover:bg-red-900/40 text-red-400 px-4 py-2 rounded-lg border border-red-900/30 text-sm transition">
-                    تصفير سجل الزوار 🗑️
+                <button onclick="clearLogs()" class="bg-white hover:bg-red-50 text-red-500 px-4 py-2 rounded-xl border border-red-100 text-sm font-bold transition-all shadow-sm">
+                    تصفير السجل 🗑️
                 </button>
                 <div id="status-light" class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-                <div class="bg-indigo-950/30 p-3 rounded-xl border border-indigo-500/30">
-                    <code id="my-id" class="text-lg font-mono font-bold text-indigo-300 uppercase">جاري الربط...</code>
+                <div class="bg-blue-50 p-3 rounded-xl border border-blue-100">
+                    <code id="my-id" class="text-lg font-mono font-bold text-blue-700 uppercase">جاري الربط...</code>
                 </div>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">متواجدون الآن (نشط)</span>
-                <div id="active-count" class="text-3xl font-bold text-amber-500">0</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <span class="text-slate-500 text-sm font-bold uppercase">متواجدون الآن</span>
+                <div id="active-count" class="text-4xl font-black text-blue-600 mt-1">0</div>
             </div>
-            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">إجمالي حركات السجل</span>
-                <div id="total-hits" class="text-3xl font-bold text-indigo-400">0</div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <span class="text-slate-500 text-sm font-bold uppercase">إجمالي الحركات</span>
+                <div id="total-hits" class="text-4xl font-black text-indigo-600 mt-1">0</div>
             </div>
-            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">آخر تحديث</span>
-                <div id="last-activity" class="text-3xl font-bold text-zinc-300">--:--</div>
+            <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                <span class="text-slate-500 text-sm font-bold uppercase">آخر نشاط</span>
+                <div id="last-activity" class="text-4xl font-black text-slate-700 mt-1">--:--</div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-amber-500 rounded-full"></span>
-                    سجل النشاط المباشر (المحفوظ)
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-800">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    سجل النشاط المباشر
                 </h2>
-                <div id="logs" class="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
+                <div id="logs" class="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
                     </div>
             </div>
 
             <div>
-                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2 text-slate-800">
                     <span class="w-2 h-6 bg-indigo-500 rounded-full"></span>
-                    أين يتواجدون الآن؟
+                    حالة الزوار الحالية
                 </h2>
-                <div id="active-visitors-list" class="bg-zinc-900/20 border border-zinc-800 rounded-2xl p-4 space-y-4">
-                    <p class="text-zinc-600 text-sm text-center">لا يوجد زوار نشطين</p>
+                <div id="active-visitors-list" class="bg-white border border-slate-100 shadow-sm rounded-2xl p-5 space-y-4">
+                    <p class="text-slate-400 text-sm text-center italic">لا يوجد زوار نشطين حالياً</p>
                 </div>
             </div>
         </div>
@@ -75,7 +87,6 @@
         let activeConnections = new Map();
         let totalCount = parseInt(localStorage.getItem('bahr_total_count')) || 0;
 
-        // تحميل السجل المحفوظ عند فتح الصفحة
         window.onload = () => {
             const savedLogs = localStorage.getItem('bahr_logs_html');
             if (savedLogs) {
@@ -88,7 +99,7 @@
 
         peer.on('open', (id) => {
             document.getElementById('my-id').innerText = id;
-            document.getElementById('status-light').classList.replace('bg-red-500', 'bg-amber-500');
+            document.getElementById('status-light').classList.replace('bg-red-500', 'bg-green-500');
         });
 
         peer.on('connection', (conn) => {
@@ -98,7 +109,6 @@
                 processLog(data);
                 playAlert(data.type);
             });
-
             conn.on('close', () => {
                 activeConnections.delete(conn.peer);
                 updateActiveDisplay();
@@ -121,32 +131,31 @@
             let cardHTML = '';
             switch(data.type) {
                 case 'LOGIN':
-                    cardHTML = createCard("🔔 دخول", `الزائر <b>${data.user}</b> وصل للموقع`, "متصل الآن", "bg-zinc-900/80", timeStr);
+                    cardHTML = createCard("🔔 دخول جديد", `الزائر <b>${data.user}</b> دخل الموقع الآن`, "متصل", "border-blue-500", "text-blue-600", timeStr);
                     break;
                 case 'PAGE_VIEW':
-                    cardHTML = createCard("👀 تصفح", `الزائر <b>${data.user}</b> يتواجد الآن في: <span class="text-indigo-400 font-bold">${data.page}</span>`, "نشط", "bg-zinc-900/40", timeStr);
+                    cardHTML = createCard("👀 تصفح", `يتصفح <b>${data.user}</b> الآن صفحة: <span class="text-indigo-600 font-bold">${data.page}</span>`, "نشط", "border-slate-300", "text-slate-500", timeStr);
                     break;
                 case 'ORDER':
-                    cardHTML = createCard("🛒 طلب", `<b>${data.user}</b> طلب: <span class="text-amber-500 font-bold">${data.item}</span>`, "هام جداً", "bg-amber-950/10 ring-1 ring-amber-500/20", timeStr);
+                    cardHTML = createCard("🛒 طلب شراء", `<b>${data.user}</b> قام بطلب: <span class="text-orange-600 font-bold">${data.item}</span>`, "عاجل", "border-orange-500", "text-orange-600", timeStr);
                     break;
             }
 
             logs.insertAdjacentHTML('afterbegin', cardHTML);
-            // حفظ حالة السجل في الذاكرة
             localStorage.setItem('bahr_logs_html', logs.innerHTML);
         }
 
-        function createCard(title, body, footer, bgColor, time) {
+        function createCard(title, body, status, borderColor, titleColor, time) {
             return `
-                <div class="log-card ${bgColor} p-4 rounded-xl shadow-lg flex justify-between items-center border border-zinc-800">
+                <div class="log-card p-5 rounded-2xl border border-slate-100 flex justify-between items-center transition-all hover:shadow-md" style="border-right-color: inherit;">
                     <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="text-[10px] font-bold uppercase text-amber-500">${title}</span>
-                            <span class="text-[9px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">${footer}</span>
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="text-xs font-black uppercase ${titleColor} tracking-widest">${title}</span>
+                            <span class="text-[10px] px-2 py-0.5 rounded-lg bg-slate-100 text-slate-500 font-bold">${status}</span>
                         </div>
-                        <div class="text-md text-zinc-200">${body}</div>
+                        <div class="text-md text-slate-700">${body}</div>
                     </div>
-                    <div class="text-xs text-zinc-500 font-mono">${time}</div>
+                    <div class="text-xs text-slate-400 font-bold bg-slate-50 p-2 rounded-lg">${time}</div>
                 </div>
             `;
         }
@@ -157,16 +166,16 @@
             countDisplay.innerText = activeConnections.size;
 
             if (activeConnections.size === 0) {
-                list.innerHTML = '<p class="text-zinc-600 text-sm text-center">لا يوجد زوار نشطين</p>';
+                list.innerHTML = '<p class="text-slate-400 text-sm text-center italic">لا يوجد زوار نشطين حالياً</p>';
                 return;
             }
 
             let html = '';
             activeConnections.forEach((val) => {
                 html += `
-                    <div class="visitor-row flex justify-between items-center p-2 border-b border-zinc-800/50 last:border-0 transition-all">
-                        <span class="text-sm font-medium text-white">${val.name}</span>
-                        <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded border border-indigo-500/20">${val.location}</span>
+                    <div class="visitor-row flex justify-between items-center p-3 rounded-xl border border-slate-50 transition-all">
+                        <span class="text-sm font-bold text-slate-700">${val.name}</span>
+                        <span class="text-[10px] bg-blue-600 text-white px-3 py-1 rounded-full font-bold shadow-sm">${val.location}</span>
                     </div>
                 `;
             });
@@ -174,7 +183,7 @@
         }
 
         function clearLogs() {
-            if(confirm('هل أنت متأكد من تصفير سجل الزوار نهائياً؟')) {
+            if(confirm('هل تريد مسح السجل المحفوظ نهائياً؟')) {
                 localStorage.removeItem('bahr_logs_html');
                 localStorage.removeItem('bahr_total_count');
                 totalCount = 0;
@@ -185,21 +194,24 @@
 
         function showEmptyState() {
             document.getElementById('logs').innerHTML = `
-                <div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
-                    لا توجد بيانات مسجلة حالياً
+                <div id="empty-state" class="text-center py-20 text-slate-400 border-2 border-dashed border-slate-200 rounded-3xl bg-white">
+                    <p class="text-lg font-medium">لا توجد بيانات مسجلة في السجل</p>
+                    <p class="text-sm">سيتم ظهور النشاط هنا بمجرد دخول الزوار</p>
                 </div>`;
         }
 
         function playAlert(type) {
-            const context = new (window.AudioContext || window.webkitAudioContext)();
-            const osc = context.createOscillator();
-            const gain = context.createGain();
-            osc.connect(gain);
-            gain.connect(context.destination);
-            osc.frequency.setValueAtTime(type === 'ORDER' ? 880 : 440, context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.5);
-            osc.start();
-            osc.stop(context.currentTime + 0.5);
+            try {
+                const context = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = context.createOscillator();
+                const gain = context.createGain();
+                osc.connect(gain);
+                gain.connect(context.destination);
+                osc.frequency.setValueAtTime(type === 'ORDER' ? 880 : 540, context.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.4);
+                osc.start();
+                osc.stop(context.currentTime + 0.4);
+            } catch(e) {}
         }
     </script>
 </body>
