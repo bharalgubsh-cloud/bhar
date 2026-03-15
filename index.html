@@ -50,7 +50,7 @@
         #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
         .content-body { line-height: 2; text-align: justify; }
 
-        /* --- تنسيق الشعار الصوري الجديد --- */
+        /* --- تنسيق الشعار الصوري الجديد والمتحرك --- */
         .main-logo-img {
             width: 200px;
             height: 200px;
@@ -58,7 +58,7 @@
             border-radius: 50%; /* شكل دائري فخم */
             border: 3px solid #d4af37;
             box-shadow: 0 0 20px rgba(46, 204, 113, 0.6);
-            animation: logoPulse 3s infinite alternate;
+            animation: logoPulse 3s infinite alternate ease-in-out;
         }
         @keyframes logoPulse {
             from { transform: scale(1); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
@@ -80,7 +80,7 @@
 
     <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <header class="mb-8">
-            <img src="https://i.ibb.co/3mN98C1/1000147768.png" alt="بحر الغبش" class="main-logo-img mx-auto mb-4">
+            <img src="logo.png" alt="بحر الغبش" class="main-logo-img mx-auto mb-4">
             <h1 class="text-4xl font-bold text-green-500">بَحْرُ الْغُبُشِ</h1>
             <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
         </header>
@@ -107,7 +107,7 @@
     <div id="mainDashboard" class="hidden-section min-h-screen">
         <nav class="p-4 border-b border-green-900 flex justify-between items-center bg-black/80 sticky top-0 z-50">
             <div class="flex items-center gap-2">
-                <img src="https://i.ibb.co/3mN98C1/1000147768.png" alt="شعار صغير" class="w-10 h-10 rounded-full border border-green-500">
+                <img src="logo.png" alt="شعار صغير" class="w-10 h-10 rounded-full border border-green-500">
                 <span class="font-bold text-xl">بَحْرُ الْغُبُشِ</span>
             </div>
             <div class="flex gap-4">
