@@ -6,40 +6,43 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; }
-        .log-card { border-right: 4px solid #10b981; animation: slideIn 0.3s ease-out; }
+        /* التعديل الجديد للألوان: مظهر ليلي فخم */
+        body { background: #0a0a0c; color: #e4e4e7; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .log-card { border-right: 4px solid #f59e0b; animation: slideIn 0.3s ease-out; background: #16161e; }
+        .visitor-row:hover { background: rgba(245, 158, 11, 0.05); }
+        .custom-scroll::-webkit-scrollbar { width: 5px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #27272a; border-radius: 10px; }
         @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
-        .visitor-row:hover { background: rgba(16, 185, 129, 0.05); }
     </style>
 </head>
 <body class="p-4 md:p-8">
     <div class="max-w-6xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-zinc-800 pb-6">
             <div>
-                <h1 class="text-3xl font-black text-emerald-500 tracking-tight">رادار الإدارة 🛰️</h1>
+                <h1 class="text-3xl font-black text-amber-500 tracking-tight">رادار الإدارة 🛰️</h1>
                 <p class="text-zinc-500 mt-1">مركز بحر الغبش | نظام الرصد المباشر</p>
             </div>
             <div class="flex gap-4 items-center">
-                <button onclick="clearLogs()" class="bg-red-950/30 hover:bg-red-900/50 text-red-500 px-4 py-2 rounded-lg border border-red-900/50 text-sm transition">
+                <button onclick="clearLogs()" class="bg-red-950/20 hover:bg-red-900/40 text-red-400 px-4 py-2 rounded-lg border border-red-900/30 text-sm transition">
                     تصفير سجل الزوار 🗑️
                 </button>
                 <div id="status-light" class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-                <div class="bg-emerald-950/20 p-3 rounded-xl border border-emerald-500/30">
-                    <code id="my-id" class="text-lg font-mono font-bold text-white uppercase">جاري الربط...</code>
+                <div class="bg-indigo-950/30 p-3 rounded-xl border border-indigo-500/30">
+                    <code id="my-id" class="text-lg font-mono font-bold text-indigo-300 uppercase">جاري الربط...</code>
                 </div>
             </div>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
+            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
                 <span class="text-zinc-500 text-sm">متواجدون الآن (نشط)</span>
-                <div id="active-count" class="text-3xl font-bold text-emerald-400">0</div>
+                <div id="active-count" class="text-3xl font-bold text-amber-500">0</div>
             </div>
-            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
+            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
                 <span class="text-zinc-500 text-sm">إجمالي حركات السجل</span>
-                <div id="total-hits" class="text-3xl font-bold text-blue-400">0</div>
+                <div id="total-hits" class="text-3xl font-bold text-indigo-400">0</div>
             </div>
-            <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
+            <div class="bg-zinc-900/40 p-4 rounded-2xl border border-zinc-800">
                 <span class="text-zinc-500 text-sm">آخر تحديث</span>
                 <div id="last-activity" class="text-3xl font-bold text-zinc-300">--:--</div>
             </div>
@@ -48,23 +51,21 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
                 <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-emerald-500 rounded-full"></span>
-                    سجل النشاط المباشر
+                    <span class="w-2 h-6 bg-amber-500 rounded-full"></span>
+                    سجل النشاط المباشر (المحفوظ)
                 </h2>
                 <div id="logs" class="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
-                    <div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
-                        لا توجد بيانات مسجلة حالياً
                     </div>
-                </div>
             </div>
 
             <div>
                 <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    <span class="w-2 h-6 bg-indigo-500 rounded-full"></span>
                     أين يتواجدون الآن؟
                 </h2>
-                <div id="active-visitors-list" class="bg-zinc-900/30 border border-zinc-800 rounded-2xl p-4 space-y-4">
-                    </div>
+                <div id="active-visitors-list" class="bg-zinc-900/20 border border-zinc-800 rounded-2xl p-4 space-y-4">
+                    <p class="text-zinc-600 text-sm text-center">لا يوجد زوار نشطين</p>
+                </div>
             </div>
         </div>
     </div>
@@ -72,16 +73,26 @@
     <script>
         const peer = new Peer('BAHR-RADAR-2026');
         let activeConnections = new Map();
-        let totalCount = 0;
+        let totalCount = parseInt(localStorage.getItem('bahr_total_count')) || 0;
+
+        // تحميل السجل المحفوظ عند فتح الصفحة
+        window.onload = () => {
+            const savedLogs = localStorage.getItem('bahr_logs_html');
+            if (savedLogs) {
+                document.getElementById('logs').innerHTML = savedLogs;
+                document.getElementById('total-hits').innerText = totalCount;
+            } else {
+                showEmptyState();
+            }
+        };
 
         peer.on('open', (id) => {
             document.getElementById('my-id').innerText = id;
-            document.getElementById('status-light').classList.replace('bg-red-500', 'bg-emerald-500');
+            document.getElementById('status-light').classList.replace('bg-red-500', 'bg-amber-500');
         });
 
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
-                // حفظ الموقِع الحالي للزائر
                 activeConnections.set(conn.peer, { name: data.user, location: data.page || "الرئيسية" });
                 updateActiveDisplay();
                 processLog(data);
@@ -101,24 +112,43 @@
 
             totalCount++;
             document.getElementById('total-hits').innerText = totalCount;
-            document.getElementById('last-activity').innerText = new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+            localStorage.setItem('bahr_total_count', totalCount);
 
-            const time = new Date().toLocaleTimeString('ar-EG');
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
+            document.getElementById('last-activity').innerText = timeStr;
+
             let cardHTML = '';
-
             switch(data.type) {
                 case 'LOGIN':
-                    cardHTML = createCard("🔔 دخول", `الزائر <b>${data.user}</b> وصل للموقع`, "متصل الآن", "bg-zinc-900", time);
+                    cardHTML = createCard("🔔 دخول", `الزائر <b>${data.user}</b> وصل للموقع`, "متصل الآن", "bg-zinc-900/80", timeStr);
                     break;
                 case 'PAGE_VIEW':
-                    cardHTML = createCard("👀 تصفح", `الزائر <b>${data.user}</b> يتواجد الآن في: <span class="text-blue-400 font-bold">${data.page}</span>`, "نشط", "bg-zinc-900/40", time);
+                    cardHTML = createCard("👀 تصفح", `الزائر <b>${data.user}</b> يتواجد الآن في: <span class="text-indigo-400 font-bold">${data.page}</span>`, "نشط", "bg-zinc-900/40", timeStr);
                     break;
                 case 'ORDER':
-                    cardHTML = createCard("🛒 طلب", `<b>${data.user}</b> طلب: <span class="text-yellow-500 font-bold">${data.item}</span>`, "هام جداً", "bg-emerald-900/20 ring-1 ring-emerald-500/40", time);
+                    cardHTML = createCard("🛒 طلب", `<b>${data.user}</b> طلب: <span class="text-amber-500 font-bold">${data.item}</span>`, "هام جداً", "bg-amber-950/10 ring-1 ring-amber-500/20", timeStr);
                     break;
             }
 
             logs.insertAdjacentHTML('afterbegin', cardHTML);
+            // حفظ حالة السجل في الذاكرة
+            localStorage.setItem('bahr_logs_html', logs.innerHTML);
+        }
+
+        function createCard(title, body, footer, bgColor, time) {
+            return `
+                <div class="log-card ${bgColor} p-4 rounded-xl shadow-lg flex justify-between items-center border border-zinc-800">
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="text-[10px] font-bold uppercase text-amber-500">${title}</span>
+                            <span class="text-[9px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">${footer}</span>
+                        </div>
+                        <div class="text-md text-zinc-200">${body}</div>
+                    </div>
+                    <div class="text-xs text-zinc-500 font-mono">${time}</div>
+                </div>
+            `;
         }
 
         function updateActiveDisplay() {
@@ -134,36 +164,30 @@
             let html = '';
             activeConnections.forEach((val) => {
                 html += `
-                    <div class="visitor-row flex justify-between items-center p-2 border-b border-zinc-800/50 last:border-0">
+                    <div class="visitor-row flex justify-between items-center p-2 border-b border-zinc-800/50 last:border-0 transition-all">
                         <span class="text-sm font-medium text-white">${val.name}</span>
-                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-1 rounded border border-blue-500/20">${val.location}</span>
+                        <span class="text-[10px] bg-indigo-500/10 text-indigo-400 px-2 py-1 rounded border border-indigo-500/20">${val.location}</span>
                     </div>
                 `;
             });
             list.innerHTML = html;
         }
 
-        function createCard(title, body, footer, bgColor, time) {
-            return `
-                <div class="log-card ${bgColor} p-4 rounded-xl shadow-lg flex justify-between items-center border border-zinc-800">
-                    <div>
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="text-[10px] font-bold uppercase text-emerald-500">${title}</span>
-                            <span class="text-[9px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">${footer}</span>
-                        </div>
-                        <div class="text-md text-zinc-200">${body}</div>
-                    </div>
-                    <div class="text-xs text-zinc-500 font-mono">${time}</div>
-                </div>
-            `;
-        }
-
         function clearLogs() {
-            if(confirm('هل أنت متأكد من تصفير سجل الزوار؟')) {
-                document.getElementById('logs').innerHTML = '<div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">لا توجد بيانات مسجلة حالياً</div>';
+            if(confirm('هل أنت متأكد من تصفير سجل الزوار نهائياً؟')) {
+                localStorage.removeItem('bahr_logs_html');
+                localStorage.removeItem('bahr_total_count');
                 totalCount = 0;
                 document.getElementById('total-hits').innerText = "0";
+                showEmptyState();
             }
+        }
+
+        function showEmptyState() {
+            document.getElementById('logs').innerHTML = `
+                <div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
+                    لا توجد بيانات مسجلة حالياً
+                </div>`;
         }
 
         function playAlert(type) {
