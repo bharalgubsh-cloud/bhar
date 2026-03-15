@@ -49,6 +49,29 @@
         /* نافذة المقالات */
         #contentModal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 30000; overflow-y: auto; display: none; padding: 20px; }
         .content-body { line-height: 2; text-align: justify; }
+
+        /* --- أكواد الشعار المتحرك الجديد --- */
+        .mosque-svg {
+            fill: none;
+            stroke: #d4af37;
+            stroke-width: 1.5;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawMosque 5s forwards ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 5px rgba(46, 204, 113, 0.5));
+        }
+        @keyframes drawMosque {
+            to { stroke-dashoffset: 0; fill: rgba(39, 174, 96, 0.1); }
+        }
+        .animate-title {
+            animation: glowText 3s infinite alternate;
+            fill: #2ecc71;
+        }
+        @keyframes glowText {
+            from { filter: drop-shadow(0 0 2px #2ecc71); opacity: 0.8; }
+            to { filter: drop-shadow(0 0 15px #d4af37); opacity: 1; }
+        }
+        /* ---------------------------------- */
     </style>
 </head>
 <body class="pb-24">
@@ -64,8 +87,10 @@
 
     <div id="loginPage" class="min-h-screen flex flex-col items-center justify-center p-6 text-center">
         <header class="mb-8">
-            <i class="fas fa-mosque text-8xl text-green-500 mb-4"></i>
-            <h1 class="text-5xl font-bold tracking-tighter">بَحْرُ الْغُبُشِ</h1>
+            <svg width="220" height="180" viewBox="0 0 200 160" class="mx-auto mb-2">
+                <path class="mosque-svg" d="M100 10 L130 50 H70 Z M75 50 V90 H125 V50 M100 30 Q110 30 110 50 M90 50 Q90 30 100 30" />
+                <text x="50%" y="135" text-anchor="middle" font-family="Amiri" font-size="32" class="animate-title" font-weight="bold">بَحْرُ الْغُبُشِ</text>
+            </svg>
             <p class="text-green-400 mt-2 font-bold italic">بِإِشْرَافِ الشَّيْخِ عَبْدَاللَّطِيفِ وَالدُّكْتُورِ عَبْدَالصَّمَدِ</p>
         </header>
         <div class="glass-card p-10 w-full max-w-md shadow-2xl border-green-600">
@@ -287,7 +312,7 @@
                     <div class="text-center italic space-y-6">
                         <p class="text-xl text-yellow-500 font-bold">"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ."</p>
                         <p class="text-xl">"اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَماً."</p>
-                        <p class="text-xl text-green-400">"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ."</p>
+                        <p class="text-xl text-green-400">"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ."</p>
                         <hr class="border-green-900">
                         <p class="text-lg">"يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ نَسْتَغِيثُ، طَهِّرْ أَبْدَانَنَا مِنَ الْأَسْقَامِ، وَقُلُوبَنَا مِنَ الْأَوْهَامِ، وَاحْمِنَا مِنْ شَرِّ مَنْ حَسَدَ وَمَنْ سَحَرَ."</p>
                         <p class="mt-6 font-bold text-yellow-500">ملاحظة: كرر هذه الأدعية بيقين تام، فَالشِّفَاءُ مِنَ اللَّهِ وَالْمَوْقِعُ سَبَبٌ.</p>
@@ -313,7 +338,7 @@
             'رقية': [
                 {n:'الْعَيْنُ وَالْحَسَدُ', p:100000}, {n:'السِّحْرُ الْمَأْكُولُ وَالْمَشْرُوبُ', p:100000},
                 {n:'السِّحْرُ الْأَسْوَدُ', p:100000}, {n:'السِّحْرُ الْأَحْمَرُ', p:100000},
-                {n:'السِّحْرُ الْأَبْيَضُ', p:100000}, {n:'السِّحْرُ السُّفْلِيُّ', p:100000},
+                {n:'السِّحْرُ الْأَبْيَضُ', p:100000}, {n:'السِّحْرُ السُّودَانِيُّ', p:100000},
                 {n:'السِّحْرُ الْمَدْفُونُ', p:100000}, {n:'السِّحْرُ الْمَرْشُوشُ', p:100000},
                 {n:'سِحْرُ الْبُطُونِ وَالْأَرْحَامِ', p:100000}, {n:'سِحْرُ عَدَمِ الْإِنْجَابِ', p:100000},
                 {n:'سِحْرُ الْفِرَاقِ', p:100000}, {n:'سِحْرُ التَّبْوِيرِ', p:100000},
