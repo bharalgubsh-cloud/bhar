@@ -6,23 +6,25 @@
     <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .log-card { border-right: 4px solid #10b981; animation: slideIn 0.4s ease-out; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .stat-badge { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); }
+        body { background: #050505; color: #e0e0e0; font-family: 'Segoe UI', sans-serif; }
+        .log-card { border-right: 4px solid #10b981; animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .visitor-row:hover { background: rgba(16, 185, 129, 0.05); }
     </style>
 </head>
 <body class="p-4 md:p-8">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-6xl mx-auto">
         <header class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-zinc-800 pb-6">
             <div>
                 <h1 class="text-3xl font-black text-emerald-500 tracking-tight">رادار الإدارة 🛰️</h1>
-                <p class="text-zinc-500 mt-1">مركز بحر الغبش | مراقبة مباشرة وشاملة</p>
+                <p class="text-zinc-500 mt-1">مركز بحر الغبش | نظام الرصد المباشر</p>
             </div>
             <div class="flex gap-4 items-center">
+                <button onclick="clearLogs()" class="bg-red-950/30 hover:bg-red-900/50 text-red-500 px-4 py-2 rounded-lg border border-red-900/50 text-sm transition">
+                    تصفير سجل الزوار 🗑️
+                </button>
                 <div id="status-light" class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></div>
-                <div class="bg-emerald-950/20 p-3 rounded-xl border border-emerald-500/30 text-center">
-                    <span class="text-[10px] block text-emerald-500 uppercase font-bold">معرف الرادار النشط</span>
+                <div class="bg-emerald-950/20 p-3 rounded-xl border border-emerald-500/30">
                     <code id="my-id" class="text-lg font-mono font-bold text-white uppercase">جاري الربط...</code>
                 </div>
             </div>
@@ -30,40 +32,65 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">متواجدون الآن</span>
-                <div id="active-count" class="text-2xl font-bold text-emerald-400">0</div>
+                <span class="text-zinc-500 text-sm">متواجدون الآن (نشط)</span>
+                <div id="active-count" class="text-3xl font-bold text-emerald-400">0</div>
             </div>
             <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">إجمالي الزيارات</span>
-                <div id="total-hits" class="text-2xl font-bold text-blue-400">0</div>
+                <span class="text-zinc-500 text-sm">إجمالي حركات السجل</span>
+                <div id="total-hits" class="text-3xl font-bold text-blue-400">0</div>
             </div>
             <div class="bg-zinc-900/50 p-4 rounded-2xl border border-zinc-800">
-                <span class="text-zinc-500 text-sm">آخر نشاط</span>
-                <div id="last-activity" class="text-2xl font-bold text-zinc-300">--:--</div>
+                <span class="text-zinc-500 text-sm">آخر تحديث</span>
+                <div id="last-activity" class="text-3xl font-bold text-zinc-300">--:--</div>
             </div>
         </div>
 
-        <div id="logs" class="space-y-4">
-            <div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
-                بانتظار وصول بيانات من زوار الموقع...
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-emerald-500 rounded-full"></span>
+                    سجل النشاط المباشر
+                </h2>
+                <div id="logs" class="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scroll">
+                    <div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">
+                        لا توجد بيانات مسجلة حالياً
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span class="w-2 h-6 bg-blue-500 rounded-full"></span>
+                    أين يتواجدون الآن؟
+                </h2>
+                <div id="active-visitors-list" class="bg-zinc-900/30 border border-zinc-800 rounded-2xl p-4 space-y-4">
+                    </div>
             </div>
         </div>
     </div>
 
     <script>
         const peer = new Peer('BAHR-RADAR-2026');
-        let sessionStats = { hits: 0 };
+        let activeConnections = new Map();
+        let totalCount = 0;
 
         peer.on('open', (id) => {
             document.getElementById('my-id').innerText = id;
             document.getElementById('status-light').classList.replace('bg-red-500', 'bg-emerald-500');
-            console.log('الرادار جاهز');
         });
 
         peer.on('connection', (conn) => {
             conn.on('data', (data) => {
+                // حفظ الموقِع الحالي للزائر
+                activeConnections.set(conn.peer, { name: data.user, location: data.page || "الرئيسية" });
+                updateActiveDisplay();
                 processLog(data);
                 playAlert(data.type);
+            });
+
+            conn.on('close', () => {
+                activeConnections.delete(conn.peer);
+                updateActiveDisplay();
             });
         });
 
@@ -72,70 +99,81 @@
             const emptyState = document.getElementById('empty-state');
             if (emptyState) emptyState.remove();
 
-            sessionStats.hits++;
-            document.getElementById('total-hits').innerText = sessionStats.hits;
-            document.getElementById('last-activity').innerText = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+            totalCount++;
+            document.getElementById('total-hits').innerText = totalCount;
+            document.getElementById('last-activity').innerText = new Date().toLocaleTimeString('ar-EG', {hour:'2-digit', minute:'2-digit'});
 
             const time = new Date().toLocaleTimeString('ar-EG');
             let cardHTML = '';
 
-            // بناء محتوى الكرت بناءً على نوع الحدث
             switch(data.type) {
                 case 'LOGIN':
-                    cardHTML = createCard("🔔 دخول جديد", `العضو <b>${data.user}</b> دخل الموقع الآن.`, `مرات الدخول: ${data.visits || 1}`, "bg-zinc-900", time);
+                    cardHTML = createCard("🔔 دخول", `الزائر <b>${data.user}</b> وصل للموقع`, "متصل الآن", "bg-zinc-900", time);
                     break;
                 case 'PAGE_VIEW':
-                    cardHTML = createCard("👀 تصفح", `العضو <b>${data.user}</b> يتصفح الآن: <span class="text-blue-400">${data.page}</span>`, "", "bg-zinc-900/40", time);
+                    cardHTML = createCard("👀 تصفح", `الزائر <b>${data.user}</b> يتواجد الآن في: <span class="text-blue-400 font-bold">${data.page}</span>`, "نشط", "bg-zinc-900/40", time);
                     break;
                 case 'ORDER':
-                    cardHTML = createCard("🛒 طلب جديد", `<b>${data.user}</b> قام بطلب: <span class="text-yellow-500 font-bold">${data.item}</span>`, "يحتاج معالجة", "bg-emerald-900/20 ring-1 ring-emerald-500/50", time);
-                    break;
-                case 'LOGOUT':
-                    cardHTML = createCard("⏱️ مغادرة", `خرج <b>${data.user}</b>. قضى في الموقع: <span class="text-orange-400">${data.duration}</span>`, "", "bg-zinc-900 border-zinc-700", time);
+                    cardHTML = createCard("🛒 طلب", `<b>${data.user}</b> طلب: <span class="text-yellow-500 font-bold">${data.item}</span>`, "هام جداً", "bg-emerald-900/20 ring-1 ring-emerald-500/40", time);
                     break;
             }
 
             logs.insertAdjacentHTML('afterbegin', cardHTML);
         }
 
+        function updateActiveDisplay() {
+            const list = document.getElementById('active-visitors-list');
+            const countDisplay = document.getElementById('active-count');
+            countDisplay.innerText = activeConnections.size;
+
+            if (activeConnections.size === 0) {
+                list.innerHTML = '<p class="text-zinc-600 text-sm text-center">لا يوجد زوار نشطين</p>';
+                return;
+            }
+
+            let html = '';
+            activeConnections.forEach((val) => {
+                html += `
+                    <div class="visitor-row flex justify-between items-center p-2 border-b border-zinc-800/50 last:border-0">
+                        <span class="text-sm font-medium text-white">${val.name}</span>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-1 rounded border border-blue-500/20">${val.location}</span>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        }
+
         function createCard(title, body, footer, bgColor, time) {
             return `
-                <div class="log-card ${bgColor} p-5 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between gap-4">
-                    <div class="flex-1">
+                <div class="log-card ${bgColor} p-4 rounded-xl shadow-lg flex justify-between items-center border border-zinc-800">
+                    <div>
                         <div class="flex items-center gap-2 mb-1">
-                            <span class="text-xs font-bold uppercase tracking-wider text-emerald-500">${title}</span>
-                            ${footer ? `<span class="stat-badge text-[10px] px-2 py-0.5 rounded-full text-zinc-400">${footer}</span>` : ''}
+                            <span class="text-[10px] font-bold uppercase text-emerald-500">${title}</span>
+                            <span class="text-[9px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400">${footer}</span>
                         </div>
-                        <div class="text-lg text-zinc-200">${body}</div>
+                        <div class="text-md text-zinc-200">${body}</div>
                     </div>
-                    <div class="text-right flex flex-col justify-center">
-                        <span class="text-xs text-zinc-500 font-mono">${time}</span>
-                    </div>
+                    <div class="text-xs text-zinc-500 font-mono">${time}</div>
                 </div>
             `;
+        }
+
+        function clearLogs() {
+            if(confirm('هل أنت متأكد من تصفير سجل الزوار؟')) {
+                document.getElementById('logs').innerHTML = '<div id="empty-state" class="text-center py-20 text-zinc-600 border-2 border-dashed border-zinc-800 rounded-3xl">لا توجد بيانات مسجلة حالياً</div>';
+                totalCount = 0;
+                document.getElementById('total-hits').innerText = "0";
+            }
         }
 
         function playAlert(type) {
             const context = new (window.AudioContext || window.webkitAudioContext)();
             const osc = context.createOscillator();
             const gain = context.createGain();
-
             osc.connect(gain);
             gain.connect(context.destination);
-
-            // نغمة مميزة للطلبات ونغمة عادية للدخول
-            if (type === 'ORDER') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(880, context.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(440, context.currentTime + 0.5);
-            } else {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(523.25, context.currentTime);
-            }
-
-            gain.gain.setValueAtTime(0.1, context.currentTime);
+            osc.frequency.setValueAtTime(type === 'ORDER' ? 880 : 440, context.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 0.5);
-
             osc.start();
             osc.stop(context.currentTime + 0.5);
         }
